@@ -1,0 +1,236 @@
+---
+title: "Tests"
+author: "Adriana RM"
+date: "8/26/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tests
+
+```{r}
+#Data
+
+data <- dft1
+
+#Function for Multiple Tests 
+mytest <- function(data,x)
+{
+  #Detect the type of var (cat vs continuous)
+  if(is.numeric(data[[x]]))
+  {
+    #Build variables x and y
+    a <- data[[x]][data$COVCLINTRIAL=='No']
+    b <- data[[x]][data$COVCLINTRIAL=='Yes']
+    #Apply the test
+    Res <- t.test(a,b)
+    print(Res)
+  } else
+  {
+    #Create table
+    tab <- table(data$COVCLINTRIAL,data[[x]])
+    #Split in a list of vectors
+    L1 <- lapply(1:ncol(tab), function(i) {tab[,i] })
+    names(L1) <- dimnames(tab)[[2]]
+    #Add Margins
+    Margins <- rowSums(tab)
+    #Test
+    L2 <- lapply(L1, function(z) {prop.test(x = z, n = Margins, correct = F)})
+    print(L2) #Enrolled vs Not-Enrolled
+  }
+}
+```
+
+```{r}
+## Defining Non-Parametric Tests (Mann Whithney U and Wilcox Test)
+mytestb <- function(data,x)
+{
+  #Detect the type of var (cat vs continuous)
+  if(is.numeric(data[[x]]))
+  {
+    #Build variables x and y
+    a <- data[[x]][data$COVCLINTRIAL=='No']
+    b <- data[[x]][data$COVCLINTRIAL=='Yes']
+    #Apply the test
+    Res <- wilcox.test(a,b, conf.int = TRUE, estimate = TRUE)
+    print(Res)
+  } else
+  {
+    #Create table
+    tab <- table(data$COVCLINTRIAL,data[[x]])
+    #Split in a list of vectors
+    L1 <- lapply(1:ncol(tab), function(i) {tab[,i] })
+    names(L1) <- dimnames(tab)[[2]]
+    #Add Margins
+    Margins <- rowSums(tab)
+    #Test
+    L2 <- lapply(L1, function(z) {prop.test(x = z, n = Margins, correct = F)})
+    print(L2) #Enrolled vs Not-Enrolled
+  }
+}
+```
+
+
+```{r Run Tests}
+#SEX
+mytest(data = dft1, x = 'SEX')
+
+#RACEi
+mytest(data= dft1, x = "RACEi")
+
+#Hispanic Eth
+mytest(data = dft1, x= "HISETHNI")
+
+```
+```{r}
+##Medical History
+
+mytest(data=dft1,x= "MEDHISTO_01")
+mytest(data=dft1,x = "MEDHISTO_02" )
+mytest(data= dft1, x = "MEDHISTO_08")
+mytest(data= dft1, x = "MEDHISTO_09")
+mytest(data= dft1, x="MEDHISTO_11")
+mytest(data= dft1, x= "MEDHISTO_12")
+
+```
+## MEDICATIONS
+
+```{r}
+
+## Medication Prior To Admission: Anti-Hypertensive
+mytest(dft1, x= "ANTIHYPRTNSV")
+mytest(dft1, x= "LIPLOWTHRP")
+mytest(dft1, x ="ANTIPLT")
+mytest(dft1, x= "ANTICOAG")
+mytest(dft1, x= "ANTIHYPRGLYM")
+
+#Patient Manageed in ICU
+mytest(dft1, x= "PATMANICU") #Get coding right
+
+#Length of Admission
+mytest(dft1, x = "DISDATE")
+
+#Death
+mytest(dft1, x= "death")
+         
+```
+
+```{r}
+# # Hists Lab Tests 
+# labs<- names(dft1[5:9])
+# for (var in labs) {
+#   
+#   summary(dft1[[var]])
+#   kurtosis(dft1[[var]], na.rm= TRUE)
+#   qqnorm(dft1[[var]])
+# }
+
+#Hemoglobin 
+#Filtered 19 patients
+filthgb<-dft1 %>% filter(!(HGBADM) > 30)
+hist(filthgb$HGBADM, breaks= 50)
+
+# Mean and SD for Hemoglobin
+
+filthgb %>% 
+select(HGBADM, COVCLINTRIAL) %>%
+group_by (COVCLINTRIAL) %>%
+summarise( mean = mean(HGBADM, na.rm = TRUE), sd = sd(HGBADM, na.rm = TRUE))
+
+
+################ Non-Gaussian. Apply Mann-Whitney and Wilcox
+
+#WBC -- 
+
+#Filtered 44 patients 
+
+filtwbc <- dft1 %>% filter(!(WBCADM)> 40)
+hist(filtwbc$WBCADM,breaks= 50)
+
+# Wiclox Test
+mytestb(filtwbc, "WBCADM")
+
+#Median and IQR for WBC 
+filtwbc %>% 
+select(WBCADM, COVCLINTRIAL) %>%
+group_by (COVCLINTRIAL) %>%
+summarise( median = median(WBCADM, na.rm = TRUE), IQR = IQR(WBCADM, na.rm = TRUE))
+
+
+
+#PLATELET
+
+hist(dft1$PLATELET)
+# Outliers: 3 patients with over 3000  
+filtplat <- dft1 %>% filter(!(PLATELET)> 800)
+hist(filtplat$PLATELET)
+
+## Median and IQR PLATELET
+
+filtplat %>% 
+select(PLATELET, COVCLINTRIAL) %>%
+group_by (COVCLINTRIAL) %>%
+summarise( median = median(PLATELET, na.rm = TRUE), IQR = IQR(PLATELET, na.rm = TRUE))
+
+#Test PLaTELET
+mytestb(filtplat, "PLATELET")
+
+## Creatinine
+## Check Units and convert if Needed over 8,000 patients with Creatinine over 5
+
+##Units 
+hist(dfor$SCRUADM)
+
+hist(dft1$INITSCR, breaks= 200)
+#11 patiens with initscr >20
+filtcreat <- dft1 %>% filter(!(INITSCR) > 25)
+# filtcrea <- dfor %>% select(COVCLINTRIAL, SCRUADM, INITSCR) %>% filter(!(SCRUADM) == 2)
+
+hist(filtcreat$INITSCR, breaks = 200)
+
+#My Test-B 
+mytestb(filtcrea, "INITSCR")
+
+
+### Troponin 
+hist(dft1$TROPADM, breaks = 200)
+filtcreat <- dft1 %>% filter(!(TROPADM) > 100)
+#100 patients with over 100 Troponin
+
+### DDMER 
+hist(dft1$DDMER, breaks = 80, plot = TRUE)
+
+
+```
+```{r}
+#T.Tests 
+
+## Length of Admission 
+
+# 2 patients with +100 days 
+# 18 patients with +70 days 
+hist(dft1$DISDATE, breaks = 200)
+
+dft1 %>% 
+select(DISDATE, COVCLINTRIAL) %>%
+group_by (COVCLINTRIAL) %>%
+summarise( mean = mean(DISDATE, na.rm = TRUE), sd = sd(DISDATE, na.rm = TRUE))
+
+
+
+```
+
+```{r}
+## x2 Payment Source
+
+mytest(dft1, "psource_group")
+mytest(dft1, "RACEi")
+```
+```{r}
+mytest(dft1, "age_group")
+```
+
+

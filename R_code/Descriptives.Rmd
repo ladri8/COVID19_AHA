@@ -1,0 +1,241 @@
+---
+title: "Descriptives Covid_8.26"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+---
+#Load Packages
+
+```{r}
+library(haven)
+library(dplyr)
+library(reshape2)
+library(ggplot2)
+library(esquisse)
+library(haven)
+library(stringr)
+library(broom)
+library(SmartEDA)
+library(summarytools)
+library(stats)
+library(kableExtra)
+library(DataExplorer)
+library(scales)
+library(RColorBrewer)
+```
+
+## Loading the Data
+```{r Read Data, message=FALSE, warning=FALSE, include=FALSE}
+
+#Read in data and save it in df object (original data for comparison)
+dataFile = '/mnt/workspace/GWTG/COVID19/data/covid19_cvd_aug20.sas7bdat'
+formatsFile = '/mnt/workspace/GWTG/COVID19/data/R_Python_windows_formats.sas7bcat'
+
+dfor <- haven::read_sas(dataFile, formatsFile)
+#Get Dimensions and Var names
+dim(dfor)
+```
+
+##Select Working Variables and Add Label
+
+```{r Select Working Variables and Add Labels, include=FALSE}
+#Select Working Variables and Exclude NAs in COVCLINTRIAL
+
+library(dplyr)
+
+dft1 <- dfor %>% dplyr::select(CASE_ID,SEX,AGEi,RACEi,
+                               HGBADM, WBCADM, PLATELET,
+                               INITSCR, TROPADM,ANTIHYPRTNSV,
+                               LIPLOWTHRP,ANTIPLT, ANTICOAG,
+                               ANTIHYPRGLYM, HISETHNI,DDMER,
+                               TROPADM, INITSCR, COVCLINTRIAL,
+                               MEDHISTO_01, MEDHISTO_02, MEDHISTO_08,
+                               MEDHISTO_09,MEDHISTO_11, MEDHISTO_12) %>%
+                          dplyr::filter(!is.na(COVCLINTRIAL))
+
+#                               (RACE_01, RACE_02, 
+#                                RACE_03, RACE_04, RACE_05, RACE_06,
+#                                ASIAN_01,ASIAN_02, ASIAN_03,
+#                                ASIAN_04, ASIAN_05, ASIAN_06, ASIAN_07,
+#                                HAWAIIAN_01, HAWAIIAN_02, HAWAIIAN_03,
+#                                HAWAIIAN_04, ETHNICYS_01, ETHNICYS_02,
+#                                ETHNICYS_03, ETHNICYS_04
+# PSOURCE_01,
+#                                PSOURCE_02,PSOURCE_03,PSOURCE_04,
+#                                PSOURCE_05, PSOURCE_06, PSOURCE_07,
+#                                PSOURCE_09,
+                                         
+                                
+#Adding Labels for Factor Variables
+
+#Payment Source
+#dft1$PSOURCE <- factor
+
+#Sex 
+
+dft1$SEX <- factor(dft1$SEX, levels = c("1", "2"), 
+                  labels = c("Male", "Female"))
+
+#Covclintrial
+
+dft1$COVCLINTRIAL <- factor(dft1$COVCLINTRIAL, levels = c("1", "2"),
+                            labels =c( "Yes", "No"))
+
+#RACEi is AHA's defition
+
+dft1$RACEi <- factor(dft1$RACEi, levels = c("1", "2", "3", "4", "5", "6", "7"),
+                  labels = c("Hispanic",
+                             "Non-Hispanic Black",
+                             "Native American",
+                             "Asian",
+                             "Pacific Islander",
+                             "Non-Hispanic White",
+                             "UTD"))
+#Hispanic Ethnicity
+dft1$HISETHNI <- factor(dft1$HISETHNI, levels = c("1", "2"),
+                        labels = c("Yes", "No/UTD"))
+
+#Atrial Fibrilation
+dft1$MEDHISTO_01 <- factor(dft1$MEDHISTO_01, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Atrial Flutter
+dft1$MEDHISTO_02 <- factor(dft1$MEDHISTO_02, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Diabetes Mellitus  
+dft1$MEDHISTO_08 <- factor(dft1$MEDHISTO_08, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Dyslipidemia
+dft1$MEDHISTO_09 <- factor(dft1$MEDHISTO_09, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+#Heart Failure
+dft1$MEDHISTO_11 <- factor(dft1$MEDHISTO_11, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+#Hypertension
+dft1$MEDHISTO_12 <- factor(dft1$MEDHISTO_12, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+## Medications Prior To Admission
+
+dft1$ANTIHYPRTNSV <- factor(dft1$ANTIHYPRTNSV, levels = c("1", "2"), 
+                  labels = c("Yes", "No"))
+
+dft1$ANTIHYPRTNSV <- factor(dft1$ANTIHYPRTNSV, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$LIPLOWTHRP <- factor(dft1$LIPLOWTHRP, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$ANTIPLT <- factor(dft1$ANTIPLT, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$ANTICOAG <- factor(dft1$ANTICOAG, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+
+dft1$ANTIHYPRGLYM <- factor(dft1$ANTIHYPRGLYM, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+##Admissions Laboratory Results 
+## Hemoglobin (Lab Closest to adm)
+
+```
+
+## Describe Data
+```{r Describe Data, echo=TRUE}
+
+#Descriptives for all the Variables Overall
+dt<-ExpCTable(dft1,
+              Target=NULL,
+              clim=9,
+              nlim=15,
+              round=2,
+              bin=NULL,
+              per=TRUE)
+
+#Table for all Variables 
+kable(dt) %>%
+  kable_styling(bootstrap_options = c("striped",
+                                      "hover",
+                                      "condensed"))
+
+#For all Variables Group by CLINTRIAL
+
+
+ExpCTable(dft1, 
+          Target = "COVCLINTRIAL", margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
+
+#Numerical Summary by Var Grouped by Enrollment in Clinical Trials
+
+dtnum<-ExpCustomStat(dft1,Cvar = c("COVCLINTRIAL"),
+                     Nvar=c("AGEi", "HGBADM", "WBCADM",     
+                            "PLATELET","INITSCR", "TROPADM",
+                            "DDMER", "TROPADM", "INITSCR"),
+                     stat = c('Count','Prop','mean',"sd",'median', "IQR", "min",'max'),
+                     gpby=FALSE, dcast = FALSE)
+
+#Table for Numeric Variables by Enrollment in Clinical Trials
+
+kable(dtnum) %>%
+  kable_styling(bootstrap_options = c("striped",
+                                      "hover",
+                                      "condensed"))
+
+```
+
+#Visualizing the Data
+```{r Visualizations, echo=FALSE}
+#Age for the entire sample
+ggplot(dft1) +
+ aes(x = AGEi) +
+ geom_histogram(bins = 100L, fill = "#6dcd59") +
+ labs(x = "Age", y = "Count") +
+ theme_classic()
+```
+#Visualizing the Data
+```{r Vis (age/sex) in Enrolled vs Not Enrolled, echo=FALSE}
+#Age and Sex comparison Enrolled vs Not-Enrolled
+
+dft1 %>%
+ filter(!is.na(SEX)) %>%
+ filter(!is.na(AGEi)) %>%
+ filter(!is.na(COVCLINTRIAL)) %>%
+ ggplot() +
+ aes(x = AGEi, fill = SEX) +
+ geom_histogram(bins = 18L, position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Age", y = "Count", title = "Enrolled/Not Enrolled", fill = "Sex") +
+ theme_classic() +
+ facet_wrap(vars(COVCLINTRIAL), scales = "free_y")
+
+```
+#Visualizing the Data
+```{r Race Comparison - Enrolled vs Not Enrolled, echo=FALSE}
+library(dplyr)
+library(ggplot2)
+
+ggrc<- dft1 %>%
+ ggplot() +
+ aes(x = RACEi, fill = RACEi) +
+ geom_bar() +
+ scale_fill_hue() +
+ labs(title = "Enrolled Vs Not-Enrolled in Clinical Trials by Race") +
+ theme_classic() +
+ facet_wrap(vars(COVCLINTRIAL), scales = "fixed") 
+
+```
+
+```{r Histograms}
+
+# Plotting Histograms of Continuous Vars Using Data Explorer
+
+dft1 %>% select(AGEi, DDMER, HGBADM, INITSCR, PLATELET, TROPADM, WBCADM) %>% plot_histogram(geom_histogram_args = list(binwidth = .3, col ="black", size = 3))
+
+
+```
+
+
+

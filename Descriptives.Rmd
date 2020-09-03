@@ -1,0 +1,339 @@
+---
+title: "Descriptives Covid_8.26"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+---
+#Load Packages
+
+```{r}
+library(haven)
+library(dplyr)
+library(reshape2)
+library(ggplot2)
+library(esquisse)
+library(haven)
+library(stringr)
+library(broom)
+library(SmartEDA)
+library(summarytools)
+library(stats)
+library(kableExtra)
+library(DataExplorer)
+library(scales)
+library(RColorBrewer)
+```
+
+## Loading the Data
+```{r Read Data, message=FALSE, warning=FALSE, include=FALSE}
+
+#Read in data and save it in df object (original data for comparison)
+dataFile = '/mnt/workspace/GWTG/COVID19/data/covid19_cvd_aug20.sas7bdat'
+formatsFile = '/mnt/workspace/GWTG/COVID19/data/R_Python_windows_formats.sas7bcat'
+
+dfor <- haven::read_sas(dataFile, formatsFile)
+#Get Dimensions and Var names
+dim(dfor)
+
+#Leaving Only Unique Vars based on PATIENT ID and HOSPITAL ID
+#Keep all leaves all columns
+
+#
+dfor %>% distinct(PATIENT_ID,SUBJID, .keep_all = TRUE)
+
+#
+dfor[duplicated(dfor), ]
+
+###Using Data Table 
+
+
+
+
+```
+
+##Select Working Variables and Add Label
+
+```{r Select Working Variables and Add Labels, include=FALSE}
+#Select Working Variables and Exclude NAs in COVCLINTRIAL
+
+library(dplyr)
+
+dft1 <- dfor %>% dplyr::select(CASE_ID,SEX,AGEi,RACEi,
+                               HGBADM, WBCADM, PLATELET,
+                               INITSCR, TROPADM,ANTIHYPRTNSV,
+                               LIPLOWTHRP,ANTIPLT, ANTICOAG,
+                               ANTIHYPRGLYM, HISETHNI,DDMER,
+                               TROPADM, INITSCR, COVCLINTRIAL,
+                               MEDHISTO_01, MEDHISTO_02, MEDHISTO_08,
+                               MEDHISTO_09,MEDHISTO_11, MEDHISTO_12,
+                               PATMANICUDT,
+                               PATMANICU,
+                               DISDATE,DSCHSTAT, ADMDT,DEATHDT,PSOURCE_01,
+                               PSOURCE_02,PSOURCE_03,PSOURCE_04,
+                               PSOURCE_05, PSOURCE_06, PSOURCE_07,
+                               PSOURCE_09) %>%
+                  dplyr::filter(!is.na(COVCLINTRIAL))
+
+#                               (RACE_01, RACE_02, 
+#                                RACE_03, RACE_04, RACE_05, RACE_06,
+#                                ASIAN_01,ASIAN_02, ASIAN_03,
+#                                ASIAN_04, ASIAN_05, ASIAN_06, ASIAN_07,
+#                                HAWAIIAN_01, HAWAIIAN_02, HAWAIIAN_03,
+#                                HAWAIIAN_04, ETHNICYS_01, ETHNICYS_02,
+#                                ETHNICYS_03, ETHNICYS_04
+
+
+                                         
+                                
+#Adding Labels for Factor Vars
+
+#Payment Source
+#dft1$PSOURCE <- factor
+
+#Sex 
+
+dft1$SEX <- factor(dft1$SEX, levels = c("1", "2"), 
+                  labels = c("Male", "Female"))
+
+#Covclintrial
+
+dft1$COVCLINTRIAL <- factor(dft1$COVCLINTRIAL, levels = c("1", "2"),
+                            labels =c( "Yes", "No"))
+
+#RACEi is AHA's defition
+
+dft1$RACEi <- factor(dft1$RACEi, levels = c("1", "2", "3", "4", "5", "6", "7"),
+                  labels = c("Hispanic",
+                             "Non-Hispanic Black",
+                             "Native American",
+                             "Asian",
+                             "Pacific Islander",
+                             "Non-Hispanic White",
+                             "UTD"))
+#Hispanic Ethnicity
+dft1$HISETHNI <- factor(dft1$HISETHNI, levels = c("1", "2"),
+                        labels = c("Yes", "No/UTD"))
+
+#Atrial Fibrilation
+dft1$MEDHISTO_01 <- factor(dft1$MEDHISTO_01, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Atrial Flutter
+dft1$MEDHISTO_02 <- factor(dft1$MEDHISTO_02, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Diabetes Mellitus  
+dft1$MEDHISTO_08 <- factor(dft1$MEDHISTO_08, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Dyslipidemia
+dft1$MEDHISTO_09 <- factor(dft1$MEDHISTO_09, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+#Heart Failure
+dft1$MEDHISTO_11 <- factor(dft1$MEDHISTO_11, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+#Hypertension
+dft1$MEDHISTO_12 <- factor(dft1$MEDHISTO_12, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+## Medications Prior To Admission
+
+dft1$ANTIHYPRTNSV <- factor(dft1$ANTIHYPRTNSV, levels = c("1", "2"), 
+                  labels = c("Yes", "No"))
+
+dft1$LIPLOWTHRP <- factor(dft1$LIPLOWTHRP, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$ANTIPLT <- factor(dft1$ANTIPLT, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$ANTICOAG <- factor(dft1$ANTICOAG, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+
+dft1$ANTIHYPRGLYM <- factor(dft1$ANTIHYPRGLYM, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$PATMANICU <- as.factor(dft1$PATMANICU)
+
+## Payment Sources
+
+
+dft1$PSOURCE_01 <- as.factor(dft1$PSOURCE_01)
+dft1$PSOURCE_02 <- as.factor(dft1$PSOURCE_02)
+dft1$PSOURCE_03 <- as.factor(dft1$PSOURCE_03)
+dft1$PSOURCE_04 <- as.factor(dft1$PSOURCE_04)
+dft1$PSOURCE_05 <- as.factor(dft1$PSOURCE_05)
+dft1$PSOURCE_06 <- as.factor(dft1$PSOURCE_06)
+dft1$PSOURCE_07 <- as.factor(dft1$PSOURCE_07)
+dft1$PSOURCE_09 <- as.factor(dft1$PSOURCE_09)
+
+
+```
+
+```{r Recode and Combine Variables}
+
+#Create age_group variable
+
+dft1 <- dft1 %>% mutate(age_group = case_when(AGEi > 64 ~ '>64',
+                                             AGEi >= 50 & AGEi <= 64 ~ '50-64',
+                                             AGEi < 50 ~ '<50'))
+#Create psource_derived
+
+dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 ~ "Medicare",
+                                                  PSOURCE_02 == 1 ~ "Medicaid",
+                                                  PSOURCE_03 == 1 ~ "Other",
+                                                  PSOURCE_04 == 1 ~ "Self-Pay",
+                                                  PSOURCE_05 == 1 ~ "Medicare",
+                                                  PSOURCE_06 == 1 ~ "Medicaid",
+                                                  PSOURCE_07 == 1 ~ "Other",
+                                                  PSOURCE_09 == 1 ~ "Other"))
+
+# Create Death Vars with AHA Logic. 
+# Discharge Data (DISDATE) is not missing and Discharge Status is 6 or "Expired" 
+
+dft1 <- dft1 %>% mutate(death = ifelse(!is.na(DISDATE) == TRUE & DSCHSTAT == 6 , 1, 0))
+dft1$death <- as.factor(dft1$death)
+
+
+# Create Length of Hospitalization Variable
+# DISDATE is already length of admission
+#Derived date variables tend to have the "Studyday" tag
+#in the description and end in DT (ex. ANCHORDT).
+#These variables are deidentified date variables from the raw regsitry data,
+#where the anchor date, or baseline (day 0) is hospital admission date. 
+#All derived dates are in the context of the Admission date (0) + day.
+
+```
+
+```{r}
+## Converting Units for DDMER, Creatinine, and Troponin
+
+hist(dfor$DDMERU, plot = TRUE)
+hist(dfor$TROPUADM, plot = TRUE)
+hist(dfor$SCRUADM, plot =TRUE)
+
+
+#Convert DDMER factors 2 (u/mL) and 3 (ug/mL) to 1 (ng/mL)
+
+transform(dft1, DDMER_uni=ifelse(DDMERU==1, DDMER*1, 
+                  ifelse(DDMERU==3, DDMER*1000, DDMER*______ )))
+
+
+
+
+# Convert Creatinine units factor 2  (umol/L) to factor 1 mg/dL
+
+transform(dft1, DDMER_uni=ifelse(DDMERU==1, DDMER*1, 
+                  ifelse(DDMERU==3, DDMER*1000, DDMER*______ )))
+
+
+
+
+
+
+#Convert Troponin factors 2 (ug/L) and 3(ng/L) to 1 (ng/mL)
+
+
+
+```
+
+
+## Describe Data
+```{r Describe Data, echo=TRUE}
+
+#Descriptives for all the Variables Overall
+dt<-ExpCTable(dft1,
+              Target=NULL,
+              clim=9,
+              nlim=15,
+              round=2,
+              bin=NULL,
+              per=TRUE)
+
+#Table for all Variables 
+kable(dt) %>%
+  kable_styling(bootstrap_options = c("striped",
+                                      "hover",
+                                      "condensed"))
+
+#For all Variables Group by CLINTRIAL
+
+ExpCTable(dft1, 
+          Target = "COVCLINTRIAL", margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
+
+#Numerical Summary by Var Grouped by Enrollment in Clinical Trials
+
+dtnum<-ExpCustomStat(dft1,Cvar = c("COVCLINTRIAL"),
+                     Nvar=c("AGEi", "HGBADM", "WBCADM",     
+                            "PLATELET","INITSCR", "TROPADM",
+                            "DDMER", "TROPADM", "INITSCR"),
+                     stat = c('Count','Prop','mean',"sd",'median', "IQR", "min",'max'),
+                     gpby=FALSE, dcast = FALSE)
+
+#Table for Numeric Variables by Enrollment in Clinical Trials
+
+kable(dtnum) %>%
+  kable_styling(bootstrap_options = c("striped",
+                                      "hover",
+                                      "condensed"))
+
+```
+
+
+
+```{r Histograms}
+
+# Plotting Histograms of Continuous Vars Using Data Explorer
+# 
+# dft1 %>% select(AGEi, DDMER, HGBADM, INITSCR, PLATELET, TROPADM, WBCADM) %>% plot_histogram(geom_histogram_args = list(binwidth = .3, col ="black", size = 3))
+
+#Hemoglobin 
+hist(dft1$HGBADM,breaks = 300, plot = TRUE)
+
+#WBC
+hist(dft1$WBCADM,breaks= 200, plot = TRUE) 
+#Use unique to see unique values in the variable
+#May be a conversion factor issue One patient at 7387.0 
+# Fema…    38 Hisp…   13.3   7387      219 
+
+#
+hist(dft1$PLATELET)
+# Outliers: 3 patients with over 3000  
+dft1 %>% filter ( PLATELET > 800)
+
+#Creatinine 
+hist(dft1$INITSCR, breaks= 200)
+#11 patiens with initscr >20
+#dft1 %>% filter ( INITSCR > 20)
+
+#Troponin
+hist(dft1$TROPADM, breaks = 200)
+#10 patients with over 100 Troponin --- Keep them 
+
+#DDMER Prot
+hist(dft1$DDMER, breaks = 80, plot = TRUE)
+
+#Age
+hist(dft1$AGEi, breaks= 20, plot = TRUE)
+qqnorm(dft1$AGEi)
+summary(dft1$AGEi)
+
+#Quick Tables
+
+
+
+```
+
+
+```{r}
+## Overall Race Prop Enrolled/Not-Enrolled
+
+racetab<-prop.table(table(dft1$COVCLINTRIAL, dft1$RACEi))
+
+racetab2<-addmargins(racetab)
+
+
+```
+

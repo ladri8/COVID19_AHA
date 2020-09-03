@@ -1,0 +1,61 @@
+---
+title: "Visualizations"
+author: "Adriana RM"
+date: "8/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r cars}
+#Visualizing the Data
+```{r Visualizations, echo=FALSE}
+#Age for the entire sample
+ggplot(dft1) +
+ aes(x = AGEi) +
+ geom_histogram(bins = 100L, fill = "#6dcd59") +
+ labs(x = "Age", y = "Count") +
+ theme_classic()
+```
+#Visualizing the Data
+```{r Vis (age/sex) in Enrolled vs Not Enrolled, echo=FALSE}
+#Age and Sex comparison Enrolled vs Not-Enrolled
+
+dft1 %>%
+ filter(!is.na(SEX)) %>%
+ filter(!is.na(AGEi)) %>%
+ filter(!is.na(COVCLINTRIAL)) %>%
+ ggplot() +
+ aes(x = AGEi, fill = SEX) +
+ geom_histogram(bins = 18L, position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Age", y = "Count", title = "Enrolled/Not Enrolled", fill = "Sex") +
+ theme_classic() +
+ facet_wrap(vars(COVCLINTRIAL), scales = "free_y")
+
+```
+#Visualizing the Data
+```{r Race Comparison - Enrolled vs Not Enrolled, echo=FALSE}
+library(dplyr)
+library(ggplot2)
+
+#Working on this... 
+ggrc<- dft1 %>%
+ ggplot() +
+ aes(x = RACEi, fill = RACEi) +
+ geom_bar(aes(y = (..count..)/sum(..count..))) +
+ scale_fill_hue() + scale_y_continuous(labels = scales::percent) +
+ labs(title = "Enrolled Vs Not-Enrolled in Clinical Trials by Race") +
+ theme_classic() +
+ coord_flip() +
+ facet_wrap(vars(COVCLINTRIAL), scales = "free")
+
+
+
+
+
+```
