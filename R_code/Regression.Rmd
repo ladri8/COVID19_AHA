@@ -1,0 +1,26 @@
+---
+title: "L_Regression_9.3"
+author: "Adriana RM"
+date: "9/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Logistic Regression
+
+```{r}
+
+logistic.model <- glm(COVCLINTRIAL ~ SEX + AGEi + age_group + factor(RACEi), data= dft1, family = 'binomial')
+
+#Model Summary
+summary(logistic.model)
+
+
+```
+
+## Including Plots
+
+
