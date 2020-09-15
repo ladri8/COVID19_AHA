@@ -1,0 +1,138 @@
+---
+title: "T1"
+author: "Adriana RM"
+date: "9/14/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(table1)
+install.packages("arsenal")
+library(arsenal)
+```
+
+```{r}
+
+
+table1(~ AGEi + factor(SEX) + factor(RACEi) + factor(age_group) | COVCLINTRIAL, data=dft1)
+
+dft1$COVCLINTRIAL <- factor(dft1$COVCLINTRIAL, levels=c(1, 2, 3), labels=c("Enrolled", "Not Enrolled", "P-value"))
+
+
+### Function to Create p.values depending on variable 
+
+rndr <- function(x, name, ...) {
+    if (length(x) == 0) {
+        y <- dft1[[name]]
+        s <- rep("", length(render.default(x=y, name=name, ...)))
+        if (is.numeric(y)) {
+            p <- t.test(y ~ dft1$COVCLINTRIAL)$p.value
+        } else {
+            p <- chisq.test(table(y, droplevels(dft1$COVCLINTRIAL)))$p.value
+        }
+        s[2] <- sub("<", "&lt;", format.pval(p, digits=3, eps=0.001))
+        s
+    } else {
+        render.default(x=x, name=name, ...)
+    }
+}
+
+rndr.strat <- function(label, n, ...) {
+    ifelse(n==0, label, render.strat.default(label, n, ...))
+}
+
+
+
+```
+
+```{r}
+
+### Installing Table1 from Wozniak 2016
+
+library(devtools)
+#install_github("emwozniak/Table1")
+library(Table1)
+
+
+make.table(dat  = dft1,
+           strat        = "COVCLINTRIAL",
+           cat.varlist  = c("SEX",
+                            "RACEi",
+                            "RACEgroup",
+                            "HISETHNI",
+                            "age_group",
+                            "psource_group",
+                            "MEDHISTO_01",
+                            "MEDHISTO_02",
+                            "MEDHISTO_08",
+                            "MEDHISTO_09",
+                            "MEDHISTO_11",
+                            "MEDHISTO_12",
+                             "ANTIHYPRTNSV",
+                            "LIPLOWTHRP",
+                            "ANTIPLT",
+                            "ANTICOAG",
+                            "ANTIHYPRGLYM", 
+                            "PATMANICU",
+                            "death"),
+           cat.header   = c("Sex",
+                            "Race",
+                            "Race Group",
+                            "Hispanic Ethnicity",
+                            "Age Group",
+                            "Payment Source",
+                            "Atrial Fibrilation",
+                            "Atrial Flutter",
+                            "Diabetes Mellitus",
+                            "Dyslipidemia", 
+                            "Heart Failure",
+                            "Hypertension",
+                             "Antihypertensive", 
+                            "Lipid-lowering Therapy",
+                            "Antiplatelet",
+                            "Anticoagulant",
+                            "Anti-Hyperglycemic",
+                            "Managed in ICU",
+                            "Mortality"),
+           cat.rmstat   = list(c("row"), c("col")),
+           cat.ptype    = "chisq",
+           cont.varlist = c("AGEi",
+                            "HGBADM",
+                            "WBCADM",
+                            "PLATELET",
+                            "INITSCR",
+                            "TROPADM",
+                            "DDMER",
+                            "DISDATE"),
+           cont.header =  c("Age", 
+                            "Hemoglobin",
+                            "WBC",
+                            "Platelet",
+                            "Creatinine", 
+                            "Troponin",
+                            "D-dimer",
+                            "Length of Hospitalization"),
+           cont.rmstat  = list(c("meansd", "q1q3")),
+           cont.ptype   = "ttest",
+           colnames     = c("Variable", "Enrolled", "Not Enrolled", "Overall", "P-value"),
+           output       = "html")
+
+
+```
+```{r}
+#Using Arsenal 
+
+library(arsenal)
+
+table_one <- tableby(COVCLINTRIAL ~ ., data = dft1)
+
+summary(table_one, title = "Table 1")
+
+
+```
+
+
