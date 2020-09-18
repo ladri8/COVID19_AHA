@@ -54,8 +54,125 @@ ggrc<- dft1 %>%
  coord_flip() +
  facet_wrap(vars(COVCLINTRIAL), scales = "free")
 
+ggrc
 
 
 
 
 ```
+```{r}
+dft1 %>%
+                  ggplot(aes(x= variable, y= mean, fill = COVCLINTRIAL)) +
+                  geom_bar(position = position_dodge(0.75),
+                           stat = "summary", fun.y = "mean", width = 0.7) +
+                  geom_errorbar(aes(ymin= mean - ci, ymax= mean + ci), 
+                                position= position_dodge(0.75)) +
+                                labs(title = "Percentage with Comorbidities", 
+                                     x = "Comorbidities", 
+                                     y = "%") +
+                  theme_bw() +
+                  theme(panel.border = element_blank(), panel.grid =element_blank()) + 
+                  coord_flip()
+
+```
+```{r}
+
+ggstatsplot::ggbarstats(
+  data = ggstatsplot::movies_long,
+  x = mpaa,
+  y = genre,
+  sampling.plan = "jointMulti",
+  title = "MPAA Ratings by Genre",
+  xlab = "movie genre",
+  legend.title = "MPAA rating",
+  ggtheme = hrbrthemes::theme_ipsum_pub(),
+  ggplot.component = list(scale_x_discrete(guide = guide_axis(n.dodge = 2))),
+  palette = "Set2",
+  messages = FALSE
+)
+
+
+```
+
+
+```{r}
+library(esquisse)
+library(ggplot2)
+
+ggplot(dft1) +
+ aes(x = RACEgroup, fill = RACEgroup) +
+ geom_bar(aes(y = (..count..)/sum(..count..)), position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Race", y = "%", title = "Enrolled vs Not Enrolled in Clinical Trials by Race") +
+ theme_classic() + scale_y_continuous(labels = scales::percent_format(accuracy=1.000)) +
+ scale_y_continuous(limits = c(0, 0.4), breaks = seq(0, 0.4, by = 0.05), labels = scales::percent_format(accuracy=1.00)) +
+ theme(legend.position = "none") +
+ facet_wrap(vars(COVCLINTRIAL))
+
+# ggplot(dft1) +
+#  aes(x = COVCLINTRIAL, fill = RACEgroup, group = RACEgroup) +
+#   geom_bar(aes(y = (..count..)/sum(..count..)), position = "dodge") +
+#  scale_fill_hue() +
+#  labs(x = "Enrolled", y = "%", title = "Enrolled vs Not Enrolled in Clinical Trials by Race") +
+#  theme_classic() +
+#  scale_y_continuous(limits = c(0, 0.4), breaks = seq(0,0.4, by = 0.05), labels = scales::percent_format(accuracy=1.00)) +
+#  theme(legend.position = "none") +
+#  facet_wrap(vars(RACEgroup))
+
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(dft1) +
+ aes(x = RACEgroup, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Race", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials", fill = "Race") +
+ theme_classic() +
+ facet_wrap(vars(COVCLINTRIAL))
+
+ggplot(dft1) +
+ aes(x = COVCLINTRIAL, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
+ theme_minimal() +
+ theme(legend.position = "none") +
+ facet_wrap(vars(RACEgroup))
+
+ggplot(dft1) +
+ aes(x = COVCLINTRIAL, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
+ theme_classic() +
+ theme(legend.position = "none") +
+ facet_wrap(vars(RACEgroup))
+
+dft1 %>%
+ filter(!(RACEgroup %in% c("Other", "UTD"))) %>%
+ ggplot() +
+ aes(x = COVCLINTRIAL, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
+ ggthemes::theme_fivethirtyeight() +
+ theme(legend.position = "none") +
+ facet_wrap(vars(RACEgroup))
+
+dft1 %>%
+ filter(!(RACEgroup %in% c("Other", "UTD"))) %>%
+ ggplot() +
+ aes(x = COVCLINTRIAL, fill = RACEgroup, group = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = " ") +
+ ggthemes::theme_fivethirtyeight()
+```
+
+```{r}
+
+```
+
+

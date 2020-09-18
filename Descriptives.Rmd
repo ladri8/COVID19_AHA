@@ -306,6 +306,54 @@ dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 ~ "Medicare",
 dft1 <- dft1 %>% mutate(death = ifelse(!is.na(DISDATE) == TRUE & DSCHSTAT == 6 , 1, 0))
 dft1$death <- as.factor(dft1$death)
 
+
+library(ggplot2)
+
+ggplot(dft1) +
+ aes(x = RACEgroup, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Race", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials", fill = "Race") +
+ theme_classic() +
+ facet_wrap(vars(COVCLINTRIAL))
+
+ggplot(dft1) +
+ aes(x = COVCLINTRIAL, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
+ theme_minimal() +
+ theme(legend.position = "none") +
+ facet_wrap(vars(RACEgroup))
+
+ggplot(dft1) +
+ aes(x = COVCLINTRIAL, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
+ theme_classic() +
+ theme(legend.position = "none") +
+ facet_wrap(vars(RACEgroup))
+
+dft1 %>%
+ filter(!(RACEgroup %in% c("Other", "UTD"))) %>%
+ ggplot() +
+ aes(x = COVCLINTRIAL, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
+ ggthemes::theme_fivethirtyeight() +
+ theme(legend.position = "none") +
+ facet_wrap(vars(RACEgroup))
+
+dft1 %>%
+ filter(!(RACEgroup %in% c("Other", "UTD"))) %>%
+ ggplot() +
+ aes(x = COVCLINTRIAL, fill = RACEgroup, group = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = " ") +
+ ggthemes::theme_fivethirtyeight()
 # Discharge Data (DISDATE) is not missing and Discharge Status is 6 or "Expired" 
 
 dft2<- dft1 %>% mutate(Covid_Sev = case_when(DSCHSTAT == 6 ~ "Level 1",

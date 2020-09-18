@@ -1,0 +1,196 @@
+---
+title: "L_Regression_9.3"
+author: "Adriana RM"
+date: "9/3/2020"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+## Setting Reference Levels 
+```{r}
+#Change reference level for COVCLIN Trial To Yes
+
+dft1 = dft1 %>% mutate(COVCLINTRIAL = relevel(COVCLINTRIAL, "Yes"))
+
+# Change reference level for RACEi to Non-Hispanc White
+
+dft1 = dft1 %>% mutate(RACEgroup = relevel(RACEgroup,"NHWhite"))
+
+```
+
+## Logistic Regression Ungrouped RACEi
+
+```{r}
+# 
+# logistic.model <- glm(COVCLINTRIAL ~ SEX + AGEi + factor(RACEi), data= dft1, family = 'binomial')
+# 
+# #Model Summary
+# summary(logistic.model)
+
+```
+
+```{r}
+## Group RACEi according to:
+# For categorizations, we combined race/ethnicity by the following hierarchy:
+# ·         Hispanic (any Race)
+# ·         Black
+# ·         Asian/Pacific Islander 
+# ·         non-Hispanic white (NHW)
+# ·         Other (Includes American Indian and Alaskan Native)
+# ·         Unable to determine
+
+## Create New Race Ethnicity Variable: RACEgroup 
+
+library(forcats)
+
+dft1$RACEgroup <- fct_collapse(dft1$RACEi,
+  UTD = "UTD",
+  Other = "Native American",
+  NHWhite = "Non-Hispanic White",
+  Asian_PI = c("Asian", "Pacific Islander"),
+  Black = "Non-Hispanic Black",
+  Hispanic = "Hispanic"
+)
+
+```
+
+## Filter out hospitals with <10
+```{r}
+
+#Hospitals with <10 Patients 
+dft1 %>% 
+  select(COVCLINTRIAL, AGEi, SEX, RACEgroup, SRC_FAC_ID) %>%         
+  group_by(SRC_FAC_ID) %>% 
+  summarise(n_hosp = n()) %>% 
+  arrange(desc(n_hosp)) %>% 
+  dplyr::filter(n_hosp <10)
+
+
+#Hospitals with <10 Patients
+
+#DS with summary
+dft1 %>% group_by(SRC_FAC_ID) %>% summarise(n_patient = n()) %>%
+  arrange(desc(n_patient)) %>% dplyr::filter(n_patient > 10)
+
+#DS with all vars (Keepers)
+
+keep_hosp <-dft1 %>% group_by(SRC_FAC_ID) %>% summarise(n_patient = n()) %>%
+  arrange(desc(n_patient)) %>% dplyr::filter(n_patient > 10)
+
+
+#Filtering out 17 Hospitals that had 10 or less patients 
+
+dim(dft1)
+length(unique(dft1$SRC_FAC_ID))
+
+#Use this DF for regression 
+filthosp <- dft1[dft1$SRC_FAC_ID %in% keep_hosp$SRC_FAC_ID, , drop = FALSE]
+
+dim(filthosp)
+length(unique(filthosp$SRC_FAC_ID))
+
+
+```
+
+
+###Unfiltered Regression
+```{r}
+library(gtsummary)
+library(dplyr)
+library(lme4)
+
+
+# estimate the model and store results in m
+
+m <- glmer(COVCLINTRIAL ~ SEX + AGEi + factor(RACEgroup) + (1 | SRC_FAC_ID ), data = dft1, family = binomial)
+
+
+# Model Summary: 
+#print(m, corr = FALSE)
+summary(m)
+#str(m) print information about the model and how to access it with @ or $
+
+
+```
+
+##Unfiltered Regression Table
+```{r}
+
+##Table for Regression Model 
+
+m %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
+
+
+```
+
+
+```{r}
+#Filtered 
+
+library(gtsummary)
+library(dplyr)
+library(lme4)
+
+# estimate the model and store results in m
+
+m_filtered <- glmer(COVCLINTRIAL ~ SEX + AGEi + factor(RACEgroup) + (1 | SRC_FAC_ID ), data = filthosp, family = binomial, nAGQ = 1)
+
+
+# Model Summary: 
+#print(m, corr = FALSE)
+summary(m_filtered)
+
+#Table
+m_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
+
+
+```
+```{r}
+# estimate the model and store results in m
+
+minadj_filtered <- glmer(COVCLINTRIAL ~ SEX + AGEi + (1 | SRC_FAC_ID ), data = filthosp, family = binomial, nAGQ = 1)
+
+
+# Model Summary: 
+#print(m, corr = FALSE)
+summary(minadj_filtered)
+
+#Table
+minadj_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
+```
+
+```{r}
+library(flextable)
+library(officer)
+
+# estimate the model and store results in m
+
+minadj2_filtered <- glmer(COVCLINTRIAL ~ SEX + age_group + (1 | SRC_FAC_ID ), data = filthosp, family = binomial, nAGQ = 1)
+
+
+# Model Summary: 
+
+summary(minadj2_filtered)
+
+#Table 
+tab_minadj_2 <- minadj2_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
+
+#Converting into Word Table
+
+flextab_minadj2 <- as_flex_table(tab_minadj_2, include = everything(),return_calls = FALSE, strip_md_bold = TRUE)
+
+#Save as a Doc file
+
+docx_file <- tempfile(fileext = ".docx")
+
+save_as_docx("Minadj_table_agegroup" = flextab_minadj2, path = docx_file)
+
+```
+
