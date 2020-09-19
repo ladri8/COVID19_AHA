@@ -102,20 +102,20 @@ length(unique(filthosp$SRC_FAC_ID))
 
 ###Unfiltered Regression
 ```{r}
-library(gtsummary)
-library(dplyr)
-library(lme4)
-
-
-# estimate the model and store results in m
-
-m <- glmer(COVCLINTRIAL ~ SEX + AGEi + factor(RACEgroup) + (1 | SRC_FAC_ID ), data = dft1, family = binomial)
-
-
-# Model Summary: 
-#print(m, corr = FALSE)
-summary(m)
-#str(m) print information about the model and how to access it with @ or $
+# library(gtsummary)
+# library(dplyr)
+# library(lme4)
+# 
+# 
+# # estimate the model and store results in m
+# 
+# m <- glmer(COVCLINTRIAL ~ SEX + AGEi + factor(RACEgroup) + (1 | SRC_FAC_ID ), data = dft1, family = binomial)
+# 
+# 
+# # Model Summary: 
+# #print(m, corr = FALSE)
+# summary(m)
+# #str(m) print information about the model and how to access it with @ or $
 
 
 ```
@@ -123,10 +123,10 @@ summary(m)
 ##Unfiltered Regression Table
 ```{r}
 
-##Table for Regression Model 
-
-m %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
-
+# ##Table for Regression Model 
+# 
+# m %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
+# 
 
 ```
 
@@ -142,16 +142,21 @@ library(lme4)
 
 m_filtered <- glmer(COVCLINTRIAL ~ SEX + AGEi + factor(RACEgroup) + (1 | SRC_FAC_ID ), data = filthosp, family = binomial, nAGQ = 1)
 
-
 # Model Summary: 
 #print(m, corr = FALSE)
 summary(m_filtered)
 
 #Table
-m_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
+
+model_tab<- m_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
+
+model_tab <- as_flex_table(model_tab, include = everything(),return_calls = FALSE, strip_md_bold = TRUE)
 
 
 ```
+
+
+
 ```{r}
 # estimate the model and store results in m
 
@@ -163,7 +168,11 @@ minadj_filtered <- glmer(COVCLINTRIAL ~ SEX + AGEi + (1 | SRC_FAC_ID ), data = f
 summary(minadj_filtered)
 
 #Table
-minadj_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
+minadj_tab<- minadj_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
+
+minadj_tab <- as_flex_table(minadj_tab, include = everything(),return_calls = FALSE, strip_md_bold = TRUE)
+
+
 ```
 
 ```{r}
@@ -190,7 +199,10 @@ flextab_minadj2 <- as_flex_table(tab_minadj_2, include = everything(),return_cal
 
 docx_file <- tempfile(fileext = ".docx")
 
-save_as_docx("Minadj_table_agegroup" = flextab_minadj2, path = docx_file)
+save_as_docx("Minadj_table_agegroup" = flextab_minadj2, "minad_tab" = minadj_tab, "Model Tab" = model_tab, path = docx_file)
+
+View(docx_file)
+print( )
 
 ```
 

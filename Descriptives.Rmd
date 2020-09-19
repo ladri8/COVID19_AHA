@@ -4,6 +4,7 @@ output:
   html_document:
     df_print: paged
   html_notebook: default
+  word_document: default
 ---
 #Load Packages
 
@@ -67,10 +68,10 @@ length(unique(df$PATIENT_ID))
 length(unique(df$SRC_FAC_ID))
 ```
 ```{r}
-
-8920-8545 #number of records with duplicate patient IDs
-8920-48-431 #dimensions using Adriana's counts
-8920-48-327 #dimensions using Laura's counts
+# 
+# 8920-8545 #number of records with duplicate patient IDs
+# 8920-48-431 #dimensions using Adriana's counts
+# 8920-48-327 #dimensions using Laura's counts
 
 ```
 
@@ -95,6 +96,7 @@ n_distinct(dup_df$RCRDNUM)
 
 ```
 ```{r}
+
 # nrow(dup_df)
 # length(unique(dup_df$PATIENT_ID))
 
@@ -105,13 +107,13 @@ length(unique(dup_df$PATIENT_ID))
 dim(df[duplicated(df$PATIENT_ID, fromLast = TRUE),]) 
 dim(df[duplicated(df$PATIENT_ID),]) 
 
-dup_summary <-  dup_df %>% 
-                group_by(PATIENT_ID) %>% 
-                summarise(n_records = length(PATIENT_ID))
-
-n_patients_per_dup_n  <- dup_summary %>% 
-                             group_by(n_records) %>%
-                              summarize(n_patients = n(n_records))
+# dup_summary <-  dup_df %>% 
+#                 group_by(PATIENT_ID) %>% 
+#                 summarise(n_records = length(PATIENT_ID))
+# 
+# n_patients_per_dup_n  <- dup_summary %>% 
+#                              group_by(n_records) %>%
+#                               summarise(n_patients = n(n_records))
  # n_patients_per_dup_n
 
 ```
@@ -199,7 +201,8 @@ dft1 <- ef2 %>% dplyr::select(CASE_ID,SEX,AGEi,RACEi,
                                PSOURCE_05, PSOURCE_06, PSOURCE_07,
                                PSOURCE_09, CARDARR, SHKMGMT_01,
                                SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
-                               HOSPVENT) %>% ## CONTINUE ADD SEVERETIY VARS
+                               HOSPVENT, SCRUADM,TROPUADM, DDMERU, HGBUADM,
+                              WBCUADM,) %>% ## CONTINUE ADD SEVERETIY VARS
                   dplyr::filter(!is.na(COVCLINTRIAL))
 
                                 
@@ -307,53 +310,6 @@ dft1 <- dft1 %>% mutate(death = ifelse(!is.na(DISDATE) == TRUE & DSCHSTAT == 6 ,
 dft1$death <- as.factor(dft1$death)
 
 
-library(ggplot2)
-
-ggplot(dft1) +
- aes(x = RACEgroup, fill = RACEgroup) +
- geom_bar(position = "dodge") +
- scale_fill_hue() +
- labs(x = "Race", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials", fill = "Race") +
- theme_classic() +
- facet_wrap(vars(COVCLINTRIAL))
-
-ggplot(dft1) +
- aes(x = COVCLINTRIAL, fill = RACEgroup) +
- geom_bar(position = "dodge") +
- scale_fill_hue() +
- labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
- theme_minimal() +
- theme(legend.position = "none") +
- facet_wrap(vars(RACEgroup))
-
-ggplot(dft1) +
- aes(x = COVCLINTRIAL, fill = RACEgroup) +
- geom_bar(position = "dodge") +
- scale_fill_hue() +
- labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
- theme_classic() +
- theme(legend.position = "none") +
- facet_wrap(vars(RACEgroup))
-
-dft1 %>%
- filter(!(RACEgroup %in% c("Other", "UTD"))) %>%
- ggplot() +
- aes(x = COVCLINTRIAL, fill = RACEgroup) +
- geom_bar(position = "dodge") +
- scale_fill_hue() +
- labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
- ggthemes::theme_fivethirtyeight() +
- theme(legend.position = "none") +
- facet_wrap(vars(RACEgroup))
-
-dft1 %>%
- filter(!(RACEgroup %in% c("Other", "UTD"))) %>%
- ggplot() +
- aes(x = COVCLINTRIAL, fill = RACEgroup, group = RACEgroup) +
- geom_bar(position = "dodge") +
- scale_fill_hue() +
- labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = " ") +
- ggthemes::theme_fivethirtyeight()
 # Discharge Data (DISDATE) is not missing and Discharge Status is 6 or "Expired" 
 
 dft2<- dft1 %>% mutate(Covid_Sev = case_when(DSCHSTAT == 6 ~ "Level 1",
@@ -404,41 +360,185 @@ table(dft2$Covid_Sev)
 ```
 
 ```{r}
-## Converting Units for DDMER, Creatinine, and Troponin
+# ## Converting Units for DDMER, Creatinine,and Troponin
+# 
+# hist(dfor$DDMERU, plot = TRUE)
+# hist(dfor$TROPUADM, plot = TRUE)
+# hist(dfor$SCRUADM, plot =TRUE)
+# 
+# #Convert DDMER factors 2 (u/mL) and 3 (ug/mL) to 1 (ng/mL)
+# 
+# transform(dft1, DDMER_uni=ifelse(DDMERU==1, DDMER*1, 
+#                   ifelse(DDMERU==3, DDMER*1000, DDMER*______ )))
+# 
+# # Convert Creatinine units factor 2 (umol/L) to factor 1 mg/dL
+# dft1<- dft1 %>% mutate(CREATININE_T = case_when(SCRUADM == 1 ~ (INITSCR*1),
+#           SCRUADM == 2 ~ (INITSCR/88.42)))
+# 
+# table(dft1$SCRUADM)
+# hist(dft1$INITSCR)
+# hist(dft1$CREATININE_T)
+# summary(dft1$CREATININE_T)
+# hist(dft1$INITSCR, breaks = 200)
+# hist(dft1$CREATININE_T, breaks = 200)
+# 
+# # 13 patients with over 30 creatinine 
+# dft1 %>% select(SCRUADM, INITSCR, CREATININE_T) %>% filter (CREATININE_T >30) 
+# 
+# 
+# #13 p patients with over 100 Troponin --- Keep them 
+# #Convert Troponin factors 2 (ug/L) and 3(ng/L) to 1 (ng/mL)
+# 
+# dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
+#           TROPUADM == 2 ~ (TROPADM*1),
+#           TROPUADM == 3 ~ (TROPADM*0.001)))
+# 
+# hist(dft1$TROPADM)
+# hist(dft1$TROPOADM_t)
+# summary(dft1$TROPOADM_t)
+# hist(dft1$TROPADM, breaks = 200)
+# hist(dft1$TROPOADM_t, breaks = 200)
+# #10 patients with over 100 Troponin --- Keep them 
+# 
+# dft1 %>% select(TROPADM, TROPUADM, TROPOADM_t) %>% filter (TROPOADM_t > 0.90) 
+# 
+# #Hemoglobin
+# 
+# dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
+#           TROPUADM == 2 ~ (TROPADM*1),
+#           TROPUADM == 3 ~ (TROPADM*0.001)))
 
-hist(dfor$DDMERU, plot = TRUE)
-hist(dfor$TROPUADM, plot = TRUE)
-hist(dfor$SCRUADM, plot =TRUE)
+```
+```{r Histograms}
+
+# Plotting Histograms of Continuous Vars Using Data Explorer
+# 
+# dft1 %>% select(AGEi, DDMER, HGBADM, INITSCR, PLATELET, TROPADM, WBCADM) %>% plot_histogram(geom_histogram_args = list(binwidth = .3, col ="black", size = 3))
+
+#Hemoglobin 
+hist(dft1$HGBADM,breaks = 300, plot = TRUE)
+dft1 %>% filter ( HGBADM > 50)
+#CHECK UNITS
+
+table(dfor$HGBUADM)
 
 
-#Convert DDMER factors 2 (u/mL) and 3 (ug/mL) to 1 (ng/mL)
+#WBC
+hist(dft1$WBCADM,breaks= 200, plot = TRUE) 
+#Use unique to see unique values in the variable
+#May be a conversion factor issue One patient at 7387.0 
+# Fema…    38 Hisp…   13.3   7387      219 
 
-transform(dft1, DDMER_uni=ifelse(DDMERU==1, DDMER*1, 
-                  ifelse(DDMERU==3, DDMER*1000, DDMER*______ )))
+#
+hist(dft1$PLATELET)
+# Outliers: 3 patients with over 3000  
+dft1 %>% filter ( PLATELET > 800)
 
+#Creatinine 
+hist(dft1$INITSCR, breaks= 200)
+#11 patiens with initscr >20
+#dft1 %>% filter ( INITSCR > 20)
 
+#Troponin
+hist(dft1$TROPADM, breaks = 200)
+#10 patients with over 100 Troponin --- Keep them 
 
+#DDMER Prot
+hist(dft1$DDMER, breaks = 80, plot = TRUE)
 
-# Convert Creatinine units factor 2  (umol/L) to factor 1 mg/dL
+#Age
+hist(dft1$AGEi, breaks= 20, plot = TRUE)
+qqnorm(dft1$AGEi)
+summary(dft1$AGEi)
 
-transform(dft1, DDMER_uni=ifelse(DDMERU==1, DDMER*1, 
-                  ifelse(DDMERU==3, DDMER*1000, DDMER*______ )))
-
-
-
-
-
-
-#Convert Troponin factors 2 (ug/L) and 3(ng/L) to 1 (ng/mL)
+#Quick Tables
 
 
 
 ```
 
+```{r}
+### Installing Table1 package from E Wozniak
 
-## Describe Data
-```{r Describe Data, echo=TRUE}
+#install_github("emwozniak/Table1")
+library(Table1)
 
+
+make.table(dat  = dft1,
+           strat        = "COVCLINTRIAL",
+           cat.varlist  = c("SEX",
+                            # RACEi",
+                            "RACEgroup",
+                            "HISETHNI",
+                            "age_group",
+                            "psource_group",
+                            "MEDHISTO_01",
+                            "MEDHISTO_02",
+                            "MEDHISTO_08",
+                            "MEDHISTO_09",
+                            "MEDHISTO_11",
+                            "MEDHISTO_12",
+                             "ANTIHYPRTNSV",
+                            "LIPLOWTHRP",
+                            "ANTIPLT",
+                            "ANTICOAG",
+                            "ANTIHYPRGLYM", 
+                            "PATMANICU",
+                            "death"),
+           cat.header   = c("Sex",
+                            #"Race",
+                            "Race Group",
+                            "Hispanic Ethnicity",
+                            "Age Group",
+                            "Payment Source",
+                            "Atrial Fibrilation",
+                            "Atrial Flutter",
+                            "Diabetes Mellitus",
+                            "Dyslipidemia", 
+                            "Heart Failure",
+                            "Hypertension",
+                             "Antihypertensive", 
+                            "Lipid-lowering Therapy",
+                            "Antiplatelet",
+                            "Anticoagulant",
+                            "Anti-Hyperglycemic",
+                            "Managed in ICU",
+                            "Death"),
+           cat.rmstat   = list(c("row"), c("col")),
+           cat.ptype    = "chisq",
+           cont.varlist = c("AGEi",
+                            # "HGBADM",
+                            # "WBCADM",
+                            # "PLATELET",
+                            # "INITSCR",
+                            # "TROPADM",
+                            # "DDMER",
+                            "DISDATE"),
+           cont.header =  c("Age", 
+                            # "Hemoglobin",
+                            # "WBC",
+                            # "Platelet",
+                            # "Creatinine", 
+                            # "Troponin",
+                            # "D-dimer",
+                            "Length of Hospitalization"),
+           cont.ptype   = c("wilcox"),
+           colnames     = c("Variable", "Enrolled", "Not Enrolled", "Overall", "P-value"),output = "html")
+
+
+
+```
+
+```{r}
+## Overall Race Prop Enrolled/Not-Enrolled
+
+racetab<-prop.table(table(dft1$COVCLINTRIAL, dft1$RACEi))
+
+racetab2<-addmargins(racetab)
+
+
+```
+```{r}
 #Descriptives for all the Variables Overall
 dt<-ExpCTable(dft1,
               Target=NULL,
@@ -477,59 +577,4 @@ kable(dtnum) %>%
 
 ```
 
-
-
-```{r Histograms}
-
-# Plotting Histograms of Continuous Vars Using Data Explorer
-# 
-# dft1 %>% select(AGEi, DDMER, HGBADM, INITSCR, PLATELET, TROPADM, WBCADM) %>% plot_histogram(geom_histogram_args = list(binwidth = .3, col ="black", size = 3))
-
-#Hemoglobin 
-hist(dft1$HGBADM,breaks = 300, plot = TRUE)
-
-#WBC
-hist(dft1$WBCADM,breaks= 200, plot = TRUE) 
-#Use unique to see unique values in the variable
-#May be a conversion factor issue One patient at 7387.0 
-# Fema…    38 Hisp…   13.3   7387      219 
-
-#
-hist(dft1$PLATELET)
-# Outliers: 3 patients with over 3000  
-dft1 %>% filter ( PLATELET > 800)
-
-#Creatinine 
-hist(dft1$INITSCR, breaks= 200)
-#11 patiens with initscr >20
-#dft1 %>% filter ( INITSCR > 20)
-
-#Troponin
-hist(dft1$TROPADM, breaks = 200)
-#10 patients with over 100 Troponin --- Keep them 
-
-#DDMER Prot
-hist(dft1$DDMER, breaks = 80, plot = TRUE)
-
-#Age
-hist(dft1$AGEi, breaks= 20, plot = TRUE)
-qqnorm(dft1$AGEi)
-summary(dft1$AGEi)
-
-#Quick Tables
-
-
-
-```
-
-
-```{r}
-## Overall Race Prop Enrolled/Not-Enrolled
-
-racetab<-prop.table(table(dft1$COVCLINTRIAL, dft1$RACEi))
-
-racetab2<-addmargins(racetab)
-
-
-```
 

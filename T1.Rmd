@@ -2,58 +2,189 @@
 title: "T1"
 author: "Adriana RM"
 date: "9/14/2020"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r
+```
+
+
 ```{r}
-library(table1)
-install.packages("arsenal")
 library(arsenal)
+
+#Select Working Variables and Exclude NAs in COVCLINTRIAL
+
+library(dplyr)
+
+dft1 <- ef2 %>% dplyr::select(CASE_ID,SEX,AGEi,RACEi,
+                               HGBADM, WBCADM, PLATELET,
+                               INITSCR, TROPADM,ANTIHYPRTNSV,
+                               LIPLOWTHRP,ANTIPLT, ANTICOAG,
+                               ANTIHYPRGLYM, HISETHNI,DDMER,
+                               TROPADM, INITSCR, COVCLINTRIAL,
+                               MEDHISTO_01, MEDHISTO_02, MEDHISTO_08,
+                               MEDHISTO_09,MEDHISTO_11, MEDHISTO_12,
+                               PATMANICUDT,PATMANICU, SRC_FAC_ID,
+                               DISDATE,DSCHSTAT, ADMDT,DEATHDT,PSOURCE_01,
+                               PSOURCE_02,PSOURCE_03,PSOURCE_04,
+                               PSOURCE_05, PSOURCE_06, PSOURCE_07,
+                               PSOURCE_09, CARDARR, SHKMGMT_01,
+                               SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
+                               HOSPVENT, SCRUADM,TROPUADM, DDMERU, HGBUADM,
+                              WBCUADM,) %>% ## CONTINUE ADD SEVERETIY VARS
+                  dplyr::filter(!is.na(COVCLINTRIAL))
+
+                                
+#Adding Labels for Factor Vars
+
+#Sex 
+
+dft1$SEX <- factor(dft1$SEX, levels = c("1", "2"), 
+                  labels = c("Male", "Female"))
+
+#Covclintrial
+
+dft1$COVCLINTRIAL <- factor(dft1$COVCLINTRIAL, levels = c("1", "2"),
+                            labels =c( "Yes", "No"))
+
+#RACEi is AHA's defition
+
+dft1$RACEi <- factor(dft1$RACEi, levels = c("1", "2", "3", "4", "5", "6", "7"),
+                  labels = c("Hispanic",
+                             "Non-Hispanic Black",
+                             "Native American",
+                             "Asian",
+                             "Pacific Islander",
+                             "Non-Hispanic White",
+                             "UTD"))
+#Hispanic Ethnicity
+dft1$HISETHNI <- factor(dft1$HISETHNI, levels = c("1", "2"),
+                        labels = c("Yes", "No/UTD"))
+
+#Atrial Fibrilation
+dft1$MEDHISTO_01 <- factor(dft1$MEDHISTO_01, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Atrial Flutter
+dft1$MEDHISTO_02 <- factor(dft1$MEDHISTO_02, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Diabetes Mellitus  
+dft1$MEDHISTO_08 <- factor(dft1$MEDHISTO_08, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Dyslipidemia
+dft1$MEDHISTO_09 <- factor(dft1$MEDHISTO_09, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+#Heart Failure
+dft1$MEDHISTO_11 <- factor(dft1$MEDHISTO_11, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+#Hypertension
+dft1$MEDHISTO_12 <- factor(dft1$MEDHISTO_12, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+## Medications Prior To Admission
+
+dft1$ANTIHYPRTNSV <- factor(dft1$ANTIHYPRTNSV, levels = c("1", "2"), 
+                  labels = c("Yes", "No"))
+
+dft1$LIPLOWTHRP <- factor(dft1$LIPLOWTHRP, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$ANTIPLT <- factor(dft1$ANTIPLT, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$ANTICOAG <- factor(dft1$ANTICOAG, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+
+dft1$ANTIHYPRGLYM <- factor(dft1$ANTIHYPRGLYM, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$PATMANICU <- as.factor(dft1$PATMANICU)
+
+## Payment Sources
+dft1$PSOURCE_01 <- as.factor(dft1$PSOURCE_01)
+dft1$PSOURCE_02 <- as.factor(dft1$PSOURCE_02)
+dft1$PSOURCE_03 <- as.factor(dft1$PSOURCE_03)
+dft1$PSOURCE_04 <- as.factor(dft1$PSOURCE_04)
+dft1$PSOURCE_05 <- as.factor(dft1$PSOURCE_05)
+dft1$PSOURCE_06 <- as.factor(dft1$PSOURCE_06)
+dft1$PSOURCE_07 <- as.factor(dft1$PSOURCE_07)
+dft1$PSOURCE_09 <- as.factor(dft1$PSOURCE_09)
+
+
 ```
 
 ```{r}
+#Create age_group variable
+
+dft1 <- dft1 %>% mutate(age_group = case_when(AGEi > 64 ~ '>64',
+                                             AGEi >= 50 & AGEi <= 64 ~ '50-64',
+                                             AGEi < 50 ~ '<50'))
+#Create psource_grouped
+
+dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 ~ "Medicare",
+                                                  PSOURCE_02 == 1 ~ "Medicaid",
+                                                  PSOURCE_03 == 1 ~ "Other",
+                                                  PSOURCE_04 == 1 ~ "Self-Pay",
+                                                  PSOURCE_05 == 1 ~ "Medicare",
+                                                  PSOURCE_06 == 1 ~ "Medicaid",
+                                                  PSOURCE_07 == 1 ~ "Other",
+                                                  PSOURCE_09 == 1 ~ "Other"))
+
+# Create Death Vars with AHA Logic
+
+dft1 <- dft1 %>% mutate(death = ifelse(!is.na(DISDATE) == TRUE & DSCHSTAT == 6 , 1, 0))
+dft1$death <- as.factor(dft1$death)
 
 
-table1(~ AGEi + factor(SEX) + factor(RACEi) + factor(age_group) | COVCLINTRIAL, data=dft1)
+# Discharge Data (DISDATE) is not missing and Discharge Status is 6 or "Expired" 
 
-dft1$COVCLINTRIAL <- factor(dft1$COVCLINTRIAL, levels=c(1, 2, 3), labels=c("Enrolled", "Not Enrolled", "P-value"))
+dft2<- dft1 %>% mutate(Covid_Sev = case_when(DSCHSTAT == 6 ~ "Level 1",
+                                                  CARDARR == 1 ~ "Level 2",
+                                                  SHKMGMT_01 == 1 ~ "Level 3",
+                                                  SHKMGMT_02 == 1 ~ "Level 3",
+                                                  SHKMGMT_04 == 1 ~ "Level 3",
+                                                  SHKMGMT_05 == 1 ~ "Level 3",
+                                                  SHKMGMT_03 == 1 ~ "Level 4",
+                                                  HOSPVENT == 1 ~ "Level 5",
+                                                  DSCHSTAT != 6 &
+                                                  CARDARR != 1 &
+                                                  SHKMGMT_01 != 1 &
+                                                  SHKMGMT_02 != 1 &
+                                                  SHKMGMT_04 != 1 &
+                                                  SHKMGMT_05 != 1 &
+                                                  SHKMGMT_03 != 1 &
+                                                  HOSPVENT != 1 ~ "Level 6")) ## do else, or nested else 
 
+dft2$Covid_Sev <- as.factor(dft2$Covid_Sev)
 
-### Function to Create p.values depending on variable 
+## Create New Race Ethnicity Variable: RACEgroup 
 
-rndr <- function(x, name, ...) {
-    if (length(x) == 0) {
-        y <- dft1[[name]]
-        s <- rep("", length(render.default(x=y, name=name, ...)))
-        if (is.numeric(y)) {
-            p <- t.test(y ~ dft1$COVCLINTRIAL)$p.value
-        } else {
-            p <- chisq.test(table(y, droplevels(dft1$COVCLINTRIAL)))$p.value
-        }
-        s[2] <- sub("<", "&lt;", format.pval(p, digits=3, eps=0.001))
-        s
-    } else {
-        render.default(x=x, name=name, ...)
-    }
-}
-
-rndr.strat <- function(label, n, ...) {
-    ifelse(n==0, label, render.strat.default(label, n, ...))
-}
-
-
+library(forcats)
+dft1$RACEgroup <- fct_collapse(dft1$RACEi,
+  UTD = "UTD",
+  Other = "Native American",
+  NHWhite = "Non-Hispanic White",
+  Asian_PI = c("Asian", "Pacific Islander"),
+  Black = "Non-Hispanic Black",
+  Hispanic = "Hispanic"
+)
 
 ```
 
+
 ```{r}
 
-### Installing Table1 from Wozniak 2016
+### Installing Table1 package from E Wozniak
 
-library(devtools)
 #install_github("emwozniak/Table1")
 library(Table1)
 
@@ -61,7 +192,7 @@ library(Table1)
 make.table(dat  = dft1,
            strat        = "COVCLINTRIAL",
            cat.varlist  = c("SEX",
-                            "RACEi",
+                            # RACEi",
                             "RACEgroup",
                             "HISETHNI",
                             "age_group",
@@ -80,7 +211,7 @@ make.table(dat  = dft1,
                             "PATMANICU",
                             "death"),
            cat.header   = c("Sex",
-                            "Race",
+                            #"Race",
                             "Race Group",
                             "Hispanic Ethnicity",
                             "Age Group",
@@ -97,42 +228,44 @@ make.table(dat  = dft1,
                             "Anticoagulant",
                             "Anti-Hyperglycemic",
                             "Managed in ICU",
-                            "Mortality"),
+                            "Death"),
            cat.rmstat   = list(c("row"), c("col")),
            cat.ptype    = "chisq",
            cont.varlist = c("AGEi",
-                            "HGBADM",
-                            "WBCADM",
-                            "PLATELET",
-                            "INITSCR",
-                            "TROPADM",
-                            "DDMER",
+                            # "HGBADM",
+                            # "WBCADM",
+                            # "PLATELET",
+                            # "INITSCR",
+                            # "TROPADM",
+                            # "DDMER",
                             "DISDATE"),
            cont.header =  c("Age", 
-                            "Hemoglobin",
-                            "WBC",
-                            "Platelet",
-                            "Creatinine", 
-                            "Troponin",
-                            "D-dimer",
+                            # "Hemoglobin",
+                            # "WBC",
+                            # "Platelet",
+                            # "Creatinine", 
+                            # "Troponin",
+                            # "D-dimer",
                             "Length of Hospitalization"),
-           cont.rmstat  = list(c("meansd", "q1q3")),
-           cont.ptype   = "ttest",
-           colnames     = c("Variable", "Enrolled", "Not Enrolled", "Overall", "P-value"),
-           output       = "html")
+           cont.ptype   = c("wilcox"),
+           colnames     = c("Variable", "Enrolled", "Not Enrolled", "Overall", "P-value"),output = "html")
+
 
 
 ```
 ```{r}
 #Using Arsenal 
 
-library(arsenal)
-
-table_one <- tableby(COVCLINTRIAL ~ ., data = dft1)
-
-summary(table_one, title = "Table 1")
+# library(arsenal)
+# 
+# table_one <- tableby(COVCLINTRIAL ~ ., data = dft1)
+# 
+# summary(table_one, title = "Table 1")
 
 
 ```
 
+```{r}
+
+```
 
