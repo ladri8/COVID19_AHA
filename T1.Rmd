@@ -130,14 +130,11 @@ dft1 <- dft1 %>% mutate(age_group = case_when(AGEi > 64 ~ '>64',
                                              AGEi < 50 ~ '<50'))
 #Create psource_grouped
 
-dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 ~ "Medicare",
-                                                  PSOURCE_02 == 1 ~ "Medicaid",
-                                                  PSOURCE_03 == 1 ~ "Other",
-                                                  PSOURCE_04 == 1 ~ "Self-Pay",
+dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 | PSOURCE_02 == 1 |PSOURCE_06 ==1 ~ "Medicaid",
                                                   PSOURCE_05 == 1 ~ "Medicare",
-                                                  PSOURCE_06 == 1 ~ "Medicaid",
-                                                  PSOURCE_07 == 1 ~ "Other",
-                                                  PSOURCE_09 == 1 ~ "Other"))
+                                                  PSOURCE_03 ==1 | PSOURCE_07 == 1 ~ "Other",
+                                                  PSOURCE_04 == 1 ~ "Self pay",
+                                                  is.na(PSOURCE_04) == TRUE  | PSOURCE_09 == 1 ~ "Other"))
 
 # Create Death Vars with AHA Logic
 
@@ -189,10 +186,10 @@ dft1$RACEgroup <- fct_collapse(dft1$RACEi,
 library(Table1)
 
 
-make.table(dat  = dft1,
+t1 <- make.table(dat  = dft1,
            strat        = "COVCLINTRIAL",
            cat.varlist  = c("SEX",
-                            # RACEi",
+                             "RACEi",
                             "RACEgroup",
                             "HISETHNI",
                             "age_group",
@@ -251,9 +248,8 @@ make.table(dat  = dft1,
            colnames     = c("Variable", "Enrolled", "Not Enrolled", "Overall", "P-value"),output = "html")
 
 
-
 ```
-```{r}
+```{r eval=FALSE, include=FALSE}
 #Using Arsenal 
 
 # library(arsenal)

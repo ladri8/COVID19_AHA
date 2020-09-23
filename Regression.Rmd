@@ -15,26 +15,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Setting Reference Levels 
 ```{r}
-#Change reference level for COVCLIN Trial To Yes
-
-dft1 = dft1 %>% mutate(COVCLINTRIAL = relevel(COVCLINTRIAL, "Yes"))
 
 # Change reference level for RACEi to Non-Hispanc White
-
 dft1 = dft1 %>% mutate(RACEgroup = relevel(RACEgroup,"NHWhite"))
 
 ```
 
 ## Logistic Regression Ungrouped RACEi
-
-```{r}
-# 
-# logistic.model <- glm(COVCLINTRIAL ~ SEX + AGEi + factor(RACEi), data= dft1, family = 'binomial')
-# 
-# #Model Summary
-# summary(logistic.model)
-
-```
 
 ```{r}
 ## Group RACEi according to:
@@ -47,7 +34,6 @@ dft1 = dft1 %>% mutate(RACEgroup = relevel(RACEgroup,"NHWhite"))
 # ·         Unable to determine
 
 ## Create New Race Ethnicity Variable: RACEgroup 
-
 library(forcats)
 
 dft1$RACEgroup <- fct_collapse(dft1$RACEi,
@@ -62,6 +48,7 @@ dft1$RACEgroup <- fct_collapse(dft1$RACEi,
 ```
 
 ## Filter out hospitals with <10
+
 ```{r}
 
 #Hospitals with <10 Patients 
@@ -96,113 +83,137 @@ filthosp <- dft1[dft1$SRC_FAC_ID %in% keep_hosp$SRC_FAC_ID, , drop = FALSE]
 dim(filthosp)
 length(unique(filthosp$SRC_FAC_ID))
 
-
 ```
 
 
-###Unfiltered Regression
-```{r}
-# library(gtsummary)
-# library(dplyr)
-# library(lme4)
-# 
-# 
-# # estimate the model and store results in m
-# 
-# m <- glmer(COVCLINTRIAL ~ SEX + AGEi + factor(RACEgroup) + (1 | SRC_FAC_ID ), data = dft1, family = binomial)
-# 
-# 
-# # Model Summary: 
-# #print(m, corr = FALSE)
-# summary(m)
-# #str(m) print information about the model and how to access it with @ or $
-
-
-```
-
-##Unfiltered Regression Table
-```{r}
-
-# ##Table for Regression Model 
-# 
-# m %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
-# 
-
-```
-
+## Regression Model 
 
 ```{r}
-#Filtered 
+#Filtered Model by Hospitals with >10 entries 
 
 library(gtsummary)
 library(dplyr)
 library(lme4)
 
-# estimate the model and store results in m
-
-m_filtered <- glmer(COVCLINTRIAL ~ SEX + AGEi + factor(RACEgroup) + (1 | SRC_FAC_ID ), data = filthosp, family = binomial, nAGQ = 1)
-
-# Model Summary: 
-#print(m, corr = FALSE)
-summary(m_filtered)
-
-#Table
-
-model_tab<- m_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
-
-model_tab <- as_flex_table(model_tab, include = everything(),return_calls = FALSE, strip_md_bold = TRUE)
-
-
-```
-
-
-
-```{r}
-# estimate the model and store results in m
-
-minadj_filtered <- glmer(COVCLINTRIAL ~ SEX + AGEi + (1 | SRC_FAC_ID ), data = filthosp, family = binomial, nAGQ = 1)
-
-
-# Model Summary: 
-#print(m, corr = FALSE)
-summary(minadj_filtered)
-
-#Table
-minadj_tab<- minadj_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
-
-minadj_tab <- as_flex_table(minadj_tab, include = everything(),return_calls = FALSE, strip_md_bold = TRUE)
-
+# # estimate the model and store results in m
+# 
+# m_filtered <- glmer(COVCLINTRIAL ~ SEX + AGEi + factor(RACEi) + (1 | SRC_FAC_ID ),
+#                     data = filthosp,
+#                     family = binomial, nAGQ = 1)
+# 
+# # Model Summary: 
+# summary(m_filtered)
+# 
+# #Table
+# 
+# model_tab<- m_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
+# 
+# model_tab <- as_flex_table(model_tab, include = everything(),return_calls = FALSE, strip_md_bold = TRUE)
 
 ```
 
+#Data Processing and Reference Levels: 
+
 ```{r}
+
 library(flextable)
 library(officer)
+library(forcats)
 
+## Check # of NA's: 
+table(filthosp$PATMANICU, useNA = "ifany")
+
+filthosp$PATMANICU <- fct_explicit_na(filthosp$PATMANICU)
+filthosp$PATMANICU <- fct_explicit_na(filthosp$PATMANICU, "Miss")
+
+#Reference Levels for Acuity and Death and Race
+
+filthosp = filthosp %>%
+           mutate(PATMANICU = relevel(PATMANICU, "2")) # 2-not managed in ICU
+filthosp = filthosp %>% 
+           mutate(death = relevel(death, "0"))# 0-No death
+filthosp = filthosp %>% mutate(RACEgroup = relevel(RACEgroup,"NHWhite"))
+
+#Renaming Levels for PATMANICU 
+
+# Rename by name: change "beta" to "two"
+levels(filthosp$PATMANICU) 
+
+#Ensuring Hospital ID is a factor
+
+filthosp$SRC_FAC_ID <- as.factor(filthosp$SRC_FAC_ID)
+
+```
+
+```{r}
+#Fit model and store results in fit
+
+fit <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + AGEi + death + PATMANICU + (1 | SRC_FAC_ID ),
+             data = filthosp,
+             family = binomial,
+             nAGQ = 1, 
+             control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5)))
+
+
+#Model Summary
+summary(fit)
+
+#Using Sink to get the Raw Outputs
+sink("mixed_model_raw.txt")
+print(summary(fit))
+sink()
+
+#Put Summary into Table 
+library(gtsummary)
+
+fmodel_tab <- fit %>%
+  tbl_regression(exponentiate = TRUE ) %>%
+  bold_labels() %>%
+  bold_p(t= 0.05)
+
+fmodel_tab
+
+#Export table into Word
+
+fmodel_flextab <- as_flex_table(fmodel_tab,
+                                  include = everything(),
+                                  return_calls = FALSE,
+                                  strip_md_bold = TRUE)
+
+#Save as a Doc file
+docx_file <- tempfile(fileext = ".docx")
+
+save_as_docx("Model" = fmodel_flextab,
+              path = docx_file)
+
+View(docx_file)
+
+
+```
+
+
+```{r}
 # estimate the model and store results in m
-
-minadj2_filtered <- glmer(COVCLINTRIAL ~ SEX + age_group + (1 | SRC_FAC_ID ), data = filthosp, family = binomial, nAGQ = 1)
+minadj_fit <- glmer(COVCLINTRIAL ~ SEX + AGEi + (1 | SRC_FAC_ID ),
+                         data = filthosp,
+                         family = binomial,
+                         nAGQ = 1,
+                         control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5)))
 
 
 # Model Summary: 
+summary(minadj_fit)
 
-summary(minadj2_filtered)
+#Table
+minadj_tab<- minadj_fit %>%
+  tbl_regression(exponentiate = TRUE ) %>%
+  bold_labels() %>% bold_p(t= 0.05) %>% 
+  add_nevent()
 
-#Table 
-tab_minadj_2 <- minadj2_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
-
-#Converting into Word Table
-
-flextab_minadj2 <- as_flex_table(tab_minadj_2, include = everything(),return_calls = FALSE, strip_md_bold = TRUE)
-
-#Save as a Doc file
-
-docx_file <- tempfile(fileext = ".docx")
-
-save_as_docx("Minadj_table_agegroup" = flextab_minadj2, "minad_tab" = minadj_tab, "Model Tab" = model_tab, path = docx_file)
-
-View(docx_file)
-print( )
+minadj_tab <- as_flex_table(minadj_fit,
+                            include = everything(),
+                            return_calls = FALSE,
+                            strip_md_bold = TRUE)
 
 ```
 

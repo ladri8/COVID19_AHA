@@ -202,7 +202,7 @@ dft1 <- ef2 %>% dplyr::select(CASE_ID,SEX,AGEi,RACEi,
                                PSOURCE_09, CARDARR, SHKMGMT_01,
                                SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
                                HOSPVENT, SCRUADM,TROPUADM, DDMERU, HGBUADM,
-                              WBCUADM,) %>% ## CONTINUE ADD SEVERETIY VARS
+                              WBCUADM) %>% ## CONTINUE ADD SEVERETIY VARS
                   dplyr::filter(!is.na(COVCLINTRIAL))
 
                                 
@@ -295,15 +295,11 @@ dft1 <- dft1 %>% mutate(age_group = case_when(AGEi > 64 ~ '>64',
                                              AGEi < 50 ~ '<50'))
 #Create psource_grouped
 
-dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 ~ "Medicare",
-                                                  PSOURCE_02 == 1 ~ "Medicaid",
-                                                  PSOURCE_03 == 1 ~ "Other",
-                                                  PSOURCE_04 == 1 ~ "Self-Pay",
+dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 | PSOURCE_02 == 1 |PSOURCE_06 ==1 ~ "Medicaid",
                                                   PSOURCE_05 == 1 ~ "Medicare",
-                                                  PSOURCE_06 == 1 ~ "Medicaid",
-                                                  PSOURCE_07 == 1 ~ "Other",
-                                                  PSOURCE_09 == 1 ~ "Other"))
-
+                                                  PSOURCE_03 ==1 | PSOURCE_07 == 1 ~ "Other",
+                                                  PSOURCE_04 == 1 ~ "Self pay",
+                                                  is.na(PSOURCE_04) == TRUE  | PSOURCE_09 == 1 ~ "Unknown"))
 # Create Death Vars with AHA Logic
 
 dft1 <- dft1 %>% mutate(death = ifelse(!is.na(DISDATE) == TRUE & DSCHSTAT == 6 , 1, 0))
