@@ -1,0 +1,46 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: COVCLINTRIAL ~ SEX + RACEgroup + AGEi + death + PATMANICU + (1 |      SRC_FAC_ID)
+   Data: filthosp
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+  3661.6   3746.2  -1818.8   3637.6     8469 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-14.8011   0.0658   0.1296   0.2366   2.0344 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ SRC_FAC_ID (Intercept) 3.941    1.985   
+Number of obs: 8481, groups:  SRC_FAC_ID, 69
+
+Fixed effects:
+                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)         3.494336   0.336079  10.397  < 2e-16 ***
+SEXFemale           0.181017   0.089804   2.016 0.043832 *  
+RACEgroupHispanic  -0.290713   0.121032  -2.402 0.016308 *  
+RACEgroupBlack      0.003108   0.128835   0.024 0.980756    
+RACEgroupOther     -1.698677   0.462883  -3.670 0.000243 ***
+RACEgroupAsian_PI  -0.116777   0.201325  -0.580 0.561887    
+RACEgroupUTD        0.060753   0.226705   0.268 0.788711    
+AGEi                0.007985   0.002749   2.905 0.003675 ** 
+death1              0.430059   0.134216   3.204 0.001354 ** 
+PATMANICU1         -1.345139   0.101254 -13.285  < 2e-16 ***
+PATMANICU(Missing) -0.292443   0.467853  -0.625 0.531922    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SEXFml RACEgH RACEgB RACEgO RACEA_ RACEUT AGEi   death1 PATMANICU1
+SEXFemale   -0.095                                                                   
+RACEgrpHspn -0.258 -0.018                                                            
+RACEgrpBlck -0.211 -0.027  0.420                                                     
+RACEgrpOthr -0.047 -0.025  0.119  0.095                                              
+RACEgrpA_PI -0.109 -0.006  0.291  0.211  0.074                                       
+RACEgropUTD -0.133  0.015  0.278  0.217  0.057  0.161                                
+AGEi        -0.505 -0.035  0.213  0.140  0.022  0.059  0.108                         
+death1       0.101  0.043 -0.012 -0.016 -0.026 -0.017 -0.006 -0.235                  
+PATMANICU1  -0.159  0.086  0.026  0.016 -0.003 -0.009  0.001  0.002 -0.339           
+PATMANICU(M -0.035  0.016 -0.021  0.033 -0.023 -0.006  0.016  0.030 -0.060  0.087    

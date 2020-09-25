@@ -1752,91 +1752,24 @@ summary {
 <p>#Load Packages</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShoYXZlbilcbmxpYnJhcnkoZHBseXIpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShoYXZlbilcbmxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KHJlc2hhcGUyKVxubGlicmFyeShnZ3Bsb3QyKVxubGlicmFyeShlc3F1aXNzZSlcbmxpYnJhcnkoaGF2ZW4pXG5saWJyYXJ5KHN0cmluZ3IpXG5saWJyYXJ5KGJyb29tKVxubGlicmFyeShTbWFydEVEQSlcbmxpYnJhcnkoc3VtbWFyeXRvb2xzKVxubGlicmFyeShzdGF0cylcbmxpYnJhcnkoa2FibGVFeHRyYSlcbmxpYnJhcnkoRGF0YUV4cGxvcmVyKVxubGlicmFyeShzY2FsZXMpXG5saWJyYXJ5KFJDb2xvckJyZXdlcilcbmxpYnJhcnkoZWNtKVxuYGBgIn0= -->
 <pre class="r"><code>library(haven)
-library(dplyr)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYZHBseXLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOnN0YXRz4oCZOlxuXG4gICAgZmlsdGVyLCBsYWdcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmJhc2XigJk6XG5cbiAgICBpbnRlcnNlY3QsIHNldGRpZmYsIHNldGVxdWFsLCB1bmlvblxuIn0= -->
-<pre><code>
-Attaching package: ‘dplyr’
-
-The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZXNoYXBlMilcbmxpYnJhcnkoZ2dwbG90MilcbmxpYnJhcnkoZXNxdWlzc2UpXG5gYGAifQ== -->
-<pre class="r"><code>library(reshape2)
+library(dplyr)
+library(reshape2)
 library(ggplot2)
-library(esquisse)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdodG1sdG9vbHMnOlxuICBtZXRob2QgICAgICAgICAgICAgICBmcm9tICAgICAgICAgXG4gIHByaW50Lmh0bWwgICAgICAgICAgIHRvb2xzOnJzdHVkaW9cbiAgcHJpbnQuc2hpbnkudGFnICAgICAgdG9vbHM6cnN0dWRpb1xuICBwcmludC5zaGlueS50YWcubGlzdCB0b29sczpyc3R1ZGlvXG4ifQ== -->
-<pre><code>Registered S3 methods overwritten by 'htmltools':
-  method               from         
-  print.html           tools:rstudio
-  print.shiny.tag      tools:rstudio
-  print.shiny.tag.list tools:rstudio</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShoYXZlbilcbmxpYnJhcnkoc3RyaW5ncilcbmxpYnJhcnkoYnJvb20pXG5saWJyYXJ5KFNtYXJ0RURBKVxuYGBgIn0= -->
-<pre class="r"><code>library(haven)
+library(esquisse)
+library(haven)
 library(stringr)
 library(broom)
-library(SmartEDA)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2Qgb3ZlcndyaXR0ZW4gYnkgJ2RhdGEudGFibGUnOlxuICBtZXRob2QgICAgICAgICAgIGZyb21cbiAgcHJpbnQuZGF0YS50YWJsZSAgICAgXG5SZWdpc3RlcmVkIFMzIG1ldGhvZCBvdmVyd3JpdHRlbiBieSAnR0dhbGx5JzpcbiAgbWV0aG9kIGZyb20gICBcbiAgKy5nZyAgIGdncGxvdDJcbiJ9 -->
-<pre><code>Registered S3 method overwritten by 'data.table':
-  method           from
-  print.data.table     
-Registered S3 method overwritten by 'GGally':
-  method from   
-  +.gg   ggplot2</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzdW1tYXJ5dG9vbHMpXG5gYGAifQ== -->
-<pre class="r"><code>library(summarytools)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2Qgb3ZlcndyaXR0ZW4gYnkgJ3ByeXInOlxuICBtZXRob2QgICAgICBmcm9tXG4gIHByaW50LmJ5dGVzIFJjcHBcbmNvdWxkbid0IGNvbm5lY3QgdG8gZGlzcGxheSBcIjowXCJzeXN0ZW0gbWlnaHQgbm90IGhhdmUgWDExIGNhcGFiaWxpdGllczsgaW4gY2FzZSBvZiBlcnJvcnMgd2hlbiB1c2luZyBkZlN1bW1hcnkoKSwgc2V0IHN0X29wdGlvbnModXNlLngxMSA9IEZBTFNFKVxuRm9yIGJlc3QgcmVzdWx0cywgcmVzdGFydCBSIHNlc3Npb24gYW5kIHVwZGF0ZSBwYW5kZXIgdXNpbmcgZGV2dG9vbHM6OiBvciByZW1vdGVzOjppbnN0YWxsX2dpdGh1YigncmFwcG9ydGVyL3BhbmRlcicpXG4ifQ== -->
-<pre><code>Registered S3 method overwritten by 'pryr':
-  method      from
-  print.bytes Rcpp
-couldn't connect to display &quot;:0&quot;system might not have X11 capabilities; in case of errors when using dfSummary(), set st_options(use.x11 = FALSE)
-For best results, restart R session and update pander using devtools:: or remotes::install_github('rapporter/pander')</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzdGF0cylcbmxpYnJhcnkoa2FibGVFeHRyYSlcbmBgYCJ9 -->
-<pre class="r"><code>library(stats)
-library(kableExtra)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYa2FibGVFeHRyYeKAmVxuXG5UaGUgZm9sbG93aW5nIG9iamVjdCBpcyBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmRwbHly4oCZOlxuXG4gICAgZ3JvdXBfcm93c1xuIn0= -->
-<pre><code>
-Attaching package: ‘kableExtra’
-
-The following object is masked from ‘package:dplyr’:
-
-    group_rows</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShEYXRhRXhwbG9yZXIpXG5gYGAifQ== -->
-<pre class="r"><code>library(DataExplorer)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2Qgb3ZlcndyaXR0ZW4gYnkgJ2h0bWx3aWRnZXRzJzpcbiAgbWV0aG9kICAgICAgICAgICBmcm9tICAgICAgICAgXG4gIHByaW50Lmh0bWx3aWRnZXQgdG9vbHM6cnN0dWRpb1xuIn0= -->
-<pre><code>Registered S3 method overwritten by 'htmlwidgets':
-  method           from         
-  print.htmlwidget tools:rstudio</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzY2FsZXMpXG5saWJyYXJ5KFJDb2xvckJyZXdlcilcbmxpYnJhcnkoZWNtKVxuYGBgIn0= -->
-<pre class="r"><code>library(scales)
+library(SmartEDA)
+library(summarytools)
+library(stats)
+library(kableExtra)
+library(DataExplorer)
+library(scales)
 library(RColorBrewer)
 library(ecm)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdjYXInOlxuICBtZXRob2QgICAgICAgICAgICAgICAgICAgICAgICAgIGZyb21cbiAgaW5mbHVlbmNlLm1lck1vZCAgICAgICAgICAgICAgICBsbWU0XG4gIGNvb2tzLmRpc3RhbmNlLmluZmx1ZW5jZS5tZXJNb2QgbG1lNFxuICBkZmJldGEuaW5mbHVlbmNlLm1lck1vZCAgICAgICAgIGxtZTRcbiAgZGZiZXRhcy5pbmZsdWVuY2UubWVyTW9kICAgICAgICBsbWU0XG4ifQ== -->
-<pre><code>Registered S3 methods overwritten by 'car':
-  method                          from
-  influence.merMod                lme4
-  cooks.distance.influence.merMod lme4
-  dfbeta.influence.merMod         lme4
-  dfbetas.influence.merMod        lme4</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <div id="loading-the-data" class="section level2">
@@ -2191,13 +2124,9 @@ Level 1 Level 2 Level 3 Level 4 Level 5
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MywibnJvdyI6MTN9LCJyZGYiOiJVa1JZTXdwWUNnQUFBQU1BQXdZQUFBTUZBQUFBQUFWVlZFWXRPQUFBQkFJQUFBQUJBQVFBQ1FBQUFBRjRBQUFERXdBQUFBTUFBQUlPQUFBQURUL3dBQUFBQUFBQVAvQUFBQUFBQUFBLzhBQUFBQUFBQUQvd0FBQUFBQUFBUC9BQUFBQUFBQUEvOEFBQUFBQUFBRC93QUFBQUFBQUFQL0FBQUFBQUFBQS84QUFBQUFBQUFEL3dBQUFBQUFBQVAvQUFBQUFBQUFBLzhBQUFBQUFBQUQvd0FBQUFBQUFBQUFBRUFnQUFBQUVBQkFBSkFBQUFCV3hoWW1Wc0FBQUFFQUFBQUFFQUJBQUpBQUFBU1VGa2JXbHpjMmx2YmlCTVlXSnpPaUJNWVdKeklDaERiRzl6WlhOMElIUnZJRUZrYldsemMybHZiaWs2SUZObGNuVnRJRU55WldGMGFXNXBibVVnS0ZORGNpa2dWVzVwZEhNQUFBUUNBQUFBQVFBRUFBa0FBQUFLWm05eWJXRjBMbk5oY3dBQUFCQUFBQUFCQUFRQUNRQUFBQWRUUTFKVlFVUk5BQUFBL2dBQUFnNEFBQUFOUUZSQUFBQUFBQUJBVFlBQUFBQUFBRUJBSm1abVptWm1RRkpBQUFBQUFBQkFWY0FBQUFBQUFFQmxZQUFBQUFBQVFGdEFBQUFBQUFCQVg0QUFBQUFBQUVCa2dBQUFBQUFBUUdVZ0FBQUFBQUJBY3ZBQUFBQUFBRUJBVE16TXpNek5RRmpBQUFBQUFBQUFBQVFDQUFBQy93QUFBQkFBQUFBQkFBUUFDUUFBQUVOQlpHMXBjM05wYjI0Z1RHRmljem9nVEdGaWN5QW9RMnh2YzJWemRDQjBieUJCWkcxcGMzTnBiMjRwT2lCVFpYSjFiU0JEY21WaGRHbHVhVzVsSUNoVFEzSXBBQUFBL2dBQUFBNEFBQUFOUUZSQUFBQUFBQUJBVFlBQUFBQUFBRUJBSm1abVptWm1RRkpBQUFBQUFBQkFWY0FBQUFBQUFFQmxZQUFBQUFBQVFGdEFBQUFBQUFCQVg0QUFBQUFBQUVCa2dBQUFBQUFBUUdVZ0FBQUFBQUJBY3ZBQUFBQUFBRUJBVE16TXpNek5RRmpBQUFBQUFBQUFBQVFDQUFBQUFRQUVBQWtBQUFBRmJtRnRaWE1BQUFBUUFBQUFBd0FFQUFrQUFBQUhVME5TVlVGRVRRQUVBQWtBQUFBSFNVNUpWRk5EVWdBRUFBa0FBQUFNUTFKRlFWUkpUa2xPUlY5VUFBQUVBZ0FBQUFFQUJBQUpBQUFBQ1hKdmR5NXVZVzFsY3dBQUFBMEFBQUFDZ0FBQUFQLy8vL01BQUFRQ0FBQUFBUUFFQUFrQUFBQUZZMnhoYzNNQUFBQVFBQUFBQVFBRUFBa0FBQUFLWkdGMFlTNW1jbUZ0WlFBQUJBSUFBQUwvQUFBQUVBQUFBQUVBQkFBSkFBQUFJRU5QVmtsRU1UbGZRMVpFWDBaSlRrRk1YMEZWUnpJd0lDQWdJQ0FnSUNBZ0FBQUEvZ0FBQkFJQUFBQUJBQVFBQ1FBQUFBZHZjSFJwYjI1ekFBQUNFd0FBQUFVQUFBQVFBQUFBQVFBRUFBa0FBQUFCY2dBQUFCQUFBQUFCQUFRQUNRQUFBQTkxYm01aGJXVmtMV05vZFc1ckxUUUFBQUFLQUFBQUFRQUFBQUFBQUFBTkFBQUFBUUFBQUEwQUFBQU5BQUFBQVFBQUFBTUFBQVFDQUFBRS93QUFBQkFBQUFBRkFBUUFDUUFBQUFabGJtZHBibVVBQkFBSkFBQUFCV3hoWW1Wc0FBUUFDUUFBQUE1eWIzZHVZVzFsY3k1d2NtbHVkQUFFQUFrQUFBQUtjbTkzY3k1MGIzUmhiQUFFQUFrQUFBQUtZMjlzY3k1MGIzUmhiQUFBQVA0QUFBRCsifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["SCRUADM"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["INITSCR"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["CREATININE_T"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"81.0","3":"81.0"},{"1":"1","2":"59.0","3":"59.0"},{"1":"1","2":"32.3","3":"32.3"},{"1":"1","2":"73.0","3":"73.0"},{"1":"1","2":"87.0","3":"87.0"},{"1":"1","2":"171.0","3":"171.0"},{"1":"1","2":"109.0","3":"109.0"},{"1":"1","2":"126.0","3":"126.0"},{"1":"1","2":"164.0","3":"164.0"},{"1":"1","2":"169.0","3":"169.0"},{"1":"1","2":"303.0","3":"303.0"},{"1":"1","2":"32.6","3":"32.6"},{"1":"1","2":"99.0","3":"99.0"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[13]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
+<!-- rnb-plot-begin eyJjb25kaXRpb25zIjpbXSwiaGVpZ2h0Ijo0MzIuNjMyOSwic2l6ZV9iZWhhdmlvciI6MCwid2lkdGgiOjcwMH0= -->
+<p><img src="data:image/png;base64,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" /></p>
+<!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-plot-begin eyJjb25kaXRpb25zIjpbXSwiaGVpZ2h0Ijo0MzIuNjMyOSwic2l6ZV9iZWhhdmlvciI6MCwid2lkdGgiOjcwMH0= -->
@@ -2207,15 +2136,11 @@ Level 1 Level 2 Level 3 Level 4 Level 5
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMjIEluc3RhbGxpbmcgVGFibGUxIHBhY2thZ2UgZnJvbSBFIFdvem5pYWtcbiNpbnN0YWxsX2dpdGh1YihcImVtd296bmlhay9UYWJsZTFcIilcbmxpYnJhcnkoVGFibGUxKVxubWFrZS50YWJsZShkYXQgID0gZGZ0MSxcbiAgICAgICAgICAgc3RyYXQgICAgICAgID0gXCJDT1ZDTElOVFJJQUxcIixcbiAgICAgICAgICAgY2F0LnZhcmxpc3QgID0gYyhcIlNFWFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgUkFDRWlcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIlJBQ0Vncm91cFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiSElTRVRITklcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcImFnZV9ncm91cFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwicHNvdXJjZV9ncm91cFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiTUVESElTVE9fMDFcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIk1FREhJU1RPXzAyXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJNRURISVNUT18wOFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiTUVESElTVE9fMDlcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIk1FREhJU1RPXzExXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJNRURISVNUT18xMlwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkFOVElIWVBSVE5TVlwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiTElQTE9XVEhSUFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiQU5USVBMVFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiQU5USUNPQUdcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkFOVElIWVBSR0xZTVwiLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIlBBVE1BTklDVVwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiZGVhdGhcIiksXG4gICAgICAgICAgIGNhdC5oZWFkZXIgICA9IGMoXCJTZXhcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjXCJSYWNlXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJSYWNlIEdyb3VwXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJIaXNwYW5pYyBFdGhuaWNpdHlcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkFnZSBHcm91cFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiUGF5bWVudCBTb3VyY2VcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkF0cmlhbCBGaWJyaWxhdGlvblwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiQXRyaWFsIEZsdXR0ZXJcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkRpYWJldGVzIE1lbGxpdHVzXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJEeXNsaXBpZGVtaWFcIiwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJIZWFydCBGYWlsdXJlXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJIeXBlcnRlbnNpb25cIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJBbnRpaHlwZXJ0ZW5zaXZlXCIsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiTGlwaWQtbG93ZXJpbmcgVGhlcmFweVwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiQW50aXBsYXRlbGV0XCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJBbnRpY29hZ3VsYW50XCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJBbnRpLUh5cGVyZ2x5Y2VtaWNcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIk1hbmFnZWQgaW4gSUNVXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJEZWF0aFwiKSxcbiAgICAgICAgICAgY2F0LnJtc3RhdCAgID0gbGlzdChjKFwicm93XCIpLCBjKFwiY29sXCIpKSxcbiAgICAgICAgICAgY2F0LnB0eXBlICAgID0gXCJjaGlzcVwiLFxuICAgICAgICAgICBjb250LnZhcmxpc3QgPSBjKFwiQUdFaVwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgXCJIR0JBRE1cIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiV0JDQURNXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBcIlBMQVRFTEVUXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBcIklOSVRTQ1JcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiVFJPUEFETVwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgXCJERE1FUlwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiRElTREFURVwiKSxcbiAgICAgICAgICAgY29udC5oZWFkZXIgPSAgYyhcIkFnZVwiLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiSGVtb2dsb2JpblwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgXCJXQkNcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiUGxhdGVsZXRcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiQ3JlYXRpbmluZVwiLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiVHJvcG9uaW5cIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiRC1kaW1lclwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiTGVuZ3RoIG9mIEhvc3BpdGFsaXphdGlvblwiKSxcbiAgICAgICAgICAgY29udC5wdHlwZSAgID0gYyhcIndpbGNveFwiKSxcbiAgICAgICAgICAgY29sbmFtZXMgICAgID0gYyhcIlZhcmlhYmxlXCIsIFwiRW5yb2xsZWRcIiwgXCJOb3QgRW5yb2xsZWRcIiwgXCJPdmVyYWxsXCIsIFwiUC12YWx1ZVwiKSxvdXRwdXQgPSBcImh0bWxcIilcbmBgYCJ9 -->
-<pre class="r"><code>### Installing Table1 package from E Wozniak
-#install_github(&quot;emwozniak/Table1&quot;)
-library(Table1)
-make.table(dat  = dft1,
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFrZS50YWJsZShkYXQgID0gZGZ0MSxcbiAgICAgICAgICAgc3RyYXQgICAgICAgID0gXCJDT1ZDTElOVFJJQUxcIixcbiAgICAgICAgICAgY2F0LnZhcmxpc3QgID0gYyhcIlNFWFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiUkFDRWlcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkhJU0VUSE5JXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJhZ2VfZ3JvdXBcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcInBzb3VyY2VfZ3JvdXBcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIk1FREhJU1RPXzAxXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJNRURISVNUT18wMlwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiTUVESElTVE9fMDhcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIk1FREhJU1RPXzA5XCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJNRURISVNUT18xMVwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiTUVESElTVE9fMTJcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJBTlRJSFlQUlROU1ZcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkxJUExPV1RIUlBcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkFOVElQTFRcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkFOVElDT0FHXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJBTlRJSFlQUkdMWU1cIiwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJQQVRNQU5JQ1VcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcImRlYXRoXCIpLFxuICAgICAgICAgICBjYXQuaGVhZGVyICAgPSBjKFwiU2V4XCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJSYWNlXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJIaXNwYW5pYyBFdGhuaWNpdHlcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkFnZSBHcm91cFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiUGF5bWVudCBTb3VyY2VcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkF0cmlhbCBGaWJyaWxhdGlvblwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiQXRyaWFsIEZsdXR0ZXJcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkRpYWJldGVzIE1lbGxpdHVzXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJEeXNsaXBpZGVtaWFcIiwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJIZWFydCBGYWlsdXJlXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJIeXBlcnRlbnNpb25cIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJBbnRpaHlwZXJ0ZW5zaXZlXCIsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiTGlwaWQtbG93ZXJpbmcgVGhlcmFweVwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiQW50aXBsYXRlbGV0XCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJBbnRpY29hZ3VsYW50XCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJBbnRpLUh5cGVyZ2x5Y2VtaWNcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIk1hbmFnZWQgaW4gSUNVXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJEZWF0aFwiKSxcbiAgICAgICAgICAgY2F0LnJtc3RhdCAgID0gbGlzdChjKFwicm93XCIpLCBjKFwiY29sXCIpKSxcbiAgICAgICAgICAgY2F0LnB0eXBlICAgID0gXCJjaGlzcVwiLFxuICAgICAgICAgICBjb250LnZhcmxpc3QgPSBjKFwiQUdFaVwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgXCJIR0JBRE1cIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiV0JDQURNXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBcIlBMQVRFTEVUXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBcIklOSVRTQ1JcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiVFJPUEFETVwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgXCJERE1FUlwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiRElTREFURVwiKSxcbiAgICAgICAgICAgY29udC5oZWFkZXIgPSAgYyhcIkFnZVwiLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiSGVtb2dsb2JpblwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgXCJXQkNcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiUGxhdGVsZXRcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiQ3JlYXRpbmluZVwiLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiVHJvcG9uaW5cIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFwiRC1kaW1lclwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiTGVuZ3RoIG9mIEhvc3BpdGFsaXphdGlvblwiKSxcbiAgICAgICAgICAgY29udC5wdHlwZSAgID0gYyhcIndpbGNveFwiKSxcbiAgICAgICAgICAgY29sbmFtZXMgICAgID0gYyhcIlZhcmlhYmxlXCIsIFwiRW5yb2xsZWRcIiwgXCJOb3QgRW5yb2xsZWRcIiwgXCJPdmVyYWxsXCIsIFwiUC12YWx1ZVwiKSxvdXRwdXQgPSBcImh0bWxcIilcblxuYGBgIn0= -->
+<pre class="r"><code>make.table(dat  = dft1,
            strat        = &quot;COVCLINTRIAL&quot;,
            cat.varlist  = c(&quot;SEX&quot;,
-                            # RACEi&quot;,
-                            &quot;RACEgroup&quot;,
+                            &quot;RACEi&quot;,
                             &quot;HISETHNI&quot;,
                             &quot;age_group&quot;,
                             &quot;psource_group&quot;,
@@ -2233,8 +2158,7 @@ make.table(dat  = dft1,
                             &quot;PATMANICU&quot;,
                             &quot;death&quot;),
            cat.header   = c(&quot;Sex&quot;,
-                            #&quot;Race&quot;,
-                            &quot;Race Group&quot;,
+                            &quot;Race&quot;,
                             &quot;Hispanic Ethnicity&quot;,
                             &quot;Age Group&quot;,
                             &quot;Payment Source&quot;,
@@ -2270,7 +2194,8 @@ make.table(dat  = dft1,
                             # &quot;D-dimer&quot;,
                             &quot;Length of Hospitalization&quot;),
            cont.ptype   = c(&quot;wilcox&quot;),
-           colnames     = c(&quot;Variable&quot;, &quot;Enrolled&quot;, &quot;Not Enrolled&quot;, &quot;Overall&quot;, &quot;P-value&quot;),output = &quot;html&quot;)</code></pre>
+           colnames     = c(&quot;Variable&quot;, &quot;Enrolled&quot;, &quot;Not Enrolled&quot;, &quot;Overall&quot;, &quot;P-value&quot;),output = &quot;html&quot;)
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiQ2hpLXNxdWFyZWQgYXBwcm94aW1hdGlvbiBtYXkgYmUgaW5jb3JyZWN0XG4ifQ== -->
 <pre><code>Chi-squared approximation may be incorrect</code></pre>
@@ -2395,21 +2320,154 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Antihypertensive      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Race      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.016</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'><0.001</td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>800 ( 9.36%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7745 (90.64%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8545</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Chi-square</td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Hispanic</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>277 (10.72%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2306 (89.28%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2583 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Non-Hispanic Black</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>167 ( 8.32%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>1840 (91.68%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2007 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Native American</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>11 (32.35%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>23 (67.65%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>34 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Asian</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>45 ( 9.59%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>424 (90.41%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>469 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Pacific Islander</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>4 (15.38%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>22 (84.62%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>26 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Non-Hispanic White</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>261 ( 9.52%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2481 (90.48%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2742 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   UTD</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>35 ( 5.12%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>649 (94.88%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>684 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Antihypertensive      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.016</td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>611 ( 7.49%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7544 (92.51%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8155</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>Chi-square</td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>286 ( 6.80%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3921 (93.20%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>4207 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>325 ( 8.23%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3623 (91.77%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3948 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>189</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>201</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>390</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Lipid-lowering Therapy      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.145</td>
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>611 ( 7.49%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7544 (92.51%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8155</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7542 (92.51%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8153</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Chi-square</td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
@@ -2417,23 +2475,23 @@ make.table(dat  = dft1,
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>286 ( 6.80%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3921 (93.20%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>4207 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>213 (34.86%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2860 (37.92%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3073 (37.69%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>325 ( 8.23%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3623 (91.77%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3948 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No/ND</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>398 (65.14%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>4682 (62.08%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5080 (62.31%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>189</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>201</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>390</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>203</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>392</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
@@ -2444,21 +2502,21 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Lipid-lowering Therapy      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Antiplatelet      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.145</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.966</td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>611 ( 7.49%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7542 (92.51%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8153</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>793 ( 9.31%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7727 (90.69%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8520</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>Chi-square</td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
@@ -2466,23 +2524,23 @@ make.table(dat  = dft1,
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>213 (34.86%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2860 (37.92%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3073 (37.69%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>204 ( 9.35%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>1977 (90.65%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2181 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No/ND</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>398 (65.14%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>4682 (62.08%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5080 (62.31%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>589 ( 9.29%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5750 (90.71%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>6339 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>189</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>203</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>392</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>18</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>25</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
@@ -2493,21 +2551,21 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Antiplatelet      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Anticoagulant      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.966</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.074</td>
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>793 ( 9.31%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7727 (90.69%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8520</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>611 ( 7.49%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7542 (92.51%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8153</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Chi-square</td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
@@ -2515,121 +2573,23 @@ make.table(dat  = dft1,
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>204 ( 9.35%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>1977 (90.65%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2181 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>52 ( 8.51%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>824 (10.93%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>876 (10.74%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No/ND</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>589 ( 9.29%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5750 (90.71%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>6339 (100.00%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>18</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>25</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Anticoagulant      </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.074</td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>611 ( 7.49%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7542 (92.51%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8153</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>Chi-square</td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>52 ( 8.51%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>824 (10.93%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>876 (10.74%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No/ND</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>559 (91.49%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>6718 (89.07%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7277 (89.26%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>189</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>203</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>392</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Anti-Hyperglycemic      </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.235</td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>611 ( 7.50%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7540 (92.50%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8151</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Chi-square</td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>154 ( 6.91%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2075 (93.09%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2229 (100.00%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No/ND</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>457 ( 7.72%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5465 (92.28%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5922 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>559 (91.49%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>6718 (89.07%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7277 (89.26%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>189</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>205</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>394</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>203</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>392</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
@@ -2640,21 +2600,21 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Hispanic Ethnicity      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Anti-Hyperglycemic      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.005</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.235</td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>798 ( 9.35%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7739 (90.65%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8537</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>611 ( 7.50%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7540 (92.50%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8151</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>Chi-square</td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
@@ -2662,23 +2622,23 @@ make.table(dat  = dft1,
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>277 (34.71%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2306 (29.80%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2583 (30.26%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>154 ( 6.91%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2075 (93.09%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2229 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No/UTD</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>521 (65.29%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5433 (70.20%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5954 (69.74%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No/ND</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>457 ( 7.72%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5465 (92.28%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5922 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>6</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>189</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>205</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>394</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
@@ -2689,45 +2649,45 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Atrial Fibrilation      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Hispanic Ethnicity      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.560</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.005</td>
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>800 ( 9.36%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7745 (90.64%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8545</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>798 ( 9.35%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7739 (90.65%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8537</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Chi-square</td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>733 ( 9.43%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7043 (90.57%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7776 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>67 ( 8.71%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>702 (91.29%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>769 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>277 (34.71%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2306 (29.80%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2583 (30.26%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No/UTD</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>521 (65.29%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5433 (70.20%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5954 (69.74%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>6</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
@@ -2738,11 +2698,11 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Atrial Flutter      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Atrial Fibrilation      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>>0.999</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.560</td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
@@ -2752,7 +2712,7 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>Chi-square</td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
@@ -2760,16 +2720,16 @@ make.table(dat  = dft1,
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>794 (99.25%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7692 (99.32%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8486 (99.31%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>733 ( 9.43%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7043 (90.57%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7776 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>6 ( 0.75%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>53 ( 0.68%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>59 ( 0.69%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>67 ( 8.71%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>702 (91.29%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>769 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
@@ -2787,105 +2747,7 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Diabetes Mellitus      </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.583</td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>800 ( 9.36%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7745 (90.64%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8545</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Chi-square</td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>513 ( 9.50%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>4885 (90.50%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5398 (100.00%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>287 ( 9.12%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2860 (90.88%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3147 (100.00%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Dyslipidemia      </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.024</td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>800 ( 9.36%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7745 (90.64%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8545</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>Chi-square</td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>488 (61.00%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5040 (65.07%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5528 (64.69%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>312 (39.00%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2705 (34.93%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3017 (35.31%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Heart Failure      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Atrial Flutter      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
@@ -2899,7 +2761,7 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Chi-square</td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
@@ -2907,16 +2769,16 @@ make.table(dat  = dft1,
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>712 ( 9.36%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>6893 (90.64%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7605 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>794 (99.25%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7692 (99.32%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8486 (99.31%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>88 ( 9.36%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>852 (90.64%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>940 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>6 ( 0.75%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>53 ( 0.68%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>59 ( 0.69%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
@@ -2934,11 +2796,11 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Hypertension      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Diabetes Mellitus      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.264</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.583</td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
@@ -2948,7 +2810,7 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>Chi-square</td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
@@ -2956,16 +2818,16 @@ make.table(dat  = dft1,
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>341 (42.62%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3138 (40.52%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3479 (40.71%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>513 ( 9.50%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>4885 (90.50%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5398 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>459 (57.38%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>4607 (59.48%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5066 (59.29%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>287 ( 9.12%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2860 (90.88%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3147 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
@@ -2983,17 +2845,17 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Managed in ICU      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Dyslipidemia      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'><0.001</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.024</td>
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>789 ( 9.28%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7714 (90.72%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8503</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>800 ( 9.36%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7745 (90.64%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8545</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Chi-square</td>
 </tr>
 <tr style='background-color: #ffffff;'>
@@ -3004,129 +2866,17 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   1</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>418 (52.98%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2018 (26.16%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2436 (28.65%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>488 (61.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5040 (65.07%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5528 (64.69%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   2</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>371 (47.02%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5696 (73.84%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>6067 (71.35%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>11</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>31</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>42</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Length of Hospitalization      </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'><0.001</td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;    Count</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>800</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7745</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8545</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>Wilcoxon rank-sum</td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;    Mean (SD)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>14.46 (11.95)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> 8.62 ( 9.51)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>9.17 (9.91)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;    Median (IQR)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>10.00 (13.64)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> 5.68 ( 7.18)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5.81 (7.32)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;    Q1, Q3</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>6.00, 19.64</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3.36, 10.55</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3.54, 10.86</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;    Min, Max</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.44,  77.80</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.00, 174.57</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.00, 174.57</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;    Missing</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Age Group      </b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'><0.001</td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>800 ( 9.36%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7745 (90.64%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8545</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Chi-square</td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   <50</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>230 (10.51%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>1959 (89.49%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2189 (100.00%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   >64</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>293 ( 7.52%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3602 (92.48%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3895 (100.00%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-</tr>
-<tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   50-64</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>277 (11.26%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2184 (88.74%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2461 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>312 (39.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2705 (34.93%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3017 (35.31%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
@@ -3144,11 +2894,11 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Payment Source      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Heart Failure      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'><0.001</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>>0.999</td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
@@ -3158,45 +2908,24 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>Chi-square</td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Medicaid</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>309 (38.62%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3465 (44.74%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3774 (44.17%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>712 ( 9.36%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>6893 (90.64%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7605 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Medicare</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>61 ( 7.62%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>1387 (17.91%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>1448 (16.95%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Other</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>313 (39.12%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2023 (26.12%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2336 (27.34%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Self pay</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>76 ( 9.50%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>473 ( 6.11%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>549 ( 6.42%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
-</tr>
-<tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Unknown</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>41 ( 5.12%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>397 ( 5.13%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>438 ( 5.13%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>88 ( 9.36%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>852 (90.64%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>940 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
@@ -3214,11 +2943,11 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Death      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Hypertension      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.102</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.264</td>
 </tr>
 <tr style='background-color: #ffffff;'>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
@@ -3228,24 +2957,24 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Chi-square</td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   0</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>672 ( 9.61%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>6319 (90.39%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>6991 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   No</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>341 (42.62%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3138 (40.52%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3479 (40.71%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   1</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>128 ( 8.24%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>1426 (91.76%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>1554 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Yes</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>459 (57.38%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>4607 (59.48%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5066 (59.29%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
 </tr>
 <tr style='background-color: #ffffff;'>
@@ -3263,7 +2992,112 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Race Group      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Managed in ICU      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'><0.001</td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>789 ( 9.28%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7714 (90.72%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8503</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>Chi-square</td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   1</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>418 (52.98%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2018 (26.16%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2436 (28.65%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   2</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>371 (47.02%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>5696 (73.84%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>6067 (71.35%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>11</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>31</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>42</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Length of Hospitalization      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'><0.001</td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;    Count</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>800</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7745</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8545</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Wilcoxon rank-sum</td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;    Mean (SD)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>14.46 (11.95)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> 8.62 ( 9.51)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>9.17 (9.91)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;    Median (IQR)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>10.00 (13.64)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> 5.68 ( 7.18)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>5.81 (7.32)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;    Q1, Q3</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>6.00, 19.64</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3.36, 10.55</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3.54, 10.86</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;    Min, Max</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.44,  77.80</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.00, 174.57</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0.00, 174.57</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;    Missing</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Age Group      </b></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
@@ -3284,45 +3118,143 @@ make.table(dat  = dft1,
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Hispanic</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>277 (10.72%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2306 (89.28%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2583 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   <50</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>230 (10.51%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>1959 (89.49%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2189 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Black</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>167 ( 8.32%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>1840 (91.68%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2007 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   >64</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>293 ( 7.52%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3602 (92.48%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>3895 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Other</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>11 (32.35%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>23 (67.65%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>34 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   50-64</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>277 (11.26%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2184 (88.74%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2461 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Asian_PI</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>49 ( 9.90%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>446 (90.10%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>495 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   NHWhite</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>261 ( 9.52%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2481 (90.48%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>2742 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'> </td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>Payment Source      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'><0.001</td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>800 ( 9.36%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>7745 (90.64%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>8545</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>Chi-square</td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Col %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Medicaid</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>309 (38.62%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3465 (44.74%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>3774 (44.17%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Medicare</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>61 ( 7.62%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>1387 (17.91%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>1448 (16.95%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Other</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>313 (39.12%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2023 (26.12%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>2336 (27.34%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Self pay</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>76 ( 9.50%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>473 ( 6.11%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>549 ( 6.42%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   Unknown</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>41 ( 5.12%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>397 ( 5.13%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>438 ( 5.13%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'>&nbsp; &nbsp; &nbsp;   Missing</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'>0</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'></td>
+</tr>
+<tr style='background-color: #ffffff;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: left;'><b>&nbsp; &nbsp; &nbsp;  </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #ffffff; text-align: right;'> </td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>Death      </b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>0.102</td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   Count (%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>800 ( 9.36%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>7745 (90.64%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>8545</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>Chi-square</td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'>&nbsp; &nbsp; &nbsp;   (Row %)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   UTD</b></td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>35 ( 5.12%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>649 (94.88%)</td>
-<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>684 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   0</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>672 ( 9.61%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>6319 (90.39%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>6991 (100.00%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
+</tr>
+<tr style='background-color: #f7f7f7;'>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: left;'><b>&nbsp; &nbsp; &nbsp;   1</b></td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>128 ( 8.24%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>1426 (91.76%)</td>
+<td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'>1554 (100.00%)</td>
 <td style='padding-left: .2em; padding-right: 2em; background-color: #f7f7f7; text-align: right;'></td>
 </tr>
 <tr style='background-color: #f7f7f7;'>
@@ -3402,7 +3334,7 @@ kable(dtnum) %&gt;%
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGVzY3JpcHRpdmVzIENvdmlkXzguMjYiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgZGZfcHJpbnQ6IHBhZ2VkCiAgaHRtbF9ub3RlYm9vazogZGVmYXVsdAogIHdvcmRfZG9jdW1lbnQ6IGRlZmF1bHQKLS0tCiNMb2FkIFBhY2thZ2VzCgpgYGB7cn0KbGlicmFyeShoYXZlbikKbGlicmFyeShkcGx5cikKbGlicmFyeShyZXNoYXBlMikKbGlicmFyeShnZ3Bsb3QyKQpsaWJyYXJ5KGVzcXVpc3NlKQpsaWJyYXJ5KGhhdmVuKQpsaWJyYXJ5KHN0cmluZ3IpCmxpYnJhcnkoYnJvb20pCmxpYnJhcnkoU21hcnRFREEpCmxpYnJhcnkoc3VtbWFyeXRvb2xzKQpsaWJyYXJ5KHN0YXRzKQpsaWJyYXJ5KGthYmxlRXh0cmEpCmxpYnJhcnkoRGF0YUV4cGxvcmVyKQpsaWJyYXJ5KHNjYWxlcykKbGlicmFyeShSQ29sb3JCcmV3ZXIpCmxpYnJhcnkoZWNtKQpgYGAKCiMjIExvYWRpbmcgdGhlIERhdGEKYGBge3IgUmVhZCBEYXRhLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFLCBpbmNsdWRlPUZBTFNFfQoKI1JlYWQgaW4gZGF0YSBhbmQgc2F2ZSBpdCBpbiBkZiBvYmplY3QgKG9yaWdpbmFsIGRhdGEgZm9yIGNvbXBhcmlzb24pCmRhdGFGaWxlID0gJy9tbnQvd29ya3NwYWNlL0dXVEcvQ09WSUQxOS9kYXRhL2NvdmlkMTlfY3ZkX2F1ZzIwLnNhczdiZGF0Jwpmb3JtYXRzRmlsZSA9ICcvbW50L3dvcmtzcGFjZS9HV1RHL0NPVklEMTkvZGF0YS9SX1B5dGhvbl93aW5kb3dzX2Zvcm1hdHMuc2FzN2JjYXQnCgojIyBBc3NpZ25pbmcgdGhlIGRhdGFmcmFtZSB0byB0aGUgZGZvciBvYmplY3QKZGZvciA8LSBoYXZlbjo6cmVhZF9zYXMoZGF0YUZpbGUsIGZvcm1hdHNGaWxlKQoKYGBgCgpgYGB7cn0KI1ByaW50IERpbWVuc2lvbnMKZGltKGRmb3IpCgojUHJpbnQgVW5pcXVlIFJlY29yZCBJRApjYXQoIlxuIE9yaWdpbmFsOiBSZWNvcmQsIFBhdGllbnQsIEhvc3BpdGFsIENvdW50cyBcbiIpCgpsZW5ndGgodW5pcXVlKGRmb3IkUkNSRE5VTSkpIApsZW5ndGgodW5pcXVlKGRmb3IkUEFUSUVOVF9JRCkpCmxlbmd0aCh1bmlxdWUoZGZvciRTUkNfRkFDX0lEKSkKCmBgYApgYGB7cn0KI0V4Y2x1ZGUgTkEncyBvbiBDT1ZDTElOVFJJQUwKIyA0OCByb3dzIHdpdGggTkFzIGZvciBDT1ZDTElOIFRyYWlsIAoKY2F0KCJcbiBNaXNzaW5nIENPVkNMSU5UUklBTCBcbiIpCnN1bShpcy5uYShkZm9yJENPVkNMSU5UUklBTCkpCgojIDQ4IHJvd3Mgd2l0aCBOQXMgZm9yIENPVkNMSU4gVHJhaWwgCmRmIDwtIGRmb3IgJT4lIGRwbHlyOjpmaWx0ZXIoIWlzLm5hKENPVkNMSU5UUklBTCkpCgojUHJpbnQgVW5pcXVlCmNhdCgiXG4gQ29tcGxldGUgQ09WQ0xJTlRSSUFMIFJlY29yZCwgUGF0aWVudCwgSG9zcGl0YWwgQ291bnRzIFxuIikKbGVuZ3RoKHVuaXF1ZShkZiRSQ1JETlVNKSkgCmxlbmd0aCh1bmlxdWUoZGYkUEFUSUVOVF9JRCkpCmxlbmd0aCh1bmlxdWUoZGYkU1JDX0ZBQ19JRCkpCmBgYApgYGB7cn0KIyAKIyA4OTIwLTg1NDUgI251bWJlciBvZiByZWNvcmRzIHdpdGggZHVwbGljYXRlIHBhdGllbnQgSURzCiMgODkyMC00OC00MzEgI2RpbWVuc2lvbnMgdXNpbmcgQWRyaWFuYSdzIGNvdW50cwojIDg5MjAtNDgtMzI3ICNkaW1lbnNpb25zIHVzaW5nIExhdXJhJ3MgY291bnRzCgpgYGAKCmBgYHtyfQojIyBJZGVudGlmeSBEdXBsaWNhdGVzCiMjU2VhcmNoZXMgb25jZSBmcm9tIHRoZSB0b3AgZG93biBhbmQgb25jZSBmcm9tIHRoZSBib3R0b20gdXAuCiMjQWRkcyAiZHVwcyIgdmFyaWFibGUgdG8gdGhlIGRmIHdoZXJlIGR1cGxpY2F0ZSBpcyBUUlVFIAoKZGYkZHVwcyA8LSBkdXBsaWNhdGVkKHB1bGwoZGYsIFBBVElFTlRfSUQpKSB8CmR1cGxpY2F0ZWQocHVsbChkZixQQVRJRU5UX0lEKSxmcm9tTGFzdD1UUlVFKQoKCiNFeHRyYWN0cyBEdXBsaWNhdGVzIHdoZXJlIFRSVUUKZHVwX2RmIDwtIGRmW2RmJGR1cHMgPT0gIlRSVUUiLCBdCgojNDMxIGR1cGxpY2F0ZXMgaWRlbnRpZmllZApkaW0oZHVwX2RmKQoKI051bWJlciBvZiBEaXN0aW5jdCBQYXRpZW50X0lEcyBhbmQgUkNSRE5VTSBpbiB0aGUgZGF0YWZyYW1lIHdpdGggYWxsIGR1cGxpY2F0ZXMKbl9kaXN0aW5jdChkdXBfZGYkUEFUSUVOVF9JRCkKbl9kaXN0aW5jdChkdXBfZGYkUkNSRE5VTSkKCmBgYApgYGB7cn0KCiMgbnJvdyhkdXBfZGYpCiMgbGVuZ3RoKHVuaXF1ZShkdXBfZGYkUEFUSUVOVF9JRCkpCgojTnVtYmVyIG9mIHJvd3Mgd2l0aCBhdCBsZWFzdCBvbmUgcmVwZWF0aW5nIFBBVElFTlRfSUQgYW5kIAojbnVtYmVyIG9mIHVuaXF1ZSByZXBlYXRpbmcgUEFUSUVOVF9JRHMgcm93KGR1cF9kZikKCmxlbmd0aCh1bmlxdWUoZHVwX2RmJFBBVElFTlRfSUQpKQpkaW0oZGZbZHVwbGljYXRlZChkZiRQQVRJRU5UX0lELCBmcm9tTGFzdCA9IFRSVUUpLF0pIApkaW0oZGZbZHVwbGljYXRlZChkZiRQQVRJRU5UX0lEKSxdKSAKCiMgZHVwX3N1bW1hcnkgPC0gIGR1cF9kZiAlPiUgCiMgICAgICAgICAgICAgICAgIGdyb3VwX2J5KFBBVElFTlRfSUQpICU+JSAKIyAgICAgICAgICAgICAgICAgc3VtbWFyaXNlKG5fcmVjb3JkcyA9IGxlbmd0aChQQVRJRU5UX0lEKSkKIyAKIyBuX3BhdGllbnRzX3Blcl9kdXBfbiAgPC0gZHVwX3N1bW1hcnkgJT4lIAojICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZ3JvdXBfYnkobl9yZWNvcmRzKSAlPiUKIyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdW1tYXJpc2Uobl9wYXRpZW50cyA9IG4obl9yZWNvcmRzKSkKICMgbl9wYXRpZW50c19wZXJfZHVwX24KCmBgYApgYGB7cn0KCiNBcnJhbmdlIGJ5IHRoZXNlIFZhcnMKZHVwX2RmIDwtZHVwX2RmICU+JSBhcnJhbmdlKFBBVElFTlRfSUQsIENPVkNMSU5UUklBTCwgU1JDX0ZBQ19JRCwgQ0FTRV9JRCkKCiMgQWRkIGFuIEFjY3VtdWxhdG9yIFZhciBmb3IgdGhlIHRpbWVzIGEgUEFUSUVOVF9JRCByZXBlYXRzIApkdXBfZGY8LWR1cF9kZiAlPiUgZ3JvdXBfYnkoUEFUSUVOVF9JRCkgJT4lIG11dGF0ZShEUk9QUyA9IGN1bWNvdW50KFBBVElFTlRfSUQpKQoKI0FycmFuZ2UgYnkgdmFycyBEZXNjZW5kIGJ5IE51bWJlciBvZiBEcm9wcyAKI0tlZXAgcm93cyBvZiAxIChZZXMpIGZvciBDb3ZjbGludHJpYWwgYW5kIHJhbmRvbWx5IHNlbGVjdCAKZHVwX2RmPC1kdXBfZGYgJT4lIGdyb3VwX2J5KFBBVElFTlRfSUQpICU+JSBzZWxlY3QoUEFUSUVOVF9JRCwgQ09WQ0xJTlRSSUFMLCBTUkNfRkFDX0lELCBDQVNFX0lELCBEUk9QUywgZXZlcnl0aGluZygpKSAlPiUgCmFycmFuZ2UoZGVzYyhEUk9QUykpCgpoZWFkKGR1cF9kZikKCmBgYApgYGB7cn0KCiNTZWxlY3RpbmcgdGhvc2Ugd2l0aCBtb3JlIHRoYW4gMSByZXBlYXQgb3IgImRyb3AiCmR1cGRmZjwtZHVwX2RmICU+JSBmaWx0ZXIoRFJPUFMgPiAxKQoKZGltKGR1cGRmZikKaGVhZChkdXBkZmYpCgojdXNpbmcgUkNSRE5VTQpkcm9wcyA8LSBkdXBkZmZbIlJDUkROVU0iXQpoZWFkKGRyb3BzKQoKI1VzaW5nIFBhdGllbnQgSUQgZHJvcHMKI2Ryb3BzPC1kdXBkZmZbIlBBVElFTlRfSUQiXQojIAojIGhlYWQoZHJvcHMpCiMgbnJvdyhkcm9wcykKCiNNYWtlIGRyb3BzIGludG8gYSB2ZWN0b3IgCnZlY2Ryb3BzIDwtIGFzLnZlY3Rvcihkcm9wcykKCmBgYAoKYGBge3J9CiNDcmVhdGUgTm90IEluIE9wZXJhdG9yCmAlbm90aW4lYCA8LSBOZWdhdGUoYCVpbiVgKQoKI1VzaW5nIFJDUkROVU0KZGltKGRmKQplZjIgPC0gZGZbZGYkUkNSRE5VTSAlbm90aW4lIHZlY2Ryb3BzJFJDUkROVU0sICwgZHJvcCA9IEZBTFNFXQpkaW0oZWYyKQoKIyAjRmlsdGVyaW5nIERGLCBsZWF2aW5nIG9ubHkgUEFUSUVOVF9JRHMgdGhhdCBhcmUgbm90IGluIHZlY2Ryb3BzKGxpc3Qgb2YgZHVwbGljYXRlcykKIyBkaW0oZGYpCiMgZWYgPC0gZGZbZGYkUEFUSUVOVF9JRCAlbm90aW4lIHZlY2Ryb3BzJFBBVElFTlRfSUQsICwgZHJvcCA9IEZBTFNFXQojIGRpbShlZikKCiNEcm9wcGluZyB0aGUgMTk1IHJlcGVhdHMgb2YgcGF0aWVudCB3aXRoIDE5NiByZXBlYXRzCiNkMiA8LWVmWyEoZWYkUEFUSUVOVF9JRD09IjkuMDAwNjRFKzE1MDA0ODA2IiksXQoKIyNDaGVjawpsZW5ndGgodW5pcXVlKGVmMiRSQ1JETlVNKSkKbGVuZ3RoKHVuaXF1ZShlZjIkUEFUSUVOVF9JRCkpCmxlbmd0aCh1bmlxdWUoZWYyJFNSQ19GQUNfSUQpKQoKYGBgCgojI1NlbGVjdCBXb3JraW5nIFZhcmlhYmxlcyBhbmQgQWRkIExhYmVscwoKYGBge3IgU2VsZWN0IFdvcmtpbmcgVmFyaWFibGVzIGFuZCBBZGQgTGFiZWxzLCBpbmNsdWRlPUZBTFNFfQojU2VsZWN0IFdvcmtpbmcgVmFyaWFibGVzIGFuZCBFeGNsdWRlIE5BcyBpbiBDT1ZDTElOVFJJQUwKCmxpYnJhcnkoZHBseXIpCgpkZnQxIDwtIGVmMiAlPiUgZHBseXI6OnNlbGVjdChDQVNFX0lELFNFWCxBR0VpLFJBQ0VpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSEdCQURNLCBXQkNBRE0sIFBMQVRFTEVULAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSU5JVFNDUiwgVFJPUEFETSxBTlRJSFlQUlROU1YsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBMSVBMT1dUSFJQLEFOVElQTFQsIEFOVElDT0FHLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQU5USUhZUFJHTFlNLCBISVNFVEhOSSxERE1FUiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFRST1BBRE0sIElOSVRTQ1IsIENPVkNMSU5UUklBTCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1FREhJU1RPXzAxLCBNRURISVNUT18wMiwgTUVESElTVE9fMDgsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNRURISVNUT18wOSxNRURISVNUT18xMSwgTUVESElTVE9fMTIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQQVRNQU5JQ1VEVCxQQVRNQU5JQ1UsIFNSQ19GQUNfSUQsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBESVNEQVRFLERTQ0hTVEFULCBBRE1EVCxERUFUSERULFBTT1VSQ0VfMDEsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQU09VUkNFXzAyLFBTT1VSQ0VfMDMsUFNPVVJDRV8wNCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFBTT1VSQ0VfMDUsIFBTT1VSQ0VfMDYsIFBTT1VSQ0VfMDcsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQU09VUkNFXzA5LCBDQVJEQVJSLCBTSEtNR01UXzAxLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU0hLTUdNVF8wMiwgU0hLTUdNVF8wNCwgU0hLTUdNVF8wNSwgU0hLTUdNVF8wMywgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBIT1NQVkVOVCwgU0NSVUFETSxUUk9QVUFETSwgRERNRVJVLCBIR0JVQURNLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICBXQkNVQURNKSAlPiUgIyMgQ09OVElOVUUgQUREIFNFVkVSRVRJWSBWQVJTCiAgICAgICAgICAgICAgICAgIGRwbHlyOjpmaWx0ZXIoIWlzLm5hKENPVkNMSU5UUklBTCkpCgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAojQWRkaW5nIExhYmVscyBmb3IgRmFjdG9yIFZhcnMKCiNTZXggCgpkZnQxJFNFWCA8LSBmYWN0b3IoZGZ0MSRTRVgsIGxldmVscyA9IGMoIjEiLCAiMiIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiTWFsZSIsICJGZW1hbGUiKSkKCiNDb3ZjbGludHJpYWwKCmRmdDEkQ09WQ0xJTlRSSUFMIDwtIGZhY3RvcihkZnQxJENPVkNMSU5UUklBTCwgbGV2ZWxzID0gYygiMSIsICIyIiksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBsYWJlbHMgPWMoICJZZXMiLCAiTm8iKSkKCiNSQUNFaSBpcyBBSEEncyBkZWZpdGlvbgoKZGZ0MSRSQUNFaSA8LSBmYWN0b3IoZGZ0MSRSQUNFaSwgbGV2ZWxzID0gYygiMSIsICIyIiwgIjMiLCAiNCIsICI1IiwgIjYiLCAiNyIpLAogICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCJIaXNwYW5pYyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIk5vbi1IaXNwYW5pYyBCbGFjayIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIk5hdGl2ZSBBbWVyaWNhbiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkFzaWFuIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiUGFjaWZpYyBJc2xhbmRlciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIk5vbi1IaXNwYW5pYyBXaGl0ZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIlVURCIpKQojSGlzcGFuaWMgRXRobmljaXR5CmRmdDEkSElTRVRITkkgPC0gZmFjdG9yKGRmdDEkSElTRVRITkksIGxldmVscyA9IGMoIjEiLCAiMiIpLAogICAgICAgICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCJZZXMiLCAiTm8vVVREIikpCgojQXRyaWFsIEZpYnJpbGF0aW9uCmRmdDEkTUVESElTVE9fMDEgPC0gZmFjdG9yKGRmdDEkTUVESElTVE9fMDEsIGxldmVscyA9IGMoIjAiLCAiMSIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiTm8iLCAiWWVzIikpCgojQXRyaWFsIEZsdXR0ZXIKZGZ0MSRNRURISVNUT18wMiA8LSBmYWN0b3IoZGZ0MSRNRURISVNUT18wMiwgbGV2ZWxzID0gYygiMCIsICIxIiksIAogICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCJObyIsICJZZXMiKSkKCiNEaWFiZXRlcyBNZWxsaXR1cyAgCmRmdDEkTUVESElTVE9fMDggPC0gZmFjdG9yKGRmdDEkTUVESElTVE9fMDgsIGxldmVscyA9IGMoIjAiLCAiMSIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiTm8iLCAiWWVzIikpCgojRHlzbGlwaWRlbWlhCmRmdDEkTUVESElTVE9fMDkgPC0gZmFjdG9yKGRmdDEkTUVESElTVE9fMDksIGxldmVscyA9IGMoIjAiLCAiMSIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiTm8iLCAiWWVzIikpCiNIZWFydCBGYWlsdXJlCmRmdDEkTUVESElTVE9fMTEgPC0gZmFjdG9yKGRmdDEkTUVESElTVE9fMTEsIGxldmVscyA9IGMoIjAiLCAiMSIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiTm8iLCAiWWVzIikpCiNIeXBlcnRlbnNpb24KZGZ0MSRNRURISVNUT18xMiA8LSBmYWN0b3IoZGZ0MSRNRURISVNUT18xMiwgbGV2ZWxzID0gYygiMCIsICIxIiksIAogICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCJObyIsICJZZXMiKSkKCiMjIE1lZGljYXRpb25zIFByaW9yIFRvIEFkbWlzc2lvbgoKZGZ0MSRBTlRJSFlQUlROU1YgPC0gZmFjdG9yKGRmdDEkQU5USUhZUFJUTlNWLCBsZXZlbHMgPSBjKCIxIiwgIjIiKSwgCiAgICAgICAgICAgICAgICAgIGxhYmVscyA9IGMoIlllcyIsICJObyIpKQoKZGZ0MSRMSVBMT1dUSFJQIDwtIGZhY3RvcihkZnQxJExJUExPV1RIUlAsIGxldmVscyA9IGMoIjEiLCAiMiIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiWWVzIiwgIk5vL05EIikpCgpkZnQxJEFOVElQTFQgPC0gZmFjdG9yKGRmdDEkQU5USVBMVCwgbGV2ZWxzID0gYygiMSIsICIyIiksIAogICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCJZZXMiLCAiTm8vTkQiKSkKCmRmdDEkQU5USUNPQUcgPC0gZmFjdG9yKGRmdDEkQU5USUNPQUcsIGxldmVscyA9IGMoIjEiLCAiMiIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiWWVzIiwgIk5vL05EIikpCgoKZGZ0MSRBTlRJSFlQUkdMWU0gPC0gZmFjdG9yKGRmdDEkQU5USUhZUFJHTFlNLCBsZXZlbHMgPSBjKCIxIiwgIjIiKSwgCiAgICAgICAgICAgICAgICAgIGxhYmVscyA9IGMoIlllcyIsICJOby9ORCIpKQoKZGZ0MSRQQVRNQU5JQ1UgPC0gYXMuZmFjdG9yKGRmdDEkUEFUTUFOSUNVKQoKIyMgUGF5bWVudCBTb3VyY2VzCmRmdDEkUFNPVVJDRV8wMSA8LSBhcy5mYWN0b3IoZGZ0MSRQU09VUkNFXzAxKQpkZnQxJFBTT1VSQ0VfMDIgPC0gYXMuZmFjdG9yKGRmdDEkUFNPVVJDRV8wMikKZGZ0MSRQU09VUkNFXzAzIDwtIGFzLmZhY3RvcihkZnQxJFBTT1VSQ0VfMDMpCmRmdDEkUFNPVVJDRV8wNCA8LSBhcy5mYWN0b3IoZGZ0MSRQU09VUkNFXzA0KQpkZnQxJFBTT1VSQ0VfMDUgPC0gYXMuZmFjdG9yKGRmdDEkUFNPVVJDRV8wNSkKZGZ0MSRQU09VUkNFXzA2IDwtIGFzLmZhY3RvcihkZnQxJFBTT1VSQ0VfMDYpCmRmdDEkUFNPVVJDRV8wNyA8LSBhcy5mYWN0b3IoZGZ0MSRQU09VUkNFXzA3KQpkZnQxJFBTT1VSQ0VfMDkgPC0gYXMuZmFjdG9yKGRmdDEkUFNPVVJDRV8wOSkKCmBgYAoKYGBge3IgUmVjb2RlIGFuZCBDb21iaW5lIFZhcmlhYmxlc30KCiNDcmVhdGUgYWdlX2dyb3VwIHZhcmlhYmxlCgpkZnQxIDwtIGRmdDEgJT4lIG11dGF0ZShhZ2VfZ3JvdXAgPSBjYXNlX3doZW4oQUdFaSA+IDY0IH4gJz42NCcsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEFHRWkgPj0gNTAgJiBBR0VpIDw9IDY0IH4gJzUwLTY0JywKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQUdFaSA8IDUwIH4gJzw1MCcpKQojQ3JlYXRlIHBzb3VyY2VfZ3JvdXBlZAoKZGZ0MSA8LSBkZnQxICU+JSBtdXRhdGUocHNvdXJjZV9ncm91cCA9IGNhc2Vfd2hlbihQU09VUkNFXzAxID09IDEgfCBQU09VUkNFXzAyID09IDEgfFBTT1VSQ0VfMDYgPT0xIH4gIk1lZGljYWlkIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQU09VUkNFXzA1ID09IDEgfiAiTWVkaWNhcmUiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFBTT1VSQ0VfMDMgPT0xIHwgUFNPVVJDRV8wNyA9PSAxIH4gIk90aGVyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQU09VUkNFXzA0ID09IDEgfiAiU2VsZiBwYXkiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlzLm5hKFBTT1VSQ0VfMDQpID09IFRSVUUgIHwgUFNPVVJDRV8wOSA9PSAxIH4gIlVua25vd24iKSkKIyBDcmVhdGUgRGVhdGggVmFycyB3aXRoIEFIQSBMb2dpYwoKZGZ0MSA8LSBkZnQxICU+JSBtdXRhdGUoZGVhdGggPSBpZmVsc2UoIWlzLm5hKERJU0RBVEUpID09IFRSVUUgJiBEU0NIU1RBVCA9PSA2ICwgMSwgMCkpCmRmdDEkZGVhdGggPC0gYXMuZmFjdG9yKGRmdDEkZGVhdGgpCgoKIyBEaXNjaGFyZ2UgRGF0YSAoRElTREFURSkgaXMgbm90IG1pc3NpbmcgYW5kIERpc2NoYXJnZSBTdGF0dXMgaXMgNiBvciAiRXhwaXJlZCIgCgpkZnQyPC0gZGZ0MSAlPiUgbXV0YXRlKENvdmlkX1NldiA9IGNhc2Vfd2hlbihEU0NIU1RBVCA9PSA2IH4gIkxldmVsIDEiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIENBUkRBUlIgPT0gMSB+ICJMZXZlbCAyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTSEtNR01UXzAxID09IDEgfiAiTGV2ZWwgMyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU0hLTUdNVF8wMiA9PSAxIH4gIkxldmVsIDMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFNIS01HTVRfMDQgPT0gMSB+ICJMZXZlbCAzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTSEtNR01UXzA1ID09IDEgfiAiTGV2ZWwgMyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU0hLTUdNVF8wMyA9PSAxIH4gIkxldmVsIDQiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEhPU1BWRU5UID09IDEgfiAiTGV2ZWwgNSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgRFNDSFNUQVQgIT0gNiAmCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQ0FSREFSUiAhPSAxICYKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTSEtNR01UXzAxICE9IDEgJgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFNIS01HTVRfMDIgIT0gMSAmCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU0hLTUdNVF8wNCAhPSAxICYKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTSEtNR01UXzA1ICE9IDEgJgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFNIS01HTVRfMDMgIT0gMSAmCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSE9TUFZFTlQgIT0gMSB+ICJMZXZlbCA2IikpICMjIGRvIGVsc2UsIG9yIG5lc3RlZCBlbHNlIAoKZGZ0MiRDb3ZpZF9TZXYgPC0gYXMuZmFjdG9yKGRmdDIkQ292aWRfU2V2KQoKIyMgQ3JlYXRlIE5ldyBSYWNlIEV0aG5pY2l0eSBWYXJpYWJsZTogUkFDRWdyb3VwIAoKbGlicmFyeShmb3JjYXRzKQpkZnQxJFJBQ0Vncm91cCA8LSBmY3RfY29sbGFwc2UoZGZ0MSRSQUNFaSwKICBVVEQgPSAiVVREIiwKICBPdGhlciA9ICJOYXRpdmUgQW1lcmljYW4iLAogIE5IV2hpdGUgPSAiTm9uLUhpc3BhbmljIFdoaXRlIiwKICBBc2lhbl9QSSA9IGMoIkFzaWFuIiwgIlBhY2lmaWMgSXNsYW5kZXIiKSwKICBCbGFjayA9ICJOb24tSGlzcGFuaWMgQmxhY2siLAogIEhpc3BhbmljID0gIkhpc3BhbmljIgopCgoKCiMgQ3JlYXRlIExlbmd0aCBvZiBIb3NwaXRhbGl6YXRpb24gVmFyaWFibGUKIyBESVNEQVRFIGlzIGFscmVhZHkgbGVuZ3RoIG9mIGFkbWlzc2lvbgojRGVyaXZlZCBkYXRlIHZhcmlhYmxlcyB0ZW5kIHRvIGhhdmUgdGhlICJTdHVkeWRheSIgdGFnCiNpbiB0aGUgZGVzY3JpcHRpb24gYW5kIGVuZCBpbiBEVCAoZXguIEFOQ0hPUkRUKS4KI1RoZXNlIHZhcmlhYmxlcyBhcmUgZGVpZGVudGlmaWVkIGRhdGUgdmFyaWFibGVzIGZyb20gdGhlIHJhdyByZWdzaXRyeSBkYXRhLAojd2hlcmUgdGhlIGFuY2hvciBkYXRlLCBvciBiYXNlbGluZSAoZGF5IDApIGlzIGhvc3BpdGFsIGFkbWlzc2lvbiBkYXRlLiAKI0FsbCBkZXJpdmVkIGRhdGVzIGFyZSBpbiB0aGUgY29udGV4dCBvZiB0aGUgQWRtaXNzaW9uIGRhdGUgKDApICsgZGF5LgoKdGFibGUoZGZ0MiRDb3ZpZF9TZXYpCgoKCmBgYAoKYGBge3J9CiMgIyMgQ29udmVydGluZyBVbml0cyBmb3IgRERNRVIsIENyZWF0aW5pbmUsYW5kIFRyb3BvbmluCiMgCiMgaGlzdChkZm9yJERETUVSVSwgcGxvdCA9IFRSVUUpCiMgaGlzdChkZm9yJFRST1BVQURNLCBwbG90ID0gVFJVRSkKIyBoaXN0KGRmb3IkU0NSVUFETSwgcGxvdCA9VFJVRSkKIyAKIyAjQ29udmVydCBERE1FUiBmYWN0b3JzIDIgKHUvbUwpIGFuZCAzICh1Zy9tTCkgdG8gMSAobmcvbUwpCiMgCiMgdHJhbnNmb3JtKGRmdDEsIERETUVSX3VuaT1pZmVsc2UoRERNRVJVPT0xLCBERE1FUioxLCAKIyAgICAgICAgICAgICAgICAgICBpZmVsc2UoRERNRVJVPT0zLCBERE1FUioxMDAwLCBERE1FUipfX19fX18gKSkpCiMgCiMgIyBDb252ZXJ0IENyZWF0aW5pbmUgdW5pdHMgZmFjdG9yIDIgKHVtb2wvTCkgdG8gZmFjdG9yIDEgbWcvZEwKIyBkZnQxPC0gZGZ0MSAlPiUgbXV0YXRlKENSRUFUSU5JTkVfVCA9IGNhc2Vfd2hlbihTQ1JVQURNID09IDEgfiAoSU5JVFNDUioxKSwKIyAgICAgICAgICAgU0NSVUFETSA9PSAyIH4gKElOSVRTQ1IvODguNDIpKSkKIyAKIyB0YWJsZShkZnQxJFNDUlVBRE0pCiMgaGlzdChkZnQxJElOSVRTQ1IpCiMgaGlzdChkZnQxJENSRUFUSU5JTkVfVCkKIyBzdW1tYXJ5KGRmdDEkQ1JFQVRJTklORV9UKQojIGhpc3QoZGZ0MSRJTklUU0NSLCBicmVha3MgPSAyMDApCiMgaGlzdChkZnQxJENSRUFUSU5JTkVfVCwgYnJlYWtzID0gMjAwKQojIAojICMgMTMgcGF0aWVudHMgd2l0aCBvdmVyIDMwIGNyZWF0aW5pbmUgCiMgZGZ0MSAlPiUgc2VsZWN0KFNDUlVBRE0sIElOSVRTQ1IsIENSRUFUSU5JTkVfVCkgJT4lIGZpbHRlciAoQ1JFQVRJTklORV9UID4zMCkgCiMgCiMgCiMgIzEzIHAgcGF0aWVudHMgd2l0aCBvdmVyIDEwMCBUcm9wb25pbiAtLS0gS2VlcCB0aGVtIAojICNDb252ZXJ0IFRyb3BvbmluIGZhY3RvcnMgMiAodWcvTCkgYW5kIDMobmcvTCkgdG8gMSAobmcvbUwpCiMgCiMgZGZ0MTwtIGRmdDEgJT4lIG11dGF0ZShUUk9QT0FETV90ID0gY2FzZV93aGVuKFRST1BVQURNID09IDEgfiAoVFJPUEFETSoxKSwKIyAgICAgICAgICAgVFJPUFVBRE0gPT0gMiB+IChUUk9QQURNKjEpLAojICAgICAgICAgICBUUk9QVUFETSA9PSAzIH4gKFRST1BBRE0qMC4wMDEpKSkKIyAKIyBoaXN0KGRmdDEkVFJPUEFETSkKIyBoaXN0KGRmdDEkVFJPUE9BRE1fdCkKIyBzdW1tYXJ5KGRmdDEkVFJPUE9BRE1fdCkKIyBoaXN0KGRmdDEkVFJPUEFETSwgYnJlYWtzID0gMjAwKQojIGhpc3QoZGZ0MSRUUk9QT0FETV90LCBicmVha3MgPSAyMDApCiMgIzEwIHBhdGllbnRzIHdpdGggb3ZlciAxMDAgVHJvcG9uaW4gLS0tIEtlZXAgdGhlbSAKIyAKIyBkZnQxICU+JSBzZWxlY3QoVFJPUEFETSwgVFJPUFVBRE0sIFRST1BPQURNX3QpICU+JSBmaWx0ZXIgKFRST1BPQURNX3QgPiAwLjkwKSAKIyAKIyAjSGVtb2dsb2JpbgojIAojIGRmdDE8LSBkZnQxICU+JSBtdXRhdGUoVFJPUE9BRE1fdCA9IGNhc2Vfd2hlbihUUk9QVUFETSA9PSAxIH4gKFRST1BBRE0qMSksCiMgICAgICAgICAgIFRST1BVQURNID09IDIgfiAoVFJPUEFETSoxKSwKIyAgICAgICAgICAgVFJPUFVBRE0gPT0gMyB+IChUUk9QQURNKjAuMDAxKSkpCgpgYGAKYGBge3IgSGlzdG9ncmFtc30KCiMgUGxvdHRpbmcgSGlzdG9ncmFtcyBvZiBDb250aW51b3VzIFZhcnMgVXNpbmcgRGF0YSBFeHBsb3JlcgojIAojIGRmdDEgJT4lIHNlbGVjdChBR0VpLCBERE1FUiwgSEdCQURNLCBJTklUU0NSLCBQTEFURUxFVCwgVFJPUEFETSwgV0JDQURNKSAlPiUgcGxvdF9oaXN0b2dyYW0oZ2VvbV9oaXN0b2dyYW1fYXJncyA9IGxpc3QoYmlud2lkdGggPSAuMywgY29sID0iYmxhY2siLCBzaXplID0gMykpCgojSGVtb2dsb2JpbiAKaGlzdChkZnQxJEhHQkFETSxicmVha3MgPSAzMDAsIHBsb3QgPSBUUlVFKQpkZnQxICU+JSBmaWx0ZXIgKCBIR0JBRE0gPiA1MCkKI0NIRUNLIFVOSVRTCgp0YWJsZShkZm9yJEhHQlVBRE0pCgoKI1dCQwpoaXN0KGRmdDEkV0JDQURNLGJyZWFrcz0gMjAwLCBwbG90ID0gVFJVRSkgCiNVc2UgdW5pcXVlIHRvIHNlZSB1bmlxdWUgdmFsdWVzIGluIHRoZSB2YXJpYWJsZQojTWF5IGJlIGEgY29udmVyc2lvbiBmYWN0b3IgaXNzdWUgT25lIHBhdGllbnQgYXQgNzM4Ny4wIAojIEZlbWHigKYgICAgMzggSGlzcOKApiAgIDEzLjMgICA3Mzg3ICAgICAgMjE5IAoKIwpoaXN0KGRmdDEkUExBVEVMRVQpCiMgT3V0bGllcnM6IDMgcGF0aWVudHMgd2l0aCBvdmVyIDMwMDAgIApkZnQxICU+JSBmaWx0ZXIgKCBQTEFURUxFVCA+IDgwMCkKCiNDcmVhdGluaW5lIApoaXN0KGRmdDEkSU5JVFNDUiwgYnJlYWtzPSAyMDApCiMxMSBwYXRpZW5zIHdpdGggaW5pdHNjciA+MjAKI2RmdDEgJT4lIGZpbHRlciAoIElOSVRTQ1IgPiAyMCkKCiNUcm9wb25pbgpoaXN0KGRmdDEkVFJPUEFETSwgYnJlYWtzID0gMjAwKQojMTAgcGF0aWVudHMgd2l0aCBvdmVyIDEwMCBUcm9wb25pbiAtLS0gS2VlcCB0aGVtIAoKI0RETUVSIFByb3QKaGlzdChkZnQxJERETUVSLCBicmVha3MgPSA4MCwgcGxvdCA9IFRSVUUpCgojQWdlCmhpc3QoZGZ0MSRBR0VpLCBicmVha3M9IDIwLCBwbG90ID0gVFJVRSkKcXFub3JtKGRmdDEkQUdFaSkKc3VtbWFyeShkZnQxJEFHRWkpCgojUXVpY2sgVGFibGVzCgoKCmBgYAoKYGBge3J9CiMjIyBJbnN0YWxsaW5nIFRhYmxlMSBwYWNrYWdlIGZyb20gRSBXb3puaWFrCgojaW5zdGFsbF9naXRodWIoImVtd296bmlhay9UYWJsZTEiKQpsaWJyYXJ5KFRhYmxlMSkKCgptYWtlLnRhYmxlKGRhdCAgPSBkZnQxLAogICAgICAgICAgIHN0cmF0ICAgICAgICA9ICJDT1ZDTElOVFJJQUwiLAogICAgICAgICAgIGNhdC52YXJsaXN0ICA9IGMoIlNFWCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFJBQ0VpIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJSQUNFZ3JvdXAiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkhJU0VUSE5JIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJhZ2VfZ3JvdXAiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgInBzb3VyY2VfZ3JvdXAiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIk1FREhJU1RPXzAxIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJNRURISVNUT18wMiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiTUVESElTVE9fMDgiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIk1FREhJU1RPXzA5IiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJNRURISVNUT18xMSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiTUVESElTVE9fMTIiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICJBTlRJSFlQUlROU1YiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkxJUExPV1RIUlAiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkFOVElQTFQiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkFOVElDT0FHIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJBTlRJSFlQUkdMWU0iLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJQQVRNQU5JQ1UiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgImRlYXRoIiksCiAgICAgICAgICAgY2F0LmhlYWRlciAgID0gYygiU2V4IiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICMiUmFjZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiUmFjZSBHcm91cCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiSGlzcGFuaWMgRXRobmljaXR5IiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJBZ2UgR3JvdXAiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIlBheW1lbnQgU291cmNlIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJBdHJpYWwgRmlicmlsYXRpb24iLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkF0cmlhbCBGbHV0dGVyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJEaWFiZXRlcyBNZWxsaXR1cyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiRHlzbGlwaWRlbWlhIiwgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiSGVhcnQgRmFpbHVyZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiSHlwZXJ0ZW5zaW9uIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiQW50aWh5cGVydGVuc2l2ZSIsIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkxpcGlkLWxvd2VyaW5nIFRoZXJhcHkiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkFudGlwbGF0ZWxldCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiQW50aWNvYWd1bGFudCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiQW50aS1IeXBlcmdseWNlbWljIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJNYW5hZ2VkIGluIElDVSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiRGVhdGgiKSwKICAgICAgICAgICBjYXQucm1zdGF0ICAgPSBsaXN0KGMoInJvdyIpLCBjKCJjb2wiKSksCiAgICAgICAgICAgY2F0LnB0eXBlICAgID0gImNoaXNxIiwKICAgICAgICAgICBjb250LnZhcmxpc3QgPSBjKCJBR0VpIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgIkhHQkFETSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICJXQkNBRE0iLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAiUExBVEVMRVQiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAiSU5JVFNDUiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICJUUk9QQURNIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgIkRETUVSIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJESVNEQVRFIiksCiAgICAgICAgICAgY29udC5oZWFkZXIgPSAgYygiQWdlIiwgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICJIZW1vZ2xvYmluIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgIldCQyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICJQbGF0ZWxldCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICJDcmVhdGluaW5lIiwgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICJUcm9wb25pbiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICJELWRpbWVyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJMZW5ndGggb2YgSG9zcGl0YWxpemF0aW9uIiksCiAgICAgICAgICAgY29udC5wdHlwZSAgID0gYygid2lsY294IiksCiAgICAgICAgICAgY29sbmFtZXMgICAgID0gYygiVmFyaWFibGUiLCAiRW5yb2xsZWQiLCAiTm90IEVucm9sbGVkIiwgIk92ZXJhbGwiLCAiUC12YWx1ZSIpLG91dHB1dCA9ICJodG1sIikKCgoKYGBgCgpgYGB7cn0KIyMgT3ZlcmFsbCBSYWNlIFByb3AgRW5yb2xsZWQvTm90LUVucm9sbGVkCgpyYWNldGFiPC1wcm9wLnRhYmxlKHRhYmxlKGRmdDEkQ09WQ0xJTlRSSUFMLCBkZnQxJFJBQ0VpKSkKCnJhY2V0YWIyPC1hZGRtYXJnaW5zKHJhY2V0YWIpCgoKYGBgCmBgYHtyfQojRGVzY3JpcHRpdmVzIGZvciBhbGwgdGhlIFZhcmlhYmxlcyBPdmVyYWxsCmR0PC1FeHBDVGFibGUoZGZ0MSwKICAgICAgICAgICAgICBUYXJnZXQ9TlVMTCwKICAgICAgICAgICAgICBjbGltPTksCiAgICAgICAgICAgICAgbmxpbT0xNSwKICAgICAgICAgICAgICByb3VuZD0yLAogICAgICAgICAgICAgIGJpbj1OVUxMLAogICAgICAgICAgICAgIHBlcj1UUlVFKQoKI1RhYmxlIGZvciBhbGwgVmFyaWFibGVzIAprYWJsZShkdCkgJT4lCiAga2FibGVfc3R5bGluZyhib290c3RyYXBfb3B0aW9ucyA9IGMoInN0cmlwZWQiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJob3ZlciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImNvbmRlbnNlZCIpKQoKI0ZvciBhbGwgVmFyaWFibGVzIEdyb3VwIGJ5IENMSU5UUklBTAoKRXhwQ1RhYmxlKGRmdDEsIAogICAgICAgICAgVGFyZ2V0ID0gIkNPVkNMSU5UUklBTCIsIG1hcmdpbiA9IDEsIGNsaW0gPSAxMCwgbmxpbSA9IDMsIGJpbiA9IE5VTEwsIHBlciA9IEZBTFNFKQoKI051bWVyaWNhbCBTdW1tYXJ5IGJ5IFZhciBHcm91cGVkIGJ5IEVucm9sbG1lbnQgaW4gQ2xpbmljYWwgVHJpYWxzCgpkdG51bTwtRXhwQ3VzdG9tU3RhdChkZnQxLEN2YXIgPSBjKCJDT1ZDTElOVFJJQUwiKSwKICAgICAgICAgICAgICAgICAgICAgTnZhcj1jKCJBR0VpIiwgIkhHQkFETSIsICJXQkNBRE0iLCAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiUExBVEVMRVQiLCJJTklUU0NSIiwgIlRST1BBRE0iLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkRETUVSIiwgIlRST1BBRE0iLCAiSU5JVFNDUiIpLAogICAgICAgICAgICAgICAgICAgICBzdGF0ID0gYygnQ291bnQnLCdQcm9wJywnbWVhbicsInNkIiwnbWVkaWFuJywgIklRUiIsICJtaW4iLCdtYXgnKSwKICAgICAgICAgICAgICAgICAgICAgZ3BieT1GQUxTRSwgZGNhc3QgPSBGQUxTRSkKCiNUYWJsZSBmb3IgTnVtZXJpYyBWYXJpYWJsZXMgYnkgRW5yb2xsbWVudCBpbiBDbGluaWNhbCBUcmlhbHMKCmthYmxlKGR0bnVtKSAlPiUKICBrYWJsZV9zdHlsaW5nKGJvb3RzdHJhcF9vcHRpb25zID0gYygic3RyaXBlZCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImhvdmVyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiY29uZGVuc2VkIikpCgpgYGAKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGVzY3JpcHRpdmVzIENvdmlkXzguMjYiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgZGZfcHJpbnQ6IHBhZ2VkCiAgaHRtbF9ub3RlYm9vazogZGVmYXVsdAogIHdvcmRfZG9jdW1lbnQ6IGRlZmF1bHQKLS0tCiNMb2FkIFBhY2thZ2VzCgpgYGB7cn0KbGlicmFyeShoYXZlbikKbGlicmFyeShkcGx5cikKbGlicmFyeShyZXNoYXBlMikKbGlicmFyeShnZ3Bsb3QyKQpsaWJyYXJ5KGVzcXVpc3NlKQpsaWJyYXJ5KGhhdmVuKQpsaWJyYXJ5KHN0cmluZ3IpCmxpYnJhcnkoYnJvb20pCmxpYnJhcnkoU21hcnRFREEpCmxpYnJhcnkoc3VtbWFyeXRvb2xzKQpsaWJyYXJ5KHN0YXRzKQpsaWJyYXJ5KGthYmxlRXh0cmEpCmxpYnJhcnkoRGF0YUV4cGxvcmVyKQpsaWJyYXJ5KHNjYWxlcykKbGlicmFyeShSQ29sb3JCcmV3ZXIpCmxpYnJhcnkoZWNtKQpgYGAKCiMjIExvYWRpbmcgdGhlIERhdGEKYGBge3IgUmVhZCBEYXRhLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFLCBpbmNsdWRlPUZBTFNFfQoKI1JlYWQgaW4gZGF0YSBhbmQgc2F2ZSBpdCBpbiBkZiBvYmplY3QgKG9yaWdpbmFsIGRhdGEgZm9yIGNvbXBhcmlzb24pCmRhdGFGaWxlID0gJy9tbnQvd29ya3NwYWNlL0dXVEcvQ09WSUQxOS9kYXRhL2NvdmlkMTlfY3ZkX2F1ZzIwLnNhczdiZGF0Jwpmb3JtYXRzRmlsZSA9ICcvbW50L3dvcmtzcGFjZS9HV1RHL0NPVklEMTkvZGF0YS9SX1B5dGhvbl93aW5kb3dzX2Zvcm1hdHMuc2FzN2JjYXQnCgojIyBBc3NpZ25pbmcgdGhlIGRhdGFmcmFtZSB0byB0aGUgZGZvciBvYmplY3QKZGZvciA8LSBoYXZlbjo6cmVhZF9zYXMoZGF0YUZpbGUsIGZvcm1hdHNGaWxlKQoKYGBgCgpgYGB7cn0KI1ByaW50IERpbWVuc2lvbnMKZGltKGRmb3IpCgojUHJpbnQgVW5pcXVlIFJlY29yZCBJRApjYXQoIlxuIE9yaWdpbmFsOiBSZWNvcmQsIFBhdGllbnQsIEhvc3BpdGFsIENvdW50cyBcbiIpCgpsZW5ndGgodW5pcXVlKGRmb3IkUkNSRE5VTSkpIApsZW5ndGgodW5pcXVlKGRmb3IkUEFUSUVOVF9JRCkpCmxlbmd0aCh1bmlxdWUoZGZvciRTUkNfRkFDX0lEKSkKCmBgYApgYGB7cn0KI0V4Y2x1ZGUgTkEncyBvbiBDT1ZDTElOVFJJQUwKIyA0OCByb3dzIHdpdGggTkFzIGZvciBDT1ZDTElOIFRyYWlsIAoKY2F0KCJcbiBNaXNzaW5nIENPVkNMSU5UUklBTCBcbiIpCnN1bShpcy5uYShkZm9yJENPVkNMSU5UUklBTCkpCgojIDQ4IHJvd3Mgd2l0aCBOQXMgZm9yIENPVkNMSU4gVHJhaWwgCmRmIDwtIGRmb3IgJT4lIGRwbHlyOjpmaWx0ZXIoIWlzLm5hKENPVkNMSU5UUklBTCkpCgojUHJpbnQgVW5pcXVlCmNhdCgiXG4gQ29tcGxldGUgQ09WQ0xJTlRSSUFMIFJlY29yZCwgUGF0aWVudCwgSG9zcGl0YWwgQ291bnRzIFxuIikKbGVuZ3RoKHVuaXF1ZShkZiRSQ1JETlVNKSkgCmxlbmd0aCh1bmlxdWUoZGYkUEFUSUVOVF9JRCkpCmxlbmd0aCh1bmlxdWUoZGYkU1JDX0ZBQ19JRCkpCmBgYApgYGB7cn0KIyAKIyA4OTIwLTg1NDUgI251bWJlciBvZiByZWNvcmRzIHdpdGggZHVwbGljYXRlIHBhdGllbnQgSURzCiMgODkyMC00OC00MzEgI2RpbWVuc2lvbnMgdXNpbmcgQWRyaWFuYSdzIGNvdW50cwojIDg5MjAtNDgtMzI3ICNkaW1lbnNpb25zIHVzaW5nIExhdXJhJ3MgY291bnRzCgpgYGAKCmBgYHtyfQojIyBJZGVudGlmeSBEdXBsaWNhdGVzCiMjU2VhcmNoZXMgb25jZSBmcm9tIHRoZSB0b3AgZG93biBhbmQgb25jZSBmcm9tIHRoZSBib3R0b20gdXAuCiMjQWRkcyAiZHVwcyIgdmFyaWFibGUgdG8gdGhlIGRmIHdoZXJlIGR1cGxpY2F0ZSBpcyBUUlVFIAoKZGYkZHVwcyA8LSBkdXBsaWNhdGVkKHB1bGwoZGYsIFBBVElFTlRfSUQpKSB8CmR1cGxpY2F0ZWQocHVsbChkZixQQVRJRU5UX0lEKSxmcm9tTGFzdD1UUlVFKQoKCiNFeHRyYWN0cyBEdXBsaWNhdGVzIHdoZXJlIFRSVUUKZHVwX2RmIDwtIGRmW2RmJGR1cHMgPT0gIlRSVUUiLCBdCgojNDMxIGR1cGxpY2F0ZXMgaWRlbnRpZmllZApkaW0oZHVwX2RmKQoKI051bWJlciBvZiBEaXN0aW5jdCBQYXRpZW50X0lEcyBhbmQgUkNSRE5VTSBpbiB0aGUgZGF0YWZyYW1lIHdpdGggYWxsIGR1cGxpY2F0ZXMKbl9kaXN0aW5jdChkdXBfZGYkUEFUSUVOVF9JRCkKbl9kaXN0aW5jdChkdXBfZGYkUkNSRE5VTSkKCmBgYApgYGB7cn0KCiMgbnJvdyhkdXBfZGYpCiMgbGVuZ3RoKHVuaXF1ZShkdXBfZGYkUEFUSUVOVF9JRCkpCgojTnVtYmVyIG9mIHJvd3Mgd2l0aCBhdCBsZWFzdCBvbmUgcmVwZWF0aW5nIFBBVElFTlRfSUQgYW5kIAojbnVtYmVyIG9mIHVuaXF1ZSByZXBlYXRpbmcgUEFUSUVOVF9JRHMgcm93KGR1cF9kZikKCmxlbmd0aCh1bmlxdWUoZHVwX2RmJFBBVElFTlRfSUQpKQpkaW0oZGZbZHVwbGljYXRlZChkZiRQQVRJRU5UX0lELCBmcm9tTGFzdCA9IFRSVUUpLF0pIApkaW0oZGZbZHVwbGljYXRlZChkZiRQQVRJRU5UX0lEKSxdKSAKCiMgZHVwX3N1bW1hcnkgPC0gIGR1cF9kZiAlPiUgCiMgICAgICAgICAgICAgICAgIGdyb3VwX2J5KFBBVElFTlRfSUQpICU+JSAKIyAgICAgICAgICAgICAgICAgc3VtbWFyaXNlKG5fcmVjb3JkcyA9IGxlbmd0aChQQVRJRU5UX0lEKSkKIyAKIyBuX3BhdGllbnRzX3Blcl9kdXBfbiAgPC0gZHVwX3N1bW1hcnkgJT4lIAojICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZ3JvdXBfYnkobl9yZWNvcmRzKSAlPiUKIyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdW1tYXJpc2Uobl9wYXRpZW50cyA9IG4obl9yZWNvcmRzKSkKICMgbl9wYXRpZW50c19wZXJfZHVwX24KCmBgYApgYGB7cn0KCiNBcnJhbmdlIGJ5IHRoZXNlIFZhcnMKZHVwX2RmIDwtZHVwX2RmICU+JSBhcnJhbmdlKFBBVElFTlRfSUQsIENPVkNMSU5UUklBTCwgU1JDX0ZBQ19JRCwgQ0FTRV9JRCkKCiMgQWRkIGFuIEFjY3VtdWxhdG9yIFZhciBmb3IgdGhlIHRpbWVzIGEgUEFUSUVOVF9JRCByZXBlYXRzIApkdXBfZGY8LWR1cF9kZiAlPiUgZ3JvdXBfYnkoUEFUSUVOVF9JRCkgJT4lIG11dGF0ZShEUk9QUyA9IGN1bWNvdW50KFBBVElFTlRfSUQpKQoKI0FycmFuZ2UgYnkgdmFycyBEZXNjZW5kIGJ5IE51bWJlciBvZiBEcm9wcyAKI0tlZXAgcm93cyBvZiAxIChZZXMpIGZvciBDb3ZjbGludHJpYWwgYW5kIHJhbmRvbWx5IHNlbGVjdCAKZHVwX2RmPC1kdXBfZGYgJT4lIGdyb3VwX2J5KFBBVElFTlRfSUQpICU+JSBzZWxlY3QoUEFUSUVOVF9JRCwgQ09WQ0xJTlRSSUFMLCBTUkNfRkFDX0lELCBDQVNFX0lELCBEUk9QUywgZXZlcnl0aGluZygpKSAlPiUgCmFycmFuZ2UoZGVzYyhEUk9QUykpCgpoZWFkKGR1cF9kZikKCmBgYApgYGB7cn0KCiNTZWxlY3RpbmcgdGhvc2Ugd2l0aCBtb3JlIHRoYW4gMSByZXBlYXQgb3IgImRyb3AiCmR1cGRmZjwtZHVwX2RmICU+JSBmaWx0ZXIoRFJPUFMgPiAxKQoKZGltKGR1cGRmZikKaGVhZChkdXBkZmYpCgojdXNpbmcgUkNSRE5VTQpkcm9wcyA8LSBkdXBkZmZbIlJDUkROVU0iXQpoZWFkKGRyb3BzKQoKI1VzaW5nIFBhdGllbnQgSUQgZHJvcHMKI2Ryb3BzPC1kdXBkZmZbIlBBVElFTlRfSUQiXQojIAojIGhlYWQoZHJvcHMpCiMgbnJvdyhkcm9wcykKCiNNYWtlIGRyb3BzIGludG8gYSB2ZWN0b3IgCnZlY2Ryb3BzIDwtIGFzLnZlY3Rvcihkcm9wcykKCmBgYAoKYGBge3J9CiNDcmVhdGUgTm90IEluIE9wZXJhdG9yCmAlbm90aW4lYCA8LSBOZWdhdGUoYCVpbiVgKQoKI1VzaW5nIFJDUkROVU0KZGltKGRmKQplZjIgPC0gZGZbZGYkUkNSRE5VTSAlbm90aW4lIHZlY2Ryb3BzJFJDUkROVU0sICwgZHJvcCA9IEZBTFNFXQpkaW0oZWYyKQoKIyAjRmlsdGVyaW5nIERGLCBsZWF2aW5nIG9ubHkgUEFUSUVOVF9JRHMgdGhhdCBhcmUgbm90IGluIHZlY2Ryb3BzKGxpc3Qgb2YgZHVwbGljYXRlcykKIyBkaW0oZGYpCiMgZWYgPC0gZGZbZGYkUEFUSUVOVF9JRCAlbm90aW4lIHZlY2Ryb3BzJFBBVElFTlRfSUQsICwgZHJvcCA9IEZBTFNFXQojIGRpbShlZikKCiNEcm9wcGluZyB0aGUgMTk1IHJlcGVhdHMgb2YgcGF0aWVudCB3aXRoIDE5NiByZXBlYXRzCiNkMiA8LWVmWyEoZWYkUEFUSUVOVF9JRD09IjkuMDAwNjRFKzE1MDA0ODA2IiksXQoKIyNDaGVjawpsZW5ndGgodW5pcXVlKGVmMiRSQ1JETlVNKSkKbGVuZ3RoKHVuaXF1ZShlZjIkUEFUSUVOVF9JRCkpCmxlbmd0aCh1bmlxdWUoZWYyJFNSQ19GQUNfSUQpKQoKYGBgCgojI1NlbGVjdCBXb3JraW5nIFZhcmlhYmxlcyBhbmQgQWRkIExhYmVscwoKYGBge3IgU2VsZWN0IFdvcmtpbmcgVmFyaWFibGVzIGFuZCBBZGQgTGFiZWxzLCBpbmNsdWRlPUZBTFNFfQojU2VsZWN0IFdvcmtpbmcgVmFyaWFibGVzIGFuZCBFeGNsdWRlIE5BcyBpbiBDT1ZDTElOVFJJQUwKCmxpYnJhcnkoZHBseXIpCgpkZnQxIDwtIGVmMiAlPiUgZHBseXI6OnNlbGVjdChDQVNFX0lELFBBVElFTlRfSUQsIFNFWCxBR0VpLFJBQ0VpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSEdCQURNLCBXQkNBRE0sIFBMQVRFTEVULAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSU5JVFNDUiwgVFJPUEFETSxBTlRJSFlQUlROU1YsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBMSVBMT1dUSFJQLEFOVElQTFQsIEFOVElDT0FHLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQU5USUhZUFJHTFlNLCBISVNFVEhOSSxERE1FUiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFRST1BBRE0sIElOSVRTQ1IsIENPVkNMSU5UUklBTCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1FREhJU1RPXzAxLCBNRURISVNUT18wMiwgTUVESElTVE9fMDgsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNRURISVNUT18wOSxNRURISVNUT18xMSwgTUVESElTVE9fMTIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQQVRNQU5JQ1VEVCxQQVRNQU5JQ1UsIFNSQ19GQUNfSUQsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBESVNEQVRFLERTQ0hTVEFULCBBRE1EVCxERUFUSERULFBTT1VSQ0VfMDEsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQU09VUkNFXzAyLFBTT1VSQ0VfMDMsUFNPVVJDRV8wNCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFBTT1VSQ0VfMDUsIFBTT1VSQ0VfMDYsIFBTT1VSQ0VfMDcsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQU09VUkNFXzA5LCBDQVJEQVJSLCBTSEtNR01UXzAxLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU0hLTUdNVF8wMiwgU0hLTUdNVF8wNCwgU0hLTUdNVF8wNSwgU0hLTUdNVF8wMywgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBIT1NQVkVOVCwgU0NSVUFETSxUUk9QVUFETSwgRERNRVJVLCBIR0JVQURNLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICBXQkNVQURNKSAlPiUgIyMgQ09OVElOVUUgQUREIFNFVkVSRVRJWSBWQVJTCiAgICAgICAgICAgICAgICAgIGRwbHlyOjpmaWx0ZXIoIWlzLm5hKENPVkNMSU5UUklBTCkpCgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAojQWRkaW5nIExhYmVscyBmb3IgRmFjdG9yIFZhcnMKCiNTZXggCgpkZnQxJFNFWCA8LSBmYWN0b3IoZGZ0MSRTRVgsIGxldmVscyA9IGMoIjEiLCAiMiIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiTWFsZSIsICJGZW1hbGUiKSkKCiNDb3ZjbGludHJpYWwKCmRmdDEkQ09WQ0xJTlRSSUFMIDwtIGZhY3RvcihkZnQxJENPVkNMSU5UUklBTCwgbGV2ZWxzID0gYygiMSIsICIyIiksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBsYWJlbHMgPWMoICJZZXMiLCAiTm8iKSkKCiNSQUNFaSBpcyBBSEEncyBkZWZpdGlvbgoKZGZ0MSRSQUNFaSA8LSBmYWN0b3IoZGZ0MSRSQUNFaSwgbGV2ZWxzID0gYygiMSIsICIyIiwgIjMiLCAiNCIsICI1IiwgIjYiLCAiNyIpLAogICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCJIaXNwYW5pYyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIk5vbi1IaXNwYW5pYyBCbGFjayIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIk5hdGl2ZSBBbWVyaWNhbiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkFzaWFuIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiUGFjaWZpYyBJc2xhbmRlciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIk5vbi1IaXNwYW5pYyBXaGl0ZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIlVURCIpKQojSGlzcGFuaWMgRXRobmljaXR5CmRmdDEkSElTRVRITkkgPC0gZmFjdG9yKGRmdDEkSElTRVRITkksIGxldmVscyA9IGMoIjEiLCAiMiIpLAogICAgICAgICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCJZZXMiLCAiTm8vVVREIikpCgojQXRyaWFsIEZpYnJpbGF0aW9uCmRmdDEkTUVESElTVE9fMDEgPC0gZmFjdG9yKGRmdDEkTUVESElTVE9fMDEsIGxldmVscyA9IGMoIjAiLCAiMSIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiTm8iLCAiWWVzIikpCgojQXRyaWFsIEZsdXR0ZXIKZGZ0MSRNRURISVNUT18wMiA8LSBmYWN0b3IoZGZ0MSRNRURISVNUT18wMiwgbGV2ZWxzID0gYygiMCIsICIxIiksIAogICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCJObyIsICJZZXMiKSkKCiNEaWFiZXRlcyBNZWxsaXR1cyAgCmRmdDEkTUVESElTVE9fMDggPC0gZmFjdG9yKGRmdDEkTUVESElTVE9fMDgsIGxldmVscyA9IGMoIjAiLCAiMSIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiTm8iLCAiWWVzIikpCgojRHlzbGlwaWRlbWlhCmRmdDEkTUVESElTVE9fMDkgPC0gZmFjdG9yKGRmdDEkTUVESElTVE9fMDksIGxldmVscyA9IGMoIjAiLCAiMSIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiTm8iLCAiWWVzIikpCiNIZWFydCBGYWlsdXJlCmRmdDEkTUVESElTVE9fMTEgPC0gZmFjdG9yKGRmdDEkTUVESElTVE9fMTEsIGxldmVscyA9IGMoIjAiLCAiMSIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiTm8iLCAiWWVzIikpCiNIeXBlcnRlbnNpb24KZGZ0MSRNRURISVNUT18xMiA8LSBmYWN0b3IoZGZ0MSRNRURISVNUT18xMiwgbGV2ZWxzID0gYygiMCIsICIxIiksIAogICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCJObyIsICJZZXMiKSkKCiMjIE1lZGljYXRpb25zIFByaW9yIFRvIEFkbWlzc2lvbgoKZGZ0MSRBTlRJSFlQUlROU1YgPC0gZmFjdG9yKGRmdDEkQU5USUhZUFJUTlNWLCBsZXZlbHMgPSBjKCIxIiwgIjIiKSwgCiAgICAgICAgICAgICAgICAgIGxhYmVscyA9IGMoIlllcyIsICJObyIpKQoKZGZ0MSRMSVBMT1dUSFJQIDwtIGZhY3RvcihkZnQxJExJUExPV1RIUlAsIGxldmVscyA9IGMoIjEiLCAiMiIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiWWVzIiwgIk5vL05EIikpCgpkZnQxJEFOVElQTFQgPC0gZmFjdG9yKGRmdDEkQU5USVBMVCwgbGV2ZWxzID0gYygiMSIsICIyIiksIAogICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCJZZXMiLCAiTm8vTkQiKSkKCmRmdDEkQU5USUNPQUcgPC0gZmFjdG9yKGRmdDEkQU5USUNPQUcsIGxldmVscyA9IGMoIjEiLCAiMiIpLCAKICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiWWVzIiwgIk5vL05EIikpCgoKZGZ0MSRBTlRJSFlQUkdMWU0gPC0gZmFjdG9yKGRmdDEkQU5USUhZUFJHTFlNLCBsZXZlbHMgPSBjKCIxIiwgIjIiKSwgCiAgICAgICAgICAgICAgICAgIGxhYmVscyA9IGMoIlllcyIsICJOby9ORCIpKQoKZGZ0MSRQQVRNQU5JQ1UgPC0gYXMuZmFjdG9yKGRmdDEkUEFUTUFOSUNVKQoKIyMgUGF5bWVudCBTb3VyY2VzCmRmdDEkUFNPVVJDRV8wMSA8LSBhcy5mYWN0b3IoZGZ0MSRQU09VUkNFXzAxKQpkZnQxJFBTT1VSQ0VfMDIgPC0gYXMuZmFjdG9yKGRmdDEkUFNPVVJDRV8wMikKZGZ0MSRQU09VUkNFXzAzIDwtIGFzLmZhY3RvcihkZnQxJFBTT1VSQ0VfMDMpCmRmdDEkUFNPVVJDRV8wNCA8LSBhcy5mYWN0b3IoZGZ0MSRQU09VUkNFXzA0KQpkZnQxJFBTT1VSQ0VfMDUgPC0gYXMuZmFjdG9yKGRmdDEkUFNPVVJDRV8wNSkKZGZ0MSRQU09VUkNFXzA2IDwtIGFzLmZhY3RvcihkZnQxJFBTT1VSQ0VfMDYpCmRmdDEkUFNPVVJDRV8wNyA8LSBhcy5mYWN0b3IoZGZ0MSRQU09VUkNFXzA3KQpkZnQxJFBTT1VSQ0VfMDkgPC0gYXMuZmFjdG9yKGRmdDEkUFNPVVJDRV8wOSkKCmBgYAoKYGBge3IgUmVjb2RlIGFuZCBDb21iaW5lIFZhcmlhYmxlc30KCiNDcmVhdGUgYWdlX2dyb3VwIHZhcmlhYmxlCgpkZnQxIDwtIGRmdDEgJT4lIG11dGF0ZShhZ2VfZ3JvdXAgPSBjYXNlX3doZW4oQUdFaSA+IDY0IH4gJz42NCcsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEFHRWkgPj0gNTAgJiBBR0VpIDw9IDY0IH4gJzUwLTY0JywKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQUdFaSA8IDUwIH4gJzw1MCcpKQojQ3JlYXRlIHBzb3VyY2VfZ3JvdXBlZAoKZGZ0MSA8LSBkZnQxICU+JSBtdXRhdGUocHNvdXJjZV9ncm91cCA9IGNhc2Vfd2hlbihQU09VUkNFXzAxID09IDEgfCBQU09VUkNFXzAyID09IDEgfFBTT1VSQ0VfMDYgPT0xIH4gIk1lZGljYWlkIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQU09VUkNFXzA1ID09IDEgfiAiTWVkaWNhcmUiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFBTT1VSQ0VfMDMgPT0xIHwgUFNPVVJDRV8wNyA9PSAxIH4gIk90aGVyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQU09VUkNFXzA0ID09IDEgfiAiU2VsZiBwYXkiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlzLm5hKFBTT1VSQ0VfMDQpID09IFRSVUUgIHwgUFNPVVJDRV8wOSA9PSAxIH4gIlVua25vd24iKSkKIyBDcmVhdGUgRGVhdGggVmFycyB3aXRoIEFIQSBMb2dpYwoKZGZ0MSA8LSBkZnQxICU+JSBtdXRhdGUoZGVhdGggPSBpZmVsc2UoIWlzLm5hKERJU0RBVEUpID09IFRSVUUgJiBEU0NIU1RBVCA9PSA2ICwgMSwgMCkpCmRmdDEkZGVhdGggPC0gYXMuZmFjdG9yKGRmdDEkZGVhdGgpCgoKIyBEaXNjaGFyZ2UgRGF0YSAoRElTREFURSkgaXMgbm90IG1pc3NpbmcgYW5kIERpc2NoYXJnZSBTdGF0dXMgaXMgNiBvciAiRXhwaXJlZCIgCgpkZnQyPC0gZGZ0MSAlPiUgbXV0YXRlKENvdmlkX1NldiA9IGNhc2Vfd2hlbihEU0NIU1RBVCA9PSA2IH4gIkxldmVsIDEiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIENBUkRBUlIgPT0gMSB+ICJMZXZlbCAyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTSEtNR01UXzAxID09IDEgfiAiTGV2ZWwgMyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU0hLTUdNVF8wMiA9PSAxIH4gIkxldmVsIDMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFNIS01HTVRfMDQgPT0gMSB+ICJMZXZlbCAzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTSEtNR01UXzA1ID09IDEgfiAiTGV2ZWwgMyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU0hLTUdNVF8wMyA9PSAxIH4gIkxldmVsIDQiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEhPU1BWRU5UID09IDEgfiAiTGV2ZWwgNSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgRFNDSFNUQVQgIT0gNiAmCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQ0FSREFSUiAhPSAxICYKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTSEtNR01UXzAxICE9IDEgJgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFNIS01HTVRfMDIgIT0gMSAmCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU0hLTUdNVF8wNCAhPSAxICYKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTSEtNR01UXzA1ICE9IDEgJgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFNIS01HTVRfMDMgIT0gMSAmCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSE9TUFZFTlQgIT0gMSB+ICJMZXZlbCA2IikpICMjIGRvIGVsc2UsIG9yIG5lc3RlZCBlbHNlIAoKZGZ0MiRDb3ZpZF9TZXYgPC0gYXMuZmFjdG9yKGRmdDIkQ292aWRfU2V2KQoKIyMgQ3JlYXRlIE5ldyBSYWNlIEV0aG5pY2l0eSBWYXJpYWJsZTogUkFDRWdyb3VwIAoKbGlicmFyeShmb3JjYXRzKQpkZnQxJFJBQ0Vncm91cCA8LSBmY3RfY29sbGFwc2UoZGZ0MSRSQUNFaSwKICBVVEQgPSAiVVREIiwKICBPdGhlciA9ICJOYXRpdmUgQW1lcmljYW4iLAogIE5IV2hpdGUgPSAiTm9uLUhpc3BhbmljIFdoaXRlIiwKICBBc2lhbl9QSSA9IGMoIkFzaWFuIiwgIlBhY2lmaWMgSXNsYW5kZXIiKSwKICBCbGFjayA9ICJOb24tSGlzcGFuaWMgQmxhY2siLAogIEhpc3BhbmljID0gIkhpc3BhbmljIgopCgoKCiMgQ3JlYXRlIExlbmd0aCBvZiBIb3NwaXRhbGl6YXRpb24gVmFyaWFibGUKIyBESVNEQVRFIGlzIGFscmVhZHkgbGVuZ3RoIG9mIGFkbWlzc2lvbgojRGVyaXZlZCBkYXRlIHZhcmlhYmxlcyB0ZW5kIHRvIGhhdmUgdGhlICJTdHVkeWRheSIgdGFnCiNpbiB0aGUgZGVzY3JpcHRpb24gYW5kIGVuZCBpbiBEVCAoZXguIEFOQ0hPUkRUKS4KI1RoZXNlIHZhcmlhYmxlcyBhcmUgZGVpZGVudGlmaWVkIGRhdGUgdmFyaWFibGVzIGZyb20gdGhlIHJhdyByZWdzaXRyeSBkYXRhLAojd2hlcmUgdGhlIGFuY2hvciBkYXRlLCBvciBiYXNlbGluZSAoZGF5IDApIGlzIGhvc3BpdGFsIGFkbWlzc2lvbiBkYXRlLiAKI0FsbCBkZXJpdmVkIGRhdGVzIGFyZSBpbiB0aGUgY29udGV4dCBvZiB0aGUgQWRtaXNzaW9uIGRhdGUgKDApICsgZGF5LgoKdGFibGUoZGZ0MiRDb3ZpZF9TZXYpCgoKCmBgYAoKYGBge3J9CiMjIENvbnZlcnRpbmcgVW5pdHMgZm9yIERETUVSLCBDcmVhdGluaW5lLGFuZCBUcm9wb25pbgoKaGlzdChkZm9yJERETUVSVSwgcGxvdCA9IFRSVUUpCmhpc3QoZGZvciRUUk9QVUFETSwgcGxvdCA9IFRSVUUpCmhpc3QoZGZvciRTQ1JVQURNLCBwbG90ID1UUlVFKQoKI0NvbnZlcnQgRERNRVIgZmFjdG9ycyAyICh1L21MKSBhbmQgMyAodWcvbUwpIHRvIDEgKG5nL21MKQoKdHJhbnNmb3JtKGRmdDEsIERETUVSX3VuaT1pZmVsc2UoRERNRVJVPT0xLCBERE1FUioxLAogICAgICAgICAgICAgICAgICBpZmVsc2UoRERNRVJVPT0zLCBERE1FUioxMDAwLCBERE1FUipfX19fX18gKSkpICMjIENvbnZlcnNpb24gRmFjdG9yIGZvciBVL01MCgoKIyBDb252ZXJ0IENyZWF0aW5pbmUgdW5pdHMgZmFjdG9yIDIgKHVtb2wvTCkgdG8gZmFjdG9yIDEgKG1nL2RMKQpkZnQxPC0gZGZ0MSAlPiUgbXV0YXRlKENSRUFUSU5JTkVfVCA9IGNhc2Vfd2hlbihTQ1JVQURNID09IDEgfiAoSU5JVFNDUioxKSwKICAgICAgICAgIFNDUlVBRE0gPT0gMiB+IChJTklUU0NSLzg4LjQyKSkpCgp0YWJsZShkZnQxJFNDUlVBRE0pCmhpc3QoZGZ0MSRJTklUU0NSKQpoaXN0KGRmdDEkQ1JFQVRJTklORV9UKQpzdW1tYXJ5KGRmdDEkQ1JFQVRJTklORV9UKQpoaXN0KGRmdDEkSU5JVFNDUiwgYnJlYWtzID0gMjAwKQpoaXN0KGRmdDEkQ1JFQVRJTklORV9ULCBicmVha3MgPSAyMDApCgojIDEzIHBhdGllbnRzIHdpdGggb3ZlciAzMCBjcmVhdGluaW5lCmRmdDEgJT4lIHNlbGVjdChTQ1JVQURNLCBJTklUU0NSLCBDUkVBVElOSU5FX1QpICU+JSBmaWx0ZXIgKENSRUFUSU5JTkVfVCA+MzApCgoKIzEzIHAgcGF0aWVudHMgd2l0aCBvdmVyIDEwMCBUcm9wb25pbiAtLS0gS2VlcCB0aGVtCiNDb252ZXJ0IFRyb3BvbmluIGZhY3RvcnMgMiAodWcvTCkgYW5kIDMobmcvTCkgdG8gMSAobmcvbUwpCgpkZnQxPC0gZGZ0MSAlPiUgbXV0YXRlKFRST1BPQURNX3QgPSBjYXNlX3doZW4oVFJPUFVBRE0gPT0gMSB+IChUUk9QQURNKjEpLAogICAgICAgICAgVFJPUFVBRE0gPT0gMiB+IChUUk9QQURNKjEpLAogICAgICAgICAgVFJPUFVBRE0gPT0gMyB+IChUUk9QQURNKjAuMDAxKSkpCgpoaXN0KGRmdDEkVFJPUEFETSkKaGlzdChkZnQxJFRST1BPQURNX3QpCnN1bW1hcnkoZGZ0MSRUUk9QT0FETV90KQpoaXN0KGRmdDEkVFJPUEFETSwgYnJlYWtzID0gMjAwKQpoaXN0KGRmdDEkVFJPUE9BRE1fdCwgYnJlYWtzID0gMjAwKQojMTAgcGF0aWVudHMgd2l0aCBvdmVyIDEwMCBUcm9wb25pbiAtLS0gS2VlcCB0aGVtCgpkZnQxICU+JSBzZWxlY3QoVFJPUEFETSwgVFJPUFVBRE0sIFRST1BPQURNX3QpICU+JSBmaWx0ZXIgKFRST1BPQURNX3QgPiAwLjkwKQoKI0hlbW9nbG9iaW4KCmRmdDE8LSBkZnQxICU+JSBtdXRhdGUoVFJPUE9BRE1fdCA9IGNhc2Vfd2hlbihUUk9QVUFETSA9PSAxIH4gKFRST1BBRE0qMSksCiAgICAgICAgICBUUk9QVUFETSA9PSAyIH4gKFRST1BBRE0qMSksCiAgICAgICAgICBUUk9QVUFETSA9PSAzIH4gKFRST1BBRE0qMC4wMDEpKSkKCmBgYApgYGB7ciBIaXN0b2dyYW1zfQoKIyBQbG90dGluZyBIaXN0b2dyYW1zIG9mIENvbnRpbnVvdXMgVmFycyBVc2luZyBEYXRhIEV4cGxvcmVyCiMgCiMgZGZ0MSAlPiUgc2VsZWN0KEFHRWksIERETUVSLCBIR0JBRE0sIElOSVRTQ1IsIFBMQVRFTEVULCBUUk9QQURNLCBXQkNBRE0pICU+JSBwbG90X2hpc3RvZ3JhbShnZW9tX2hpc3RvZ3JhbV9hcmdzID0gbGlzdChiaW53aWR0aCA9IC4zLCBjb2wgPSJibGFjayIsIHNpemUgPSAzKSkKCiNIZW1vZ2xvYmluIApoaXN0KGRmdDEkSEdCQURNLGJyZWFrcyA9IDMwMCwgcGxvdCA9IFRSVUUpCmRmdDEgJT4lIGZpbHRlciAoIEhHQkFETSA+IDUwKQojQ0hFQ0sgVU5JVFMKCnRhYmxlKGRmb3IkSEdCVUFETSkKCgojV0JDCmhpc3QoZGZ0MSRXQkNBRE0sYnJlYWtzPSAyMDAsIHBsb3QgPSBUUlVFKSAKI1VzZSB1bmlxdWUgdG8gc2VlIHVuaXF1ZSB2YWx1ZXMgaW4gdGhlIHZhcmlhYmxlCiNNYXkgYmUgYSBjb252ZXJzaW9uIGZhY3RvciBpc3N1ZSBPbmUgcGF0aWVudCBhdCA3Mzg3LjAgCiMgRmVtYeKApiAgICAzOCBIaXNw4oCmICAgMTMuMyAgIDczODcgICAgICAyMTkgCgojCmhpc3QoZGZ0MSRQTEFURUxFVCkKIyBPdXRsaWVyczogMyBwYXRpZW50cyB3aXRoIG92ZXIgMzAwMCAgCmRmdDEgJT4lIGZpbHRlciAoIFBMQVRFTEVUID4gODAwKQoKI0NyZWF0aW5pbmUgCmhpc3QoZGZ0MSRJTklUU0NSLCBicmVha3M9IDIwMCkKIzExIHBhdGllbnMgd2l0aCBpbml0c2NyID4yMAojZGZ0MSAlPiUgZmlsdGVyICggSU5JVFNDUiA+IDIwKQoKI1Ryb3BvbmluCmhpc3QoZGZ0MSRUUk9QQURNLCBicmVha3MgPSAyMDApCiMxMCBwYXRpZW50cyB3aXRoIG92ZXIgMTAwIFRyb3BvbmluIC0tLSBLZWVwIHRoZW0gCgojRERNRVIgUHJvdApoaXN0KGRmdDEkRERNRVIsIGJyZWFrcyA9IDgwLCBwbG90ID0gVFJVRSkKCiNBZ2UKaGlzdChkZnQxJEFHRWksIGJyZWFrcz0gMjAsIHBsb3QgPSBUUlVFKQpxcW5vcm0oZGZ0MSRBR0VpKQpzdW1tYXJ5KGRmdDEkQUdFaSkKCiNRdWljayBUYWJsZXMKCgoKYGBgCgpgYGB7cn0KIyMjIEluc3RhbGxpbmcgVGFibGUxIHBhY2thZ2UgZnJvbSBFIFdvem5pYWsKCiNpbnN0YWxsX2dpdGh1YigiZW13b3puaWFrL1RhYmxlMSIpCmxpYnJhcnkoVGFibGUxKQoKCm1ha2UudGFibGUoZGF0ICA9IGRmdDEsCiAgICAgICAgICAgc3RyYXQgICAgICAgID0gIkNPVkNMSU5UUklBTCIsCiAgICAgICAgICAgY2F0LnZhcmxpc3QgID0gYygiU0VYIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJSQUNFaSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiSElTRVRITkkiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgImFnZV9ncm91cCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAicHNvdXJjZV9ncm91cCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiTUVESElTVE9fMDEiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIk1FREhJU1RPXzAyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJNRURISVNUT18wOCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiTUVESElTVE9fMDkiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIk1FREhJU1RPXzExIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJNRURISVNUT18xMiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkFOVElIWVBSVE5TViIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiTElQTE9XVEhSUCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiQU5USVBMVCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiQU5USUNPQUciLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkFOVElIWVBSR0xZTSIsIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIlBBVE1BTklDVSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiZGVhdGgiKSwKICAgICAgICAgICBjYXQuaGVhZGVyICAgPSBjKCJTZXgiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIlJhY2UiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkhpc3BhbmljIEV0aG5pY2l0eSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiQWdlIEdyb3VwIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJQYXltZW50IFNvdXJjZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiQXRyaWFsIEZpYnJpbGF0aW9uIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJBdHJpYWwgRmx1dHRlciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiRGlhYmV0ZXMgTWVsbGl0dXMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkR5c2xpcGlkZW1pYSIsIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkhlYXJ0IEZhaWx1cmUiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkh5cGVydGVuc2lvbiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkFudGloeXBlcnRlbnNpdmUiLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJMaXBpZC1sb3dlcmluZyBUaGVyYXB5IiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJBbnRpcGxhdGVsZXQiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkFudGljb2FndWxhbnQiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkFudGktSHlwZXJnbHljZW1pYyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiTWFuYWdlZCBpbiBJQ1UiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkRlYXRoIiksCiAgICAgICAgICAgY2F0LnJtc3RhdCAgID0gbGlzdChjKCJyb3ciKSwgYygiY29sIikpLAogICAgICAgICAgIGNhdC5wdHlwZSAgICA9ICJjaGlzcSIsCiAgICAgICAgICAgY29udC52YXJsaXN0ID0gYygiQUdFaSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICJIR0JBRE0iLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAiV0JDQURNIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgIlBMQVRFTEVUIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgIklOSVRTQ1IiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAiVFJPUEFETSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICJERE1FUiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiRElTREFURSIpLAogICAgICAgICAgIGNvbnQuaGVhZGVyID0gIGMoIkFnZSIsIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAiSGVtb2dsb2JpbiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICJXQkMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAiUGxhdGVsZXQiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAiQ3JlYXRpbmluZSIsIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAiVHJvcG9uaW4iLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAiRC1kaW1lciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiTGVuZ3RoIG9mIEhvc3BpdGFsaXphdGlvbiIpLAogICAgICAgICAgIGNvbnQucHR5cGUgICA9IGMoIndpbGNveCIpLAogICAgICAgICAgIGNvbG5hbWVzICAgICA9IGMoIlZhcmlhYmxlIiwgIkVucm9sbGVkIiwgIk5vdCBFbnJvbGxlZCIsICJPdmVyYWxsIiwgIlAtdmFsdWUiKSxvdXRwdXQgPSAiaHRtbCIpCgoKCmBgYAoKYGBge3J9CiMjIE92ZXJhbGwgUmFjZSBQcm9wIEVucm9sbGVkL05vdC1FbnJvbGxlZAoKcmFjZXRhYjwtcHJvcC50YWJsZSh0YWJsZShkZnQxJENPVkNMSU5UUklBTCwgZGZ0MSRSQUNFaSkpCgpyYWNldGFiMjwtYWRkbWFyZ2lucyhyYWNldGFiKQoKCmBgYApgYGB7cn0KI0Rlc2NyaXB0aXZlcyBmb3IgYWxsIHRoZSBWYXJpYWJsZXMgT3ZlcmFsbApkdDwtRXhwQ1RhYmxlKGRmdDEsCiAgICAgICAgICAgICAgVGFyZ2V0PU5VTEwsCiAgICAgICAgICAgICAgY2xpbT05LAogICAgICAgICAgICAgIG5saW09MTUsCiAgICAgICAgICAgICAgcm91bmQ9MiwKICAgICAgICAgICAgICBiaW49TlVMTCwKICAgICAgICAgICAgICBwZXI9VFJVRSkKCiNUYWJsZSBmb3IgYWxsIFZhcmlhYmxlcyAKa2FibGUoZHQpICU+JQogIGthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSBjKCJzdHJpcGVkIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiaG92ZXIiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJjb25kZW5zZWQiKSkKCiNGb3IgYWxsIFZhcmlhYmxlcyBHcm91cCBieSBDTElOVFJJQUwKCkV4cENUYWJsZShkZnQxLCAKICAgICAgICAgIFRhcmdldCA9ICJDT1ZDTElOVFJJQUwiLCBtYXJnaW4gPSAxLCBjbGltID0gMTAsIG5saW0gPSAzLCBiaW4gPSBOVUxMLCBwZXIgPSBGQUxTRSkKCiNOdW1lcmljYWwgU3VtbWFyeSBieSBWYXIgR3JvdXBlZCBieSBFbnJvbGxtZW50IGluIENsaW5pY2FsIFRyaWFscwoKZHRudW08LUV4cEN1c3RvbVN0YXQoZGZ0MSxDdmFyID0gYygiQ09WQ0xJTlRSSUFMIiksCiAgICAgICAgICAgICAgICAgICAgIE52YXI9YygiQUdFaSIsICJIR0JBRE0iLCAiV0JDQURNIiwgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIlBMQVRFTEVUIiwiSU5JVFNDUiIsICJUUk9QQURNIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJERE1FUiIsICJUUk9QQURNIiwgIklOSVRTQ1IiKSwKICAgICAgICAgICAgICAgICAgICAgc3RhdCA9IGMoJ0NvdW50JywnUHJvcCcsJ21lYW4nLCJzZCIsJ21lZGlhbicsICJJUVIiLCAibWluIiwnbWF4JyksCiAgICAgICAgICAgICAgICAgICAgIGdwYnk9RkFMU0UsIGRjYXN0ID0gRkFMU0UpCgojVGFibGUgZm9yIE51bWVyaWMgVmFyaWFibGVzIGJ5IEVucm9sbG1lbnQgaW4gQ2xpbmljYWwgVHJpYWxzCgprYWJsZShkdG51bSkgJT4lCiAga2FibGVfc3R5bGluZyhib290c3RyYXBfb3B0aW9ucyA9IGMoInN0cmlwZWQiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJob3ZlciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImNvbmRlbnNlZCIpKQoKYGBgCgoK</div>
 
 
 

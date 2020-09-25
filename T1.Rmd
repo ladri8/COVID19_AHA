@@ -3,8 +3,8 @@ title: "T1"
 author: "Adriana RM"
 date: "9/14/2020"
 output:
-  word_document: default
   html_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -130,11 +130,12 @@ dft1 <- dft1 %>% mutate(age_group = case_when(AGEi > 64 ~ '>64',
                                              AGEi < 50 ~ '<50'))
 #Create psource_grouped
 
-dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 | PSOURCE_02 == 1 |PSOURCE_06 ==1 ~ "Medicaid",
+dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 | PSOURCE_02 == 1 | PSOURCE_06 == 1 ~
+                                                  "Medicaid",
                                                   PSOURCE_05 == 1 ~ "Medicare",
-                                                  PSOURCE_03 ==1 | PSOURCE_07 == 1 ~ "Other",
+                                                  PSOURCE_03 == 1 | PSOURCE_07 == 1 ~ "Other",
                                                   PSOURCE_04 == 1 ~ "Self pay",
-                                                  is.na(PSOURCE_04) == TRUE  | PSOURCE_09 == 1 ~ "Other"))
+                                                  is.na(PSOURCE_04) == TRUE | PSOURCE_09 == 1 ~ "Other"))
 
 # Create Death Vars with AHA Logic
 
@@ -144,22 +145,22 @@ dft1$death <- as.factor(dft1$death)
 
 # Discharge Data (DISDATE) is not missing and Discharge Status is 6 or "Expired" 
 
-dft2<- dft1 %>% mutate(Covid_Sev = case_when(DSCHSTAT == 6 ~ "Level 1",
-                                                  CARDARR == 1 ~ "Level 2",
-                                                  SHKMGMT_01 == 1 ~ "Level 3",
-                                                  SHKMGMT_02 == 1 ~ "Level 3",
-                                                  SHKMGMT_04 == 1 ~ "Level 3",
-                                                  SHKMGMT_05 == 1 ~ "Level 3",
-                                                  SHKMGMT_03 == 1 ~ "Level 4",
-                                                  HOSPVENT == 1 ~ "Level 5",
-                                                  DSCHSTAT != 6 &
-                                                  CARDARR != 1 &
-                                                  SHKMGMT_01 != 1 &
-                                                  SHKMGMT_02 != 1 &
-                                                  SHKMGMT_04 != 1 &
-                                                  SHKMGMT_05 != 1 &
-                                                  SHKMGMT_03 != 1 &
-                                                  HOSPVENT != 1 ~ "Level 6")) ## do else, or nested else 
+# dft2<- dft1 %>% mutate(Covid_Sev = case_when(DSCHSTAT == 6 ~ "Level 1",
+#                                                   CARDARR == 1 ~ "Level 2",
+#                                                   SHKMGMT_01 == 1 ~ "Level 3",
+#                                                   SHKMGMT_02 == 1 ~ "Level 3",
+#                                                   SHKMGMT_04 == 1 ~ "Level 3",
+#                                                   SHKMGMT_05 == 1 ~ "Level 3",
+#                                                   SHKMGMT_03 == 1 ~ "Level 4",
+#                                                   HOSPVENT == 1 ~ "Level 5",
+#                                                   DSCHSTAT != 6 &
+#                                                   CARDARR != 1 &
+#                                                   SHKMGMT_01 != 1 &
+#                                                   SHKMGMT_02 != 1 &
+#                                                   SHKMGMT_04 != 1 &
+#                                                   SHKMGMT_05 != 1 &
+#                                                   SHKMGMT_03 != 1 &
+#                                                   HOSPVENT != 1 ~ "Level 6")) ## do else, or nested else 
 
 dft2$Covid_Sev <- as.factor(dft2$Covid_Sev)
 
@@ -190,7 +191,6 @@ t1 <- make.table(dat  = dft1,
            strat        = "COVCLINTRIAL",
            cat.varlist  = c("SEX",
                              "RACEi",
-                            "RACEgroup",
                             "HISETHNI",
                             "age_group",
                             "psource_group",
@@ -208,8 +208,7 @@ t1 <- make.table(dat  = dft1,
                             "PATMANICU",
                             "death"),
            cat.header   = c("Sex",
-                            #"Race",
-                            "Race Group",
+                            "Race",
                             "Hispanic Ethnicity",
                             "Age Group",
                             "Payment Source",
@@ -247,6 +246,7 @@ t1 <- make.table(dat  = dft1,
            cont.ptype   = c("wilcox"),
            colnames     = c("Variable", "Enrolled", "Not Enrolled", "Overall", "P-value"),output = "html")
 
+t1
 
 ```
 ```{r eval=FALSE, include=FALSE}

@@ -39,63 +39,125 @@ dft1 %>%
 
 ```
 #Visualizing the Data
+
 ```{r Race Comparison - Enrolled vs Not Enrolled, echo=FALSE}
+
 library(dplyr)
 library(ggplot2)
 
-#Working on this... 
-ggrc<- dft1 %>%
- ggplot() +
- aes(x = RACEi, fill = RACEi) +
- geom_bar(aes(y = (..count..)/sum(..count..))) +
- scale_fill_hue() + scale_y_continuous(labels = scales::percent) +
- labs(title = "Enrolled Vs Not-Enrolled in Clinical Trials by Race") +
- theme_classic() +
- coord_flip() +
- facet_wrap(vars(COVCLINTRIAL), scales = "free")
+melted<-melt(dft1$RACEi, dft1$COVCLINTRIAL, id=PATIENT_ID )
 
-ggrc
+#With Denominator  
 
+dat <-dft1 %>%
+  select(RACEi, COVCLINTRIAL) %>%
+  tidyr::gather(RACEi, COVCLINTRIAL, na.rm = FALSE, convert = FALSE, factor_key = FALSE) %>%
+  count(RACEi, COVCLINTRIAL) %>%
+  group_by(COVCLINTRIAL) %>%
+  mutate(percent = (n/sum(n) * 100)) %>%
+           mutate (rounded = round(percent, 1))
 
+dat
 
+#With Denominator
 
-```
-```{r}
 dft1 %>%
-                  ggplot(aes(x= variable, y= mean, fill = COVCLINTRIAL)) +
-                  geom_bar(position = position_dodge(0.75),
-                           stat = "summary", fun.y = "mean", width = 0.7) +
-                  geom_errorbar(aes(ymin= mean - ci, ymax= mean + ci), 
-                                position= position_dodge(0.75)) +
-                                labs(title = "Percentage with Comorbidities", 
-                                     x = "Comorbidities", 
-                                     y = "%") +
-                  theme_bw() +
-                  theme(panel.border = element_blank(), panel.grid =element_blank()) + 
-                  coord_flip()
+  group_by(RACEi, COVCLINTRIAL) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  mutate(percent = (freq*100))
 
-```
-```{r}
-
-ggstatsplot::ggbarstats(
-  data = ggstatsplot::movies_long,
-  x = mpaa,
-  y = genre,
-  sampling.plan = "jointMulti",
-  title = "MPAA Ratings by Genre",
-  xlab = "movie genre",
-  legend.title = "MPAA rating",
-  ggtheme = hrbrthemes::theme_ipsum_pub(),
-  ggplot.component = list(scale_x_discrete(guide = guide_axis(n.dodge = 2))),
-  palette = "Set2",
-  messages = FALSE
-)
+byrace<-dft1 %>%
+  group_by(RACEi, COVCLINTRIAL) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  mutate(percent = (freq*100), rounded = round(percent,1))
 
 
+sink("output.txt")
+byrace
+sink()
 ```
 
+```{r}
+#PLOT
+ggplot(dat, aes(RACEi, percent, fill = COVCLINTRIAL)) + 
+    geom_col(position = "stack") + 
+  labs(x = "Race", y = "Percentage",
+       title = "Percentage of Patients Enrolled/Not Enrolled in Clinical Trials by Race",
+       fill = "Enrolled") + scale_y_continuous(limits = c(0, 100), breaks = seq(0, 100, by = 25)) +
+   geom_label(aes( label = "rounded",
+                y= "rounded",
+           position = "stack",
+           vjust = 0.5))+
+  theme_classic() +
+  coord_flip()
+
+ aes(x = reorder(Name, -Number), Number)
+
+#Plot 2
+ png("myplot.png")
+ 
+p1 <- ggplot(data = dat, aes(y= percent, x= reorder(RACEi, -rounded), fill=COVCLINTRIAL)) + 
+  geom_bar(stat="identity", width = 0.8) + 
+  ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
+  xlab('Race') + ylab('Percentage') +
+  # geom_text(aes(x = RACEi, label = paste0(rounded, '%')), 
+  #           colour = 'white',
+  #           size= 3,
+  #           position=position_stack(vjust=0.5)) + 
+  labs(fill='Enrolled') +
+  theme_classic() + 
+  coord_flip()
+
+file1 <- tempfile("file1", fileext = ".png")
+save_plot(file1, p1)
+View(file1)
+
+# PLot Percentage of Enrollment by Race/Ethnicity
+
+p2 <- ggplot(data = byrace, aes(y= percent, x= reorder(RACEi, -percent), fill=COVCLINTRIAL)) + 
+  geom_bar(stat="identity", width = 0.8) + 
+  ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
+  xlab('Race/Ethnicity') + ylab('Percentage') +
+   geom_text(aes(x = RACEi, label = paste0(rounded, '%')), 
+             colour = 'white',
+             size= 2.7,
+             position=position_stack(vjust=0.5)) +
+  labs(fill='Enrolled') +
+  theme_classic() + 
+  coord_flip()
+
+file1 <- tempfile("file1", fileext = ".png")
+save_plot(file1, p2)
+View(file1)
+
+```
 
 ```{r}
+#PLot 2 with Labels 
+
+ggplot(dft1, aes(x= RACEi, group= COVCLINTRIAL)) + 
+    geom_bar(aes(y = ..prop.., fill = factor(COVCLINTRIAL)),
+             stat="count",
+             position = "stack") +
+ geom_text(aes( label = scales::percent(..prop..),
+                y= ..prop.. ),
+              stat= "count",
+           position = "stack",
+           vjust = 0.5) +
+      labs(y = "Percent",
+         fill= "COVCLINTRIAL", 
+         position = "stack",
+         vjust = .5) +
+       scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) + 
+        theme_classic() + 
+        coord_flip()
+```
+
+
+```{r}
+
 library(esquisse)
 library(ggplot2)
 

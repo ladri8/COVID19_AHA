@@ -140,7 +140,6 @@ filthosp = filthosp %>% mutate(RACEgroup = relevel(RACEgroup,"NHWhite"))
 levels(filthosp$PATMANICU) 
 
 #Ensuring Hospital ID is a factor
-
 filthosp$SRC_FAC_ID <- as.factor(filthosp$SRC_FAC_ID)
 
 ```
@@ -188,12 +187,12 @@ save_as_docx("Model" = fmodel_flextab,
 
 View(docx_file)
 
-
 ```
 
 
+## Minimally Adjusted Model 
 ```{r}
-# estimate the model and store results in m
+# Estimate the model and store results in m
 minadj_fit <- glmer(COVCLINTRIAL ~ SEX + AGEi + (1 | SRC_FAC_ID ),
                          data = filthosp,
                          family = binomial,
@@ -204,16 +203,32 @@ minadj_fit <- glmer(COVCLINTRIAL ~ SEX + AGEi + (1 | SRC_FAC_ID ),
 # Model Summary: 
 summary(minadj_fit)
 
-#Table
-minadj_tab<- minadj_fit %>%
-  tbl_regression(exponentiate = TRUE ) %>%
-  bold_labels() %>% bold_p(t= 0.05) %>% 
-  add_nevent()
+#Using Sink to get the Raw Outputs
+sink("minadj_model_raw.txt")
+print(summary(fit))
+sink()
 
-minadj_tab <- as_flex_table(minadj_fit,
-                            include = everything(),
-                            return_calls = FALSE,
-                            strip_md_bold = TRUE)
+#Put Summary into Table 
+library(gtsummary)
+
+minadj_tab <- minadj_fit %>%
+  tbl_regression(exponentiate = TRUE ) %>%
+  bold_labels() %>%
+  bold_p(t= 0.05)
+
+#Export table into Word
+minadj_flextab <- as_flex_table(minadj_tab,
+                                  include = everything(),
+                                  return_calls = FALSE,
+                                  strip_md_bold = TRUE)
+
+#Save as a Doc file
+docx_file <- tempfile(fileext = ".docx")
+
+save_as_docx("Minimally-adjusted Model" = minadj_flextab,
+              path = docx_file)
+
+View(docx_file)
 
 ```
 

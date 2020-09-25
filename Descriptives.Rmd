@@ -187,7 +187,7 @@ length(unique(ef2$SRC_FAC_ID))
 
 library(dplyr)
 
-dft1 <- ef2 %>% dplyr::select(CASE_ID,SEX,AGEi,RACEi,
+dft1 <- ef2 %>% dplyr::select(CASE_ID,PATIENT_ID, SEX,AGEi,RACEi,
                                HGBADM, WBCADM, PLATELET,
                                INITSCR, TROPADM,ANTIHYPRTNSV,
                                LIPLOWTHRP,ANTIPLT, ANTICOAG,
@@ -356,53 +356,54 @@ table(dft2$Covid_Sev)
 ```
 
 ```{r}
-# ## Converting Units for DDMER, Creatinine,and Troponin
-# 
-# hist(dfor$DDMERU, plot = TRUE)
-# hist(dfor$TROPUADM, plot = TRUE)
-# hist(dfor$SCRUADM, plot =TRUE)
-# 
-# #Convert DDMER factors 2 (u/mL) and 3 (ug/mL) to 1 (ng/mL)
-# 
-# transform(dft1, DDMER_uni=ifelse(DDMERU==1, DDMER*1, 
-#                   ifelse(DDMERU==3, DDMER*1000, DDMER*______ )))
-# 
-# # Convert Creatinine units factor 2 (umol/L) to factor 1 mg/dL
-# dft1<- dft1 %>% mutate(CREATININE_T = case_when(SCRUADM == 1 ~ (INITSCR*1),
-#           SCRUADM == 2 ~ (INITSCR/88.42)))
-# 
-# table(dft1$SCRUADM)
-# hist(dft1$INITSCR)
-# hist(dft1$CREATININE_T)
-# summary(dft1$CREATININE_T)
-# hist(dft1$INITSCR, breaks = 200)
-# hist(dft1$CREATININE_T, breaks = 200)
-# 
-# # 13 patients with over 30 creatinine 
-# dft1 %>% select(SCRUADM, INITSCR, CREATININE_T) %>% filter (CREATININE_T >30) 
-# 
-# 
-# #13 p patients with over 100 Troponin --- Keep them 
-# #Convert Troponin factors 2 (ug/L) and 3(ng/L) to 1 (ng/mL)
-# 
-# dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
-#           TROPUADM == 2 ~ (TROPADM*1),
-#           TROPUADM == 3 ~ (TROPADM*0.001)))
-# 
-# hist(dft1$TROPADM)
-# hist(dft1$TROPOADM_t)
-# summary(dft1$TROPOADM_t)
-# hist(dft1$TROPADM, breaks = 200)
-# hist(dft1$TROPOADM_t, breaks = 200)
-# #10 patients with over 100 Troponin --- Keep them 
-# 
-# dft1 %>% select(TROPADM, TROPUADM, TROPOADM_t) %>% filter (TROPOADM_t > 0.90) 
-# 
-# #Hemoglobin
-# 
-# dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
-#           TROPUADM == 2 ~ (TROPADM*1),
-#           TROPUADM == 3 ~ (TROPADM*0.001)))
+## Converting Units for DDMER, Creatinine,and Troponin
+
+hist(dfor$DDMERU, plot = TRUE)
+hist(dfor$TROPUADM, plot = TRUE)
+hist(dfor$SCRUADM, plot =TRUE)
+
+#Convert DDMER factors 2 (u/mL) and 3 (ug/mL) to 1 (ng/mL)
+
+transform(dft1, DDMER_uni=ifelse(DDMERU==1, DDMER*1,
+                  ifelse(DDMERU==3, DDMER*1000, DDMER*______ ))) ## Conversion Factor for U/ML
+
+
+# Convert Creatinine units factor 2 (umol/L) to factor 1 (mg/dL)
+dft1<- dft1 %>% mutate(CREATININE_T = case_when(SCRUADM == 1 ~ (INITSCR*1),
+          SCRUADM == 2 ~ (INITSCR/88.42)))
+
+table(dft1$SCRUADM)
+hist(dft1$INITSCR)
+hist(dft1$CREATININE_T)
+summary(dft1$CREATININE_T)
+hist(dft1$INITSCR, breaks = 200)
+hist(dft1$CREATININE_T, breaks = 200)
+
+# 13 patients with over 30 creatinine
+dft1 %>% select(SCRUADM, INITSCR, CREATININE_T) %>% filter (CREATININE_T >30)
+
+
+#13 p patients with over 100 Troponin --- Keep them
+#Convert Troponin factors 2 (ug/L) and 3(ng/L) to 1 (ng/mL)
+
+dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
+          TROPUADM == 2 ~ (TROPADM*1),
+          TROPUADM == 3 ~ (TROPADM*0.001)))
+
+hist(dft1$TROPADM)
+hist(dft1$TROPOADM_t)
+summary(dft1$TROPOADM_t)
+hist(dft1$TROPADM, breaks = 200)
+hist(dft1$TROPOADM_t, breaks = 200)
+#10 patients with over 100 Troponin --- Keep them
+
+dft1 %>% select(TROPADM, TROPUADM, TROPOADM_t) %>% filter (TROPOADM_t > 0.90)
+
+#Hemoglobin
+
+dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
+          TROPUADM == 2 ~ (TROPADM*1),
+          TROPUADM == 3 ~ (TROPADM*0.001)))
 
 ```
 ```{r Histograms}
@@ -463,8 +464,7 @@ library(Table1)
 make.table(dat  = dft1,
            strat        = "COVCLINTRIAL",
            cat.varlist  = c("SEX",
-                            # RACEi",
-                            "RACEgroup",
+                            "RACEi",
                             "HISETHNI",
                             "age_group",
                             "psource_group",
@@ -482,8 +482,7 @@ make.table(dat  = dft1,
                             "PATMANICU",
                             "death"),
            cat.header   = c("Sex",
-                            #"Race",
-                            "Race Group",
+                            "Race",
                             "Hispanic Ethnicity",
                             "Age Group",
                             "Payment Source",
