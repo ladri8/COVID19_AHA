@@ -232,3 +232,38 @@ View(docx_file)
 
 ```
 
+```{r}
+
+#Hospitals with <10 Patients
+
+#DS with summary
+dft1 %>% group_by(SRC_FAC_ID) %>% summarise(n_patient = n()) %>%
+  arrange(desc(n_patient)) %>% dplyr::filter(n_patient >= 10)
+
+#DS with all vars (Keepers)
+
+keep_hosp <-dft1 %>% group_by(SRC_FAC_ID) %>% summarise(n_patient = n()) %>%
+  arrange(desc(n_patient)) %>% dplyr::filter(n_patient >= 10)
+
+
+#Filtering out 17 Hospitals that had 10 or less patients 
+
+dim(dft1)
+length(unique(dft1$SRC_FAC_ID))
+
+#Use this DF for regression 
+filthosp <- dft1[dft1$SRC_FAC_ID %in% keep_hosp$SRC_FAC_ID, , drop = FALSE]
+
+dim(filthosp)
+length(unique(filthosp$SRC_FAC_ID))
+```
+```{r}
+
+table(filthosp$PATMANICU, useNA = "ifany")
+
+dim(filthosp) 
+dim(dft1)
+
+
+```
+
