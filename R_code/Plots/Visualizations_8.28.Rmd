@@ -101,7 +101,7 @@ ggplot(dat, aes(RACEi, percent, fill = COVCLINTRIAL)) +
 p1 <- ggplot(data = dat, aes(y= percent, x= reorder(RACEi, -rounded), fill=COVCLINTRIAL)) + 
   geom_bar(stat="identity", width = 0.8) + 
   ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
-  xlab('Race') + ylab('Percentage') +
+  xlab('Race/Ethnicity') + ylab('Percentage') +
   # geom_text(aes(x = RACEi, label = paste0(rounded, '%')), 
   #           colour = 'white',
   #           size= 3,
@@ -109,6 +109,8 @@ p1 <- ggplot(data = dat, aes(y= percent, x= reorder(RACEi, -rounded), fill=COVCL
   labs(fill='Enrolled') +
   theme_classic() + 
   coord_flip()
+
+p1
 
 file1 <- tempfile("file1", fileext = ".png")
 save_plot(file1, p1)
@@ -147,7 +149,7 @@ ggplot(dft1, aes(x= RACEi, group= COVCLINTRIAL)) +
            position = "stack",
            vjust = 0.5) +
       labs(y = "Percent",
-         fill= "COVCLINTRIAL", 
+         fill= "COVCLINTRIAL",
          position = "stack",
          vjust = .5) +
        scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) + 

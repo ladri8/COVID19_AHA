@@ -20,6 +20,10 @@ library(arsenal)
 
 #Select Working Variables and Exclude NAs in COVCLINTRIAL
 
+
+
+
+
 library(dplyr)
 
 dft1 <- ef2 %>% dplyr::select(CASE_ID,SEX,AGEi,RACEi,
@@ -249,11 +253,13 @@ t1 <- make.table(dat  = dft1,
 t1
 
 ```
+
+
 ```{r eval=FALSE, include=FALSE}
 #Using Arsenal
-
-
 library(arsenal)
+library(magrittr)
+tmpdir <- tempdir()
                            
 
 #Add Labels
@@ -288,8 +294,14 @@ tabla <- select(dft1, -c(CASE_ID, PATIENT_ID, SRC_FAC_ID, t1, TROPADM, - TROPUAD
 
 table_1 <-tableby(COVCLINTRIAL ~ ., data = tabla)
 
-summary(table_1, title = "Table 1")
+latabla<-summary(table_1, title = "Table 1", pfootnote = TRUE, digits=3, digits.test=2, nsmall.pct=1)
 
+
+write2word(
+  latabla, paste0(tmpdir, "/test.tableby.doc"), quiet = TRUE,
+  title = "My table 1",      # passed to summary.tableby
+  total = FALSE                 # passed to summary.tableby
+)
 
 
 ```

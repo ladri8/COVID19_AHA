@@ -361,15 +361,13 @@ table(dft2$Covid_Sev)
 ```
 
 ```{r}
+
 #Using Arsenal
 library(arsenal)
 library(magrittr)
 tmpdir <- tempdir()
                            
-
 #Add Labels
-
-dft1$psour
 
 labels(dft1)  <- c( AGEi = 'Age', SEX = "Sex",
                     age_group = "Age Group", RACEi = "Race/Ethnicity",
@@ -388,7 +386,7 @@ labels(dft1)  <- c( AGEi = 'Age', SEX = "Sex",
                     PATMANICU = "Managed in ICU",
                     death = "In-Hospital Death")
 
-tabla <- select(dft1, -c(CASE_ID, PATIENT_ID, SRC_FAC_ID, t1, TROPADM, - TROPUADM, HGBADM, WBCADM, PLATELET, INITSCR, TROPADM,DDMERU, DDMER, SCRUADM,WBCUADM, PSOURCE_01, PSOURCE_02,PSOURCE_03,PSOURCE_04,PSOURCE_05,PSOURCE_07, PSOURCE_09,
+tabla <- select(dft1, -c(CASE_ID, PATIENT_ID, SRC_FAC_ID, TROPADM, - TROPUADM, HGBADM, WBCADM, PLATELET, INITSCR, TROPADM,DDMERU, DDMER, SCRUADM,WBCUADM, PSOURCE_01, PSOURCE_02,PSOURCE_03,PSOURCE_04,PSOURCE_05,PSOURCE_07, PSOURCE_09,
                          DISDATE,DSCHSTAT, ADMDT,DEATHDT,PSOURCE_01,
                                PSOURCE_02,PSOURCE_03,PSOURCE_04,
                                PSOURCE_05, PSOURCE_06, PSOURCE_07,
