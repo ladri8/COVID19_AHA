@@ -47,7 +47,7 @@ library(ggplot2)
 
 melted<-melt(dft1$RACEi, dft1$COVCLINTRIAL, id=PATIENT_ID )
 
-#With Denominator  
+#Manipulating DAta With Denominator  
 
 dat <-dft1 %>%
   select(RACEi, COVCLINTRIAL) %>%

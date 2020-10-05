@@ -293,14 +293,16 @@ dft1$PSOURCE_09 <- as.factor(dft1$PSOURCE_09)
 dft1 <- dft1 %>% mutate(age_group = case_when(AGEi > 64 ~ '>64',
                                              AGEi >= 50 & AGEi <= 64 ~ '50-64',
                                              AGEi < 50 ~ '<50'))
-#Create psource_grouped
+#Create psource_group
 
-dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 | PSOURCE_02 == 1 |PSOURCE_06 ==1 ~ "Medicaid",
-                                                  PSOURCE_05 == 1 ~ "Medicare",
-                                                  PSOURCE_03 ==1 | PSOURCE_07 == 1 ~ "Other",
-                                                  PSOURCE_04 == 1 ~ "Self pay",
-                                                  is.na(PSOURCE_04) == TRUE  | PSOURCE_09 == 1 ~ "Unknown"))
-# Create Death Vars with AHA Logic
+dft1 <- dft1 %>% mutate(psource_group = case_when((is.na(PSOURCE_04) == TRUE) | (PSOURCE_09 == 1) ~ "Unknown",
+  (PSOURCE_04 == 1) ~ "Self pay",
+  (PSOURCE_03 == 1) | (PSOURCE_07 == 1) ~ "Other",
+  (PSOURCE_05 == 1) ~ "Medicare",
+  (PSOURCE_01 == 1) | (PSOURCE_02 == 1)|(PSOURCE_06 ==1) ~ "Medicaid"))
+
+ 
+# Create Death Var with AHA Logic
 
 dft1 <- dft1 %>% mutate(death = ifelse(!is.na(DISDATE) == TRUE & DSCHSTAT == 6 , 1, 0))
 dft1$death <- as.factor(dft1$death)
@@ -356,6 +358,7 @@ table(dft2$Covid_Sev)
 ```
 
 ```{r}
+
 ## Converting Units for DDMER, Creatinine,and Troponin
 
 hist(dfor$DDMERU, plot = TRUE)
@@ -364,13 +367,19 @@ hist(dfor$SCRUADM, plot =TRUE)
 
 #Convert DDMER factors 2 (u/mL) and 3 (ug/mL) to 1 (ng/mL)
 
-transform(dft1, DDMER_uni=ifelse(DDMERU==1, DDMER*1,
-                  ifelse(DDMERU==3, DDMER*1000, DDMER*______ ))) ## Conversion Factor for U/ML
+DDMER_uni<-transform(dft1, DDMER_uni=ifelse(DDMERU==1, DDMER*1,
+                  ifelse(DDMERU==3, DDMER*1000,
+                         ifelse( DDMERU== 2, DDMER*1000, DDMERU )))) ## Conversion Factor for U/ML
 
-
+ 
 # Convert Creatinine units factor 2 (umol/L) to factor 1 (mg/dL)
 dft1<- dft1 %>% mutate(CREATININE_T = case_when(SCRUADM == 1 ~ (INITSCR*1),
           SCRUADM == 2 ~ (INITSCR/88.42)))
+
+
+
+
+
 
 table(dft1$SCRUADM)
 hist(dft1$INITSCR)
@@ -406,6 +415,10 @@ dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
           TROPUADM == 3 ~ (TROPADM*0.001)))
 
 ```
+
+
+
+
 ```{r Histograms}
 
 # Plotting Histograms of Continuous Vars Using Data Explorer
@@ -448,79 +461,75 @@ hist(dft1$AGEi, breaks= 20, plot = TRUE)
 qqnorm(dft1$AGEi)
 summary(dft1$AGEi)
 
-#Quick Tables
-
-
-
 ```
 
 ```{r}
-### Installing Table1 package from E Wozniak
-
-#install_github("emwozniak/Table1")
-library(Table1)
-
-
-make.table(dat  = dft1,
-           strat        = "COVCLINTRIAL",
-           cat.varlist  = c("SEX",
-                            "RACEi",
-                            "HISETHNI",
-                            "age_group",
-                            "psource_group",
-                            "MEDHISTO_01",
-                            "MEDHISTO_02",
-                            "MEDHISTO_08",
-                            "MEDHISTO_09",
-                            "MEDHISTO_11",
-                            "MEDHISTO_12",
-                             "ANTIHYPRTNSV",
-                            "LIPLOWTHRP",
-                            "ANTIPLT",
-                            "ANTICOAG",
-                            "ANTIHYPRGLYM", 
-                            "PATMANICU",
-                            "death"),
-           cat.header   = c("Sex",
-                            "Race",
-                            "Hispanic Ethnicity",
-                            "Age Group",
-                            "Payment Source",
-                            "Atrial Fibrilation",
-                            "Atrial Flutter",
-                            "Diabetes Mellitus",
-                            "Dyslipidemia", 
-                            "Heart Failure",
-                            "Hypertension",
-                             "Antihypertensive", 
-                            "Lipid-lowering Therapy",
-                            "Antiplatelet",
-                            "Anticoagulant",
-                            "Anti-Hyperglycemic",
-                            "Managed in ICU",
-                            "Death"),
-           cat.rmstat   = list(c("row"), c("col")),
-           cat.ptype    = "chisq",
-           cont.varlist = c("AGEi",
-                            # "HGBADM",
-                            # "WBCADM",
-                            # "PLATELET",
-                            # "INITSCR",
-                            # "TROPADM",
-                            # "DDMER",
-                            "DISDATE"),
-           cont.header =  c("Age", 
-                            # "Hemoglobin",
-                            # "WBC",
-                            # "Platelet",
-                            # "Creatinine", 
-                            # "Troponin",
-                            # "D-dimer",
-                            "Length of Hospitalization"),
-           cont.ptype   = c("wilcox"),
-           colnames     = c("Variable", "Enrolled", "Not Enrolled", "Overall", "P-value"),output = "html")
-
-
+# ### Installing Table1 package from E Wozniak
+# 
+# #install_github("emwozniak/Table1")
+# library(Table1)
+# 
+# 
+# make.table(dat  = dft1,
+#            strat        = "COVCLINTRIAL",
+#            cat.varlist  = c("SEX",
+#                             "RACEi",
+#                             "HISETHNI",
+#                             "age_group",
+#                             "psource_group",
+#                             "MEDHISTO_01",
+#                             "MEDHISTO_02",
+#                             "MEDHISTO_08",
+#                             "MEDHISTO_09",
+#                             "MEDHISTO_11",
+#                             "MEDHISTO_12",
+#                              "ANTIHYPRTNSV",
+#                             "LIPLOWTHRP",
+#                             "ANTIPLT",
+#                             "ANTICOAG",
+#                             "ANTIHYPRGLYM", 
+#                             "PATMANICU",
+#                             "death"),
+#            cat.header   = c("Sex",
+#                             "Race",
+#                             "Hispanic Ethnicity",
+#                             "Age Group",
+#                             "Payment Source",
+#                             "Atrial Fibrilation",
+#                             "Atrial Flutter",
+#                             "Diabetes Mellitus",
+#                             "Dyslipidemia", 
+#                             "Heart Failure",
+#                             "Hypertension",
+#                              "Antihypertensive", 
+#                             "Lipid-lowering Therapy",
+#                             "Antiplatelet",
+#                             "Anticoagulant",
+#                             "Anti-Hyperglycemic",
+#                             "Managed in ICU",
+#                             "Death"),
+#            cat.rmstat   = list(c("row"), c("col")),
+#            cat.ptype    = "chisq",
+#            cont.varlist = c("AGEi",
+#                             # "HGBADM",
+#                             # "WBCADM",
+#                             # "PLATELET",
+#                             # "INITSCR",
+#                             # "TROPADM",
+#                             # "DDMER",
+#                             "DISDATE"),
+#            cont.header =  c("Age", 
+#                             # "Hemoglobin",
+#                             # "WBC",
+#                             # "Platelet",
+#                             # "Creatinine", 
+#                             # "Troponin",
+#                             # "D-dimer",
+#                             "Length of Hospitalization"),
+#            cont.ptype   = c("wilcox"),
+#            colnames     = c("Variable", "Enrolled", "Not Enrolled", "Overall", "P-value"),output = "html")
+# 
+# 
 
 ```
 
@@ -535,40 +544,40 @@ racetab2<-addmargins(racetab)
 ```
 ```{r}
 #Descriptives for all the Variables Overall
-dt<-ExpCTable(dft1,
-              Target=NULL,
-              clim=9,
-              nlim=15,
-              round=2,
-              bin=NULL,
-              per=TRUE)
-
-#Table for all Variables 
-kable(dt) %>%
-  kable_styling(bootstrap_options = c("striped",
-                                      "hover",
-                                      "condensed"))
-
-#For all Variables Group by CLINTRIAL
-
-ExpCTable(dft1, 
-          Target = "COVCLINTRIAL", margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
-
-#Numerical Summary by Var Grouped by Enrollment in Clinical Trials
-
-dtnum<-ExpCustomStat(dft1,Cvar = c("COVCLINTRIAL"),
-                     Nvar=c("AGEi", "HGBADM", "WBCADM",     
-                            "PLATELET","INITSCR", "TROPADM",
-                            "DDMER", "TROPADM", "INITSCR"),
-                     stat = c('Count','Prop','mean',"sd",'median', "IQR", "min",'max'),
-                     gpby=FALSE, dcast = FALSE)
-
-#Table for Numeric Variables by Enrollment in Clinical Trials
-
-kable(dtnum) %>%
-  kable_styling(bootstrap_options = c("striped",
-                                      "hover",
-                                      "condensed"))
+# dt<-ExpCTable(dft1,
+#               Target=NULL,
+#               clim=9,
+#               nlim=15,
+#               round=2,
+#               bin=NULL,
+#               per=TRUE)
+# 
+# #Table for all Variables 
+# kable(dt) %>%
+#   kable_styling(bootstrap_options = c("striped",
+#                                       "hover",
+#                                       "condensed"))
+# 
+# #For all Variables Group by CLINTRIAL
+# 
+# ExpCTable(dft1, 
+#           Target = "COVCLINTRIAL", margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
+# 
+# #Numerical Summary by Var Grouped by Enrollment in Clinical Trials
+# 
+# dtnum<-ExpCustomStat(dft1,Cvar = c("COVCLINTRIAL"),
+#                      Nvar=c("AGEi", "HGBADM", "WBCADM",     
+#                             "PLATELET","INITSCR", "TROPADM",
+#                             "DDMER", "TROPADM", "INITSCR"),
+#                      stat = c('Count','Prop','mean',"sd",'median', "IQR", "min",'max'),
+#                      gpby=FALSE, dcast = FALSE)
+# 
+# #Table for Numeric Variables by Enrollment in Clinical Trials
+# 
+# kable(dtnum) %>%
+#   kable_styling(bootstrap_options = c("striped",
+#                                       "hover",
+#                                       "condensed"))
 
 ```
 

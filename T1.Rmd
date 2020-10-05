@@ -134,12 +134,15 @@ dft1 <- dft1 %>% mutate(age_group = case_when(AGEi > 64 ~ '>64',
                                              AGEi < 50 ~ '<50'))
 #Create psource_grouped
 
-dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 | PSOURCE_02 == 1 | PSOURCE_06 == 1 ~
-                                                  "Medicaid",
-                                                  PSOURCE_05 == 1 ~ "Medicare",
-                                                  PSOURCE_03 == 1 | PSOURCE_07 == 1 ~ "Other",
-                                                  PSOURCE_04 == 1 ~ "Self pay",
-                                                  is.na(PSOURCE_04) == TRUE | PSOURCE_09 == 1 ~ "Other"))
+table(dft1$PSOURCE_01)
+table(dft1$PSOURCE_02)
+table(dft1$PSOURCE_06)
+
+dft1 <- dft1 %>% mutate(psource_group = case_when((is.na(PSOURCE_04) == TRUE) | (PSOURCE_09 == 1) ~ "Unknown",
+  (PSOURCE_04 == 1) ~ "Self pay",
+  (PSOURCE_03 == 1) | (PSOURCE_07 == 1) ~ "Other",
+  (PSOURCE_05 == 1) ~ "Medicare",
+  (PSOURCE_01 == 1) | (PSOURCE_02 == 1)|(PSOURCE_06 ==1) ~ "Medicaid"))
 
 # Create Death Vars with AHA Logic
 

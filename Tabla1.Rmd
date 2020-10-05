@@ -366,7 +366,8 @@ table(dft2$Covid_Sev)
 library(arsenal)
 library(magrittr)
 tmpdir <- tempdir()
-                           
+                        
+   
 #Add Labels
 
 labels(dft1)  <- c( AGEi = 'Age', SEX = "Sex",
@@ -386,6 +387,8 @@ labels(dft1)  <- c( AGEi = 'Age', SEX = "Sex",
                     PATMANICU = "Managed in ICU",
                     death = "In-Hospital Death")
 
+
+
 tabla <- select(dft1, -c(CASE_ID, PATIENT_ID, SRC_FAC_ID, TROPADM, - TROPUADM, HGBADM, WBCADM, PLATELET, INITSCR, TROPADM,DDMERU, DDMER, SCRUADM,WBCUADM, PSOURCE_01, PSOURCE_02,PSOURCE_03,PSOURCE_04,PSOURCE_05,PSOURCE_07, PSOURCE_09,
                          DISDATE,DSCHSTAT, ADMDT,DEATHDT,PSOURCE_01,
                                PSOURCE_02,PSOURCE_03,PSOURCE_04,
@@ -394,17 +397,41 @@ tabla <- select(dft1, -c(CASE_ID, PATIENT_ID, SRC_FAC_ID, TROPADM, - TROPUADM, H
                                SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
                                HOSPVENT, SCRUADM,TROPUADM, DDMERU, HGBUADM,
                               WBCUADM, RACEgroup, PATMANICUDT))
+# 
+# table_1 <-tableby(COVCLINTRIAL ~ ., data = tabla)
+# 
+# latabla<-summary(table_1, title = "Table 1", pfootnote = TRUE, digits=3, digits.test=2, nsmall.pct=1)
+# 
+# 
+# write2word(
+#   latabla, paste0(tmpdir, "/test.tableby.doc"), quiet = TRUE,
+#   title = "My table 1",      # passed to summary.tableby
+#   total = FALSE                 # passed to summary.tableby
+# )
 
-table_1 <-tableby(COVCLINTRIAL ~ ., data = tabla)
-
-latabla<-summary(table_1, title = "Table 1", pfootnote = TRUE, digits=3, digits.test=2, nsmall.pct=1)
+```
 
 
-write2word(
-  latabla, paste0(tmpdir, "/test.tableby.doc"), quiet = TRUE,
-  title = "My table 1",      # passed to summary.tableby
-  total = FALSE                 # passed to summary.tableby
-)
+```{r}
+
+
+tabla1 <-tabla %>% tbl_summary(by = COVCLINTRIAL, digits = list(everything() ~ 1), type = list(starts_with(("MEDHISTO")) ~ "dichotomous"), missing = "always", missing_text = "(Missing)") %>% add_p(list(all_continuous() ~ "wilcox.test", all_categorical() ~ "chisq.test")) %>% add_overall() %>% add_stat_label()
+
+
+
+#Export table into Word
+tabla1_flextab <- as_flex_table(tabla1,
+                                  include = everything(),
+                                  return_calls = FALSE,
+                                  strip_md_bold = TRUE)
+
+#Save as a Doc file
+docx_file <- tempfile(fileext = ".docx")
+
+save_as_docx("Table1" = tabla1_flextab,
+              path = docx_file)
+
+View(docx_file)
 
 ```
 
