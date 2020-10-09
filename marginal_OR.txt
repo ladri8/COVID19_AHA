@@ -1,0 +1,6 @@
+      (Intercept)         SEXFemale RACEgroupHispanic    RACEgroupBlack 
+        9.8519767         1.1408154         0.8046157         1.0018153 
+   RACEgroupOther RACEgroupAsian_PI      RACEgroupUTD              AGEi 
+        0.3071115         0.9103645         1.0408554         1.0057075 
+           death1      PATMANICUYes 
+        1.4151061         0.3748086 
