@@ -1,0 +1,7 @@
+                        2.5 %   Estimate     97.5 %
+(Intercept)       19.59762862 35.2543866 63.4194984
+RACEgroupHispanic  0.56223821  0.7048354  0.8835987
+RACEgroupBlack     0.76717176  0.9815947  1.2559484
+RACEgroupOther     0.06667386  0.1593794  0.3809856
+RACEgroupAsian_PI  0.56536964  0.8315389  1.2230175
+RACEgroupUTD       0.62639499  0.9636918  1.4826137
