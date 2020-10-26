@@ -1,0 +1,37 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: COVCLINTRIAL ~ SEX + RACEgroup + age_group + death + PATMANICU +      psource_group + (1 | SRC_FAC_ID)
+   Data: filthosp
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+  3613.7   3726.4  -1790.9   3581.7     8423 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-18.1600   0.0660   0.1278   0.2314   1.9947 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ SRC_FAC_ID (Intercept) 3.952    1.988   
+Number of obs: 8439, groups:  SRC_FAC_ID, 69
+
+Fixed effects:
+                      Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            4.14293    0.31212  13.274  < 2e-16 ***
+SEXFemale              0.15427    0.09099   1.695 0.089982 .  
+RACEgroupHispanic     -0.34669    0.12417  -2.792 0.005236 ** 
+RACEgroupBlack        -0.02544    0.13003  -0.196 0.844874    
+RACEgroupOther        -1.72372    0.47708  -3.613 0.000303 ***
+RACEgroupAsian_PI     -0.12496    0.20308  -0.615 0.538348    
+RACEgroupUTD           0.06573    0.22881   0.287 0.773906    
+age_group>64           0.08763    0.12649   0.693 0.488421    
+age_group50-64        -0.32116    0.11473  -2.799 0.005121 ** 
+death1                 0.44874    0.13629   3.293 0.000993 ***
+PATMANICUYes          -1.33675    0.10193 -13.115  < 2e-16 ***
+psource_groupMedicare  0.13471    0.15758   0.855 0.392627    
+psource_groupOther    -0.21129    0.11144  -1.896 0.057952 .  
+psource_groupSelf pay -0.16004    0.18708  -0.855 0.392306    
+psource_groupUnknown  -0.01977    0.24152  -0.082 0.934747    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

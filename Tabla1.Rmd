@@ -298,14 +298,13 @@ dft1$PSOURCE_09 <- as.factor(dft1$PSOURCE_09)
 dft1 <- dft1 %>% mutate(age_group = case_when(AGEi > 64 ~ '>64',
                                              AGEi >= 50 & AGEi <= 64 ~ '50-64',
                                              AGEi < 50 ~ '<50'))
-#Create psource_grouped
+#Create psource_group
 
-dft1 <- dft1 %>% mutate(psource_group = case_when(PSOURCE_01 == 1 | PSOURCE_02 == 1 |PSOURCE_06 ==1 ~ "Medicaid",
-                                                  PSOURCE_05 == 1 ~ "Medicare",
-                                                  PSOURCE_03 ==1 | PSOURCE_07 == 1 ~ "Other",
-                                                  PSOURCE_04 == 1 ~ "Self pay",
-                                                  is.na(PSOURCE_04) == TRUE  | PSOURCE_09 == 1 ~ "Unknown"))
-# Create Death Vars with AHA Logic
+dft1 <- dft1 %>% mutate(psource_group = case_when((is.na(PSOURCE_04) == TRUE) | (PSOURCE_09 == 1) ~ "Unknown",
+  (PSOURCE_04 == 1) ~ "Self pay",
+  (PSOURCE_03 == 1) | (PSOURCE_07 == 1) ~ "Other",
+  (PSOURCE_05 == 1) ~ "Medicare",
+  (PSOURCE_01 == 1) | (PSOURCE_02 == 1)|(PSOURCE_06 ==1) ~ "Medicaid"))
 
 dft1 <- dft1 %>% mutate(death = ifelse(!is.na(DISDATE) == TRUE & DSCHSTAT == 6 , 1, 0))
 dft1$death <- as.factor(dft1$death)
@@ -371,8 +370,10 @@ tmpdir <- tempdir()
 #Add Labels
 
 labels(dft1)  <- c( AGEi = 'Age', SEX = "Sex",
-                    age_group = "Age Group", RACEi = "Race/Ethnicity",
-                    HISETHNI = "Hispanic Ethnicity", psource_group = "Payment Source",
+                    age_group = "Age Group", 
+                    RACEi = "Race/Ethnicity",
+                    HISETHNI = "Hispanic Ethnicity",
+                    psource_group = "Payment Source",
                     MEDHISTO_01 = "Atrial Fibrilation",
                     MEDHISTO_02 = "Atrial Flutter",
                     MEDHISTO_08 = "Diabetes Mellitus",
@@ -397,27 +398,31 @@ tabla <- select(dft1, -c(CASE_ID, PATIENT_ID, SRC_FAC_ID, TROPADM, - TROPUADM, H
                                SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
                                HOSPVENT, SCRUADM,TROPUADM, DDMERU, HGBUADM,
                               WBCUADM, RACEgroup, PATMANICUDT))
-# 
-# table_1 <-tableby(COVCLINTRIAL ~ ., data = tabla)
-# 
-# latabla<-summary(table_1, title = "Table 1", pfootnote = TRUE, digits=3, digits.test=2, nsmall.pct=1)
-# 
-# 
-# write2word(
-#   latabla, paste0(tmpdir, "/test.tableby.doc"), quiet = TRUE,
-#   title = "My table 1",      # passed to summary.tableby
-#   total = FALSE                 # passed to summary.tableby
-# )
+
+#Rearrange order of variables to appear in Table
+
+tabla<-tabla %>% dplyr::select(COVCLINTRIAL, AGEi, age_group, SEX,RACEi, HISETHNI, psource_group, 
+                               MEDHISTO_01, MEDHISTO_02, MEDHISTO_08, MEDHISTO_09,
+                               MEDHISTO_11, MEDHISTO_12, ANTIHYPRTNSV, LIPLOWTHRP,
+                               ANTIPLT, ANTICOAG, ANTIHYPRGLYM,PATMANICU, death )
 
 ```
 
 
 ```{r}
+tabla1 <- tabla %>% tbl_summary(by = COVCLINTRIAL,
+                               digits = list(everything() ~ 1),
+                               type = list(starts_with(("MEDHISTO")) ~ "categorical"),
+                               missing = "always",
+                               missing_text = "(Missing)") %>%
+                              add_p(list(all_continuous() ~ "wilcox.test", all_categorical() ~ "chisq.test")) %>% 
+                              add_overall() %>% 
+                              add_stat_label() %>%
+                              modify_header(update = list(label ~ "**Variable**"))%>%
+                              modify_spanning_header(c("stat_1", "stat_2") ~ "**Enrolled in Clinical Trials**")
 
 
-tabla1 <-tabla %>% tbl_summary(by = COVCLINTRIAL, digits = list(everything() ~ 1), type = list(starts_with(("MEDHISTO")) ~ "dichotomous"), missing = "always", missing_text = "(Missing)") %>% add_p(list(all_continuous() ~ "wilcox.test", all_categorical() ~ "chisq.test")) %>% add_overall() %>% add_stat_label()
-
-
+tabla1
 
 #Export table into Word
 tabla1_flextab <- as_flex_table(tabla1,
@@ -435,4 +440,36 @@ View(docx_file)
 
 ```
 
+```{r}
+tablafilt <- select(filthosp, -c(CASE_ID, PATIENT_ID, SRC_FAC_ID, TROPADM, - TROPUADM, HGBADM, WBCADM, PLATELET, INITSCR, TROPADM,DDMERU, DDMER, SCRUADM,WBCUADM, PSOURCE_01, PSOURCE_02,PSOURCE_03,PSOURCE_04,PSOURCE_05,PSOURCE_07, PSOURCE_09,
+                         DISDATE,DSCHSTAT, ADMDT,DEATHDT,PSOURCE_01,
+                               PSOURCE_02,PSOURCE_03,PSOURCE_04,
+                               PSOURCE_05, PSOURCE_06, PSOURCE_07,
+                               PSOURCE_09, CARDARR, SHKMGMT_01,
+                               SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
+                               HOSPVENT, SCRUADM,TROPUADM, DDMERU, HGBUADM,
+                              WBCUADM, RACEgroup, PATMANICUDT))
+
+#Rearrange order of variables to appear in Table
+
+tablafilt<-tablafilt %>% dplyr::select(COVCLINTRIAL, AGEi, age_group, SEX,RACEi, HISETHNI, psource_group, 
+                               MEDHISTO_01, MEDHISTO_02, MEDHISTO_08, MEDHISTO_09,
+                               MEDHISTO_11, MEDHISTO_12, ANTIHYPRTNSV, LIPLOWTHRP,
+                               ANTIPLT, ANTICOAG, ANTIHYPRGLYM,PATMANICU, death )
+
+
+tabla2 <- tablafilt %>% tbl_summary(by = COVCLINTRIAL,
+                               digits = list(everything() ~ 1),
+                               type = list(starts_with(("MEDHISTO")) ~ "categorical"),
+                               missing = "always",
+                               missing_text = "(Missing)") %>%
+                              add_p(list(all_continuous() ~ "wilcox.test", all_categorical() ~ "chisq.test")) %>% 
+                              add_overall() %>% 
+                              add_stat_label() %>%
+                              modify_header(update = list(label ~ "**Variable**"))%>%
+                              modify_spanning_header(c("stat_1", "stat_2") ~ "**Enrolled in Clinical Trials**")
+
+
+tabla2
+```
 

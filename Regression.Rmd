@@ -10,10 +10,14 @@ output:
 ```{r setup, include=FALSE}
 library(dplyr)
 knitr::opts_chunk$set(echo = TRUE)
+library(gtsummary)
+library(dplyr)
+library(lme4)
+
 
 ```
 
-## Setting Reference Levels 
+## 
 ```{r}
 
 # Change reference level for RACEi to Non-Hispanc White
@@ -53,7 +57,7 @@ dft1$RACEgroup <- fct_collapse(dft1$RACEi,
 
 #Hospitals with <10 Patients 
 dft1 %>% 
-  select(COVCLINTRIAL, AGEi, SEX, RACEgroup, SRC_FAC_ID) %>%         
+  select(COVCLINTRIAL, AGEi, SEX, RACEgroup,psource_group, SRC_FAC_ID) %>%         
   group_by(SRC_FAC_ID) %>% 
   summarise(n_hosp = n()) %>% 
   arrange(desc(n_hosp)) %>% 
@@ -83,92 +87,86 @@ filthosp <- dft1[dft1$SRC_FAC_ID %in% keep_hosp$SRC_FAC_ID, , drop = FALSE]
 dim(filthosp)
 length(unique(filthosp$SRC_FAC_ID))
 
-```
-
-
-## Regression Model 
-
-```{r}
-#Filtered Model by Hospitals with >10 entries 
-
-library(gtsummary)
-library(dplyr)
-library(lme4)
-
-# # estimate the model and store results in m
-# 
-# m_filtered <- glmer(COVCLINTRIAL ~ SEX + AGEi + factor(RACEi) + (1 | SRC_FAC_ID ),
-#                     data = filthosp,
-#                     family = binomial, nAGQ = 1)
-# 
-# # Model Summary: 
-# summary(m_filtered)
-# 
-# #Table
-# 
-# model_tab<- m_filtered %>% tbl_regression(exponentiate = TRUE ) %>% bold_labels() %>% bold_p(t= 0.05) %>% add_nevent()
-# 
-# model_tab <- as_flex_table(model_tab, include = everything(),return_calls = FALSE, strip_md_bold = TRUE)
+table(filthosp$COVCLINTRIAL)
 
 ```
 
 #Data Processing and Reference Levels: 
 
 ```{r}
-
 library(flextable)
 library(officer)
 library(forcats)
 
 ## Check # of NA's: 
-table(filthosp$PATMANICU, useNA = "ifany")
+#table(filthosp$PATMANICU, useNA = "ifany")
 
+filthosp$PATMANICU <- factor(filthosp$PATMANICU, levels = c("1", "2"),
+                            labels=c( "Yes", "No"))
+filthosp = filthosp %>%
+           mutate(PATMANICU = relevel(PATMANICU, "No"))# 2-not managed in ICU
+ 
 filthosp$PATMANICU <- fct_explicit_na(filthosp$PATMANICU)
 filthosp$PATMANICU <- fct_explicit_na(filthosp$PATMANICU, "Miss")
 
 #Reference Levels for Acuity and Death and Race
 
-filthosp = filthosp %>%
-           mutate(PATMANICU = relevel(PATMANICU, "2")) # 2-not managed in ICU
 filthosp = filthosp %>% 
            mutate(death = relevel(death, "0"))# 0-No death
+
 filthosp = filthosp %>% mutate(RACEgroup = relevel(RACEgroup,"NHWhite"))
 
-#Renaming Levels for PATMANICU 
+filthosp = filthosp %>% mutate(COVCLINTRIAL = relevel(COVCLINTRIAL, "Yes"))
 
-# Rename by name: change "beta" to "two"
-levels(filthosp$PATMANICU) 
-
-#Ensuring Hospital ID is a factor
+#Ensuring Hospital ID and age_group is a factor
 filthosp$SRC_FAC_ID <- as.factor(filthosp$SRC_FAC_ID)
+filthosp$age_group <- as.factor(filthosp$age_group)
+
+#Set >64 in age_group as reference level 
+filthosp = filthosp %>% mutate(age_group = relevel(age_group, ">64"))
+
+table(filthosp$COVCLINTRIAL)
+contrasts(filthosp$COVCLINTRIAL)
 
 ```
 
-```{r}
-#Fit model and store results in fit
+#Regression Model (no psource)
 
-fit <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + AGEi + death + PATMANICU + (1 | SRC_FAC_ID ),
+```{r}
+
+fit <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + AGEi + death + PATMANICU + (1|SRC_FAC_ID ),
              data = filthosp,
              family = binomial,
              nAGQ = 1, 
              control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5)))
 
-
 #Model Summary
 summary(fit)
 
-#Using Sink to get the Raw Outputs
+#oddsratios.glmm <- exp(1)^fixef(fit)
+#print(oddsratios.glmm)
+
+contrasts(filthosp$PATMANICU)
+contrasts(filthosp$COVCLINTRIAL)
+contrasts(filthosp$SEX)
+contrasts(filthosp$RACEgroup)
+contrasts(filthosp$age_group)
+
+#Save raw output in txt
 sink("mixed_model_raw.txt")
 print(summary(fit))
 sink()
 
 #Put Summary into Table 
+
 library(gtsummary)
 
 fmodel_tab <- fit %>%
   tbl_regression(exponentiate = TRUE ) %>%
   bold_labels() %>%
   bold_p(t= 0.05)
+
+#Model Table 
 
 fmodel_tab
 
@@ -183,6 +181,53 @@ fmodel_flextab <- as_flex_table(fmodel_tab,
 docx_file <- tempfile(fileext = ".docx")
 
 save_as_docx("Model" = fmodel_flextab,
+              path = docx_file)
+
+View(docx_file)
+
+
+```
+
+#Regression Model + Payment Source
+```{r}
+
+fit2 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death + PATMANICU + psource_group + (1|SRC_FAC_ID ),
+             data = filthosp,
+             family = binomial,
+             nAGQ = 1, 
+             control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5)))
+
+summary(fit2)
+
+#Save raw output in txt
+sink("mixed_model_raw.txt")
+print(summary(fit2))
+sink()
+
+#Put Summary into Table 
+
+library(gtsummary)
+
+f2model_tab <- fit2 %>%
+  tbl_regression(exponentiate = TRUE ) %>%
+  bold_labels() %>%
+  bold_p(t= 0.05)
+
+#Model Table 
+
+f2model_tab
+
+#Export table into Word
+
+f2model_flextab <- as_flex_table(f2model_tab,
+                                  include = everything(),
+                                  return_calls = FALSE,
+                                  strip_md_bold = TRUE)
+
+#Save as a Doc file
+docx_file <- tempfile(fileext = ".docx")
+
+save_as_docx("Model2" = f2model_flextab,
               path = docx_file)
 
 View(docx_file)
@@ -216,6 +261,8 @@ minadj_tab <- minadj_fit %>%
   bold_labels() %>%
   bold_p(t= 0.05)
 
+minadj_tab
+
 #Export table into Word
 minadj_flextab <- as_flex_table(minadj_tab,
                                   include = everything(),
@@ -232,38 +279,85 @@ View(docx_file)
 
 ```
 
+#Conditional vs Marginal Coefficients
 ```{r}
+# 
+# fm<-mixed_model(fixed = COVCLINTRIAL ~ SEX + RACEgroup + AGEi + death + PATMANICU, random = ~ 1 | SRC_FAC_ID,
+#              data = filthosp,
+#              family = binomial())
+# summary(fm)
+# 
+# #Getting Conditional Odds Ratio
+# conditionalOR<-exp(confint(fm, level = 0.95))
+# 
+# conditionalOR
+# 
+# sink("conditional_OR_mixed_model.txt")
+# print(conditionalOR)
+# sink()
+# 
+# marginals<-marginal_coefs(fm, std_errors = TRUE, cores = 3)
+# 
+# marginals
+# 
+# MarginalOR95<- exp(confint(marginals, level = 0.95))
+# 
+# MarginalOR95
+# 
+# #Using Sink to get the Raw Outputs
+# sink("marginal_OR95.txt")
+# print(MarginalOR95)
+# sink()
+# 
+# 
+# MarginalOR<-exp(coef(marginals))
+# 
+# #Using Sink to get the Raw Outputs
+# sink("marginal_OR.txt")
+# print(MarginalOR)
+# sink()
+# 
+# 
+# #Using Sink to get the Raw Outputs
+# sink("marginal_coefficients_mixed_model.txt")
+# print(marginals)
+# sink()
+# 
+# ```
+# 
+# ```{r}
+# ## Unadjusted Odds Ratios 
+# 
+# ##Question: Keep clustering by hospital?
+# 
+# #RACEgroup
+# 
+# unadj<-mixed_model(fixed = COVCLINTRIAL ~ RACEgroup,
+#             random = ~ 1 | SRC_FAC_ID,
+#             data = filthosp,
+#             family = binomial())
+# 
+# summary(unadj)
+# 
+# #Getting Conditional Odds Ratio
+# conditionalOR<-exp(confint(unadj, level = 0.95))
+# 
+# conditionalOR
+# 
+# conOR<-round(conditionalOR,2)
+# 
+# sink("conditional_OR_unadj_RACEgroup.txt")
+# print(conOR)
+# sink()
+# 
+# marginals<-marginal_coefs(fm, std_errors = TRUE, cores = 3)
+# 
+# marginals
+# 
+# MarginalOR95<- exp(confint(marginals, level = 0.95))
+# 
+# MarginalOR95
 
-#Hospitals with <10 Patients
-
-#DS with summary
-dft1 %>% group_by(SRC_FAC_ID) %>% summarise(n_patient = n()) %>%
-  arrange(desc(n_patient)) %>% dplyr::filter(n_patient >= 10)
-
-#DS with all vars (Keepers)
-
-keep_hosp <-dft1 %>% group_by(SRC_FAC_ID) %>% summarise(n_patient = n()) %>%
-  arrange(desc(n_patient)) %>% dplyr::filter(n_patient >= 10)
-
-
-#Filtering out 17 Hospitals that had 10 or less patients 
-
-dim(dft1)
-length(unique(dft1$SRC_FAC_ID))
-
-#Use this DF for regression 
-filthosp <- dft1[dft1$SRC_FAC_ID %in% keep_hosp$SRC_FAC_ID, , drop = FALSE]
-
-dim(filthosp)
-length(unique(filthosp$SRC_FAC_ID))
 ```
-```{r}
 
-table(filthosp$PATMANICU, useNA = "ifany")
-
-dim(filthosp) 
-dim(dft1)
-
-
-```
 

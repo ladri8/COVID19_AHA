@@ -130,6 +130,8 @@ p2 <- ggplot(data = byrace, aes(y= percent, x= reorder(RACEi, -percent), fill=CO
   theme_classic() + 
   coord_flip()
 
+p2
+
 file1 <- tempfile("file1", fileext = ".png")
 save_plot(file1, p2)
 View(file1)
