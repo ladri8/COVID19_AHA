@@ -1,48 +1,74 @@
 Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
  Family: binomial  ( logit )
-Formula: COVCLINTRIAL ~ SEX + RACEgroup + age_group + death + PATMANICU +      (1 | SRC_FAC_ID)
+Formula: COVCLINTRIAL ~ SEX + RACEgroup + age_group + death + psource_group +      region + BMIgroup + HOSPVENT + PATMANICU + fibandflutter +  
+    MEDHISTO_03 + MEDHISTO_07 + MEDHISTO_08 + MEDHISTO_09 + MEDHISTO_12 +  
+    MEDHISTO_13 + MEDHISTO_14 + MEDHISTO_15 + MEDHISTO_16 + MEDHISTO_17 +  
+    MEDHISTO_18 + MEDHISTO_28 + MEDHISTO_29 + MEDHISTO_30 + MEDHISTO_31 +  
+    MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + MEDHISTO_35 + Cerebrovasc_group +  
+    fibandflutter + dvt_pe + smo_vape + DOCUSYMP_12 + month_cont +      (1 | FACILITY_DISPLAY_ID)
    Data: filthosp
 Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e+05))
 
      AIC      BIC   logLik deviance df.resid 
-  3651.6   3743.2  -1812.8   3625.6     8468 
+  6152.7   6510.9  -3028.4   6056.7    12818 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.1823 -0.2333 -0.1294 -0.0655 17.2174 
+-2.6002 -0.2856 -0.1403 -0.0590 23.3310 
 
 Random effects:
- Groups     Name        Variance Std.Dev.
- SRC_FAC_ID (Intercept) 3.995    1.999   
-Number of obs: 8481, groups:  SRC_FAC_ID, 69
+ Groups              Name        Variance Std.Dev.
+ FACILITY_DISPLAY_ID (Intercept) 2.928    1.711   
+Number of obs: 12866, groups:  FACILITY_DISPLAY_ID, 85
 
 Fixed effects:
-                     Estimate Std. Error z value Pr(>|z|)    
-(Intercept)        -4.2041474  0.2973435 -14.139  < 2e-16 ***
-SEXFemale          -0.1662218  0.0900789  -1.845 0.064995 .  
-RACEgroupHispanic   0.3273695  0.1206873   2.713 0.006677 ** 
-RACEgroupBlack      0.0007521  0.1285824   0.006 0.995333    
-RACEgroupOther      1.6660053  0.4694296   3.549 0.000387 ***
-RACEgroupAsian_PI   0.1113263  0.2023281   0.550 0.582164    
-RACEgroupUTD       -0.0564135  0.2278140  -0.248 0.804421    
-age_group<50        0.1945565  0.1184574   1.642 0.100503    
-age_group50-64      0.4922431  0.1089262   4.519 6.21e-06 ***
-death1             -0.4324058  0.1343204  -3.219 0.001285 ** 
-PATMANICUYes        1.3350042  0.1015542  13.146  < 2e-16 ***
-PATMANICU(Missing)  0.2547269  0.4675142   0.545 0.585854    
+                       Estimate Std. Error z value Pr(>|z|)    
+(Intercept)           -5.137296   0.339206 -15.145  < 2e-16 ***
+SEXFemale             -0.252907   0.071042  -3.560 0.000371 ***
+RACEgroupHispanic      0.183034   0.100173   1.827 0.067674 .  
+RACEgroupBlack        -0.232636   0.097790  -2.379 0.017363 *  
+RACEgroupOther         0.600995   0.383060   1.569 0.116664    
+RACEgroupAsian_PI      0.065435   0.170677   0.383 0.701434    
+RACEgroupUTD          -0.058818   0.180091  -0.327 0.743967    
+age_group<50          -0.136331   0.111284  -1.225 0.220548    
+age_group50-64         0.112143   0.094673   1.185 0.236206    
+deathYes              -0.261523   0.109969  -2.378 0.017400 *  
+psource_groupMedicare  0.028906   0.112660   0.257 0.797508    
+psource_groupOther     0.185325   0.089128   2.079 0.037589 *  
+psource_groupSelf pay  0.231900   0.138785   1.671 0.094735 .  
+psource_groupUnknown   0.202328   0.188201   1.075 0.282348    
+regionMidwest          0.061603   0.438674   0.140 0.888321    
+regionSouth            0.722622   0.357185   2.023 0.043062 *  
+regionWest             2.053519   0.482289   4.258 2.06e-05 ***
+BMIgroupObese          0.508386   0.099395   5.115 3.14e-07 ***
+BMIgroupOverweight     0.204037   0.103819   1.965 0.049377 *  
+BMIgroupUnderweight   -0.498075   0.308906  -1.612 0.106879    
+HOSPVENTYes            0.410801   0.111332   3.690 0.000224 ***
+PATMANICUYes           1.128709   0.099132  11.386  < 2e-16 ***
+fibandflutterYes      -0.286905   0.133689  -2.146 0.031868 *  
+MEDHISTO_03Yes         0.078337   0.106765   0.734 0.463114    
+MEDHISTO_07Yes        -0.230176   0.219338  -1.049 0.293989    
+MEDHISTO_08Yes         0.013987   0.079470   0.176 0.860290    
+MEDHISTO_09Yes         0.072861   0.082651   0.882 0.378016    
+MEDHISTO_12Yes        -0.043907   0.091502  -0.480 0.631334    
+MEDHISTO_13Yes        -0.136857   0.232890  -0.588 0.556770    
+MEDHISTO_14Yes        -0.364595   0.240039  -1.519 0.128789    
+MEDHISTO_15Yes         0.191912   0.169555   1.132 0.257695    
+MEDHISTO_16Yes         0.138231   0.180473   0.766 0.443712    
+MEDHISTO_17Yes         0.134526   0.120250   1.119 0.263258    
+MEDHISTO_18Yes        -0.116993   0.117819  -0.993 0.320712    
+MEDHISTO_28Yes        -0.005839   0.230465  -0.025 0.979788    
+MEDHISTO_29Yes         0.030953   0.213315   0.145 0.884627    
+MEDHISTO_30Yes         0.719258   0.431357   1.667 0.095429 .  
+MEDHISTO_31Yes         0.097681   0.215258   0.454 0.649982    
+MEDHISTO_32Yes        -0.146647   0.262440  -0.559 0.576310    
+MEDHISTO_33Yes         0.504209   0.223285   2.258 0.023937 *  
+MEDHISTO_34Yes         1.589243   0.542147   2.931 0.003374 ** 
+MEDHISTO_35Yes         0.229479   0.426703   0.538 0.590718    
+Cerebrovasc_groupYes  -0.365438   0.140952  -2.593 0.009524 ** 
+dvt_peYes             -0.636477   0.184299  -3.454 0.000553 ***
+smo_vapeYes           -0.035105   0.142301  -0.247 0.805145    
+DOCUSYMP_12Yes        -0.394805   0.126911  -3.111 0.001865 ** 
+month_cont             0.186168   0.028186   6.605 3.98e-11 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Correlation of Fixed Effects:
-            (Intr) SEXFml RACEgH RACEgB RACEgO RACEA_ RACEUT ag_<50 a_50-6 death1 PATMANICUY
-SEXFemale   -0.140                                                                          
-RACEgrpHspn -0.141 -0.019                                                                   
-RACEgrpBlck -0.137 -0.031  0.414                                                            
-RACEgrpOthr -0.035 -0.025  0.118  0.095                                                     
-RACEgrpA_PI -0.078 -0.009  0.290  0.210  0.073                                              
-RACEgropUTD -0.070  0.014  0.274  0.214  0.056  0.160                                       
-age_grop<50 -0.154  0.043 -0.195 -0.109 -0.022 -0.054 -0.095                                
-ag_grp50-64 -0.182  0.062 -0.095 -0.096 -0.027 -0.048 -0.075  0.501                         
-death1      -0.060  0.046 -0.007 -0.014 -0.029 -0.016 -0.004  0.220  0.169                  
-PATMANICUYs -0.178  0.084  0.022  0.017 -0.001 -0.010  0.000  0.013 -0.013 -0.337           
-PATMANICU(M -0.014  0.015 -0.023  0.032 -0.027 -0.006  0.016 -0.035 -0.040 -0.063  0.088    

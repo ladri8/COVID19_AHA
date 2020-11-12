@@ -1,0 +1,276 @@
+---
+title: "Visualizations"
+author: "Adriana RM"
+date: "8/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r cars}
+#Visualizing the Data
+#Age for the entire sample
+ggplot(dft1) +
+ aes(x = AGEi) +
+ geom_histogram(bins = 100L, fill = "#6dcd59") +
+ labs(x = "Age", y = "Count") +
+ theme_classic()
+
+```
+
+
+```{r Vis (age/sex) in Enrolled vs Not Enrolled, echo=FALSE}
+#Age and Sex comparison Enrolled vs Not-Enrolled
+
+dft1 %>%
+ filter(!is.na(SEX)) %>%
+ filter(!is.na(AGEi)) %>%
+ filter(!is.na(COVCLINTRIAL)) %>%
+ ggplot() +
+ aes(x = AGEi, fill = SEX) +
+ geom_histogram(bins = 18L, position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Age", y = "Count", title = "Enrolled/Not Enrolled", fill = "Sex") +
+ theme_classic() +
+ facet_wrap(vars(COVCLINTRIAL), scales = "free_y")
+
+```
+#Visualizing the Data
+
+```{r Race Comparison - Enrolled vs Not Enrolled, echo=FALSE}
+
+library(dplyr)
+library(ggplot2)
+
+melted<-melt(dft1$RACEi, dft1$COVCLINTRIAL, id=PATIENT_ID )
+
+#Manipulating DAta With Denominator  
+
+dat <-dft1 %>%
+  select(RACEi, COVCLINTRIAL) %>%
+  tidyr::gather(RACEi, COVCLINTRIAL, na.rm = FALSE, convert = FALSE, factor_key = FALSE) %>%
+  count(RACEi, COVCLINTRIAL) %>%
+  group_by(COVCLINTRIAL) %>%
+  mutate(percent = (n/sum(n) * 100)) %>%
+           mutate (rounded = round(percent, 1))
+
+dat
+
+#With Denominator
+
+dft1 %>%
+  group_by(RACEi, COVCLINTRIAL) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  mutate(percent = (freq*100))
+
+byrace<-dft1 %>%
+  group_by(RACEi, COVCLINTRIAL) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  mutate(percent = (freq*100), rounded = round(percent,1))
+
+
+sink("output.txt")
+byrace
+sink()
+```
+
+```{r}
+# #PLOT
+# ggplot(dat, aes(RACEi, percent, fill = COVCLINTRIAL)) + 
+#     geom_col(position = "stack") + 
+#   labs(x = "Race", y = "Percentage",
+#        title = "Percentage of Patients Enrolled/Not Enrolled in Clinical Trials by Race",
+#        fill = "Enrolled") + scale_y_continuous(limits = c(0, 100), breaks = seq(0, 100, by = 25)) +
+#    geom_label(aes( label = "rounded",
+#                 y= "rounded",
+#            position = "stack",
+#            vjust = 0.5))+
+#   theme_classic() +
+#   coord_flip()
+# 
+#  aes(x = reorder(Name, -Number), Number)
+# 
+# #Plot 2
+#  png("myplot.png")
+#  
+# p1 <- ggplot(data = dat, aes(y= percent, x= reorder(RACEi, -rounded), fill=COVCLINTRIAL)) + 
+#   geom_bar(stat="identity", width = 0.8) + 
+#   ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
+#   xlab('Race/Ethnicity') + ylab('Percentage') +
+#   # geom_text(aes(x = RACEi, label = paste0(rounded, '%')), 
+#   #           colour = 'white',
+#   #           size= 3,
+#   #           position=position_stack(vjust=0.5)) + 
+#   labs(fill='Enrolled') +
+#   theme_classic() + 
+#   coord_flip()
+# 
+# p1
+# 
+# file1 <- tempfile("file1", fileext = ".png")
+# save_plot(file1, p1)
+# View(file1)
+
+# PLot Percentage of Enrollment by Race/Ethnicity
+
+p2 <- ggplot(data = byrace, aes(y= percent, x= reorder(RACEi, -percent), fill=COVCLINTRIAL)) + 
+  geom_bar(stat="identity", width = 0.8) + 
+  ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
+  xlab('Race/Ethnicity') + ylab('Percentage') +
+   geom_text(aes(x = RACEi, label = paste0(rounded, '%')), 
+             colour = 'white',
+             size= 2.7,
+             position=position_stack(vjust=0.5)) +
+  labs(fill='Enrolled') +
+  theme_classic() + 
+  coord_flip()
+
+p2
+
+file1 <- tempfile("file1", fileext = ".png")
+save_plot(file1, p2)
+View(file1)
+
+```
+
+```{r}
+#PLot 2 with Labels 
+
+#Print Dimensions
+hist(cleandata$ADMDT, breaks = "month", freq = TRUE)
+
+```
+
+```{r}
+##Histogram with ggplot2 
+
+cleandata$adate<-ymd(cleandata$ADMDT)
+dft1$adate<- ymd(cleandata$ADMDT)
+
+
+cleandata$ddate <- ymd(cleandata$DISDATE)
+dft1$ddate <- ymd_hms(cleandata$DISDATE)
+
+library(scales)
+library(ggplot2)
+ggplot(dft1, aes(x=adate, fill=COVCLINTRIAL)) + 
+  stat_bin(binwidth=1, position="identity") + 
+  scale_x_date(breaks=date_breaks(width="1 month"))
+
+
+library(dplyr)
+library(ggplot2)
+
+#plot OVerall Admission Date
+dft1 %>%
+ filter(adate >= "2020-01-03" & adate <= "2020-09-25") %>%
+ ggplot() +
+ aes(x = adate) +
+ geom_histogram(bins = 31L, fill = "#bd3786") +
+ labs(x = "Admission Date (2020)", y = "Count", title = "Frequency Count - Admission Dates") +
+ theme_minimal()
+
+#Admission date Grouped by Covclintrial  #Binning changes 
+ggplot(dft1) +
+ aes(x = adate, fill = COVCLINTRIAL) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Admission Date (2020)", y = "Count", title = "Frequency Count - Admission Dates") +
+ theme_minimal()
+
+#With 1day for Bin
+library(scales)
+ggplot(dft1,aes(x=ddate, group=COVCLINTRIAL, fill=COVCLINTRIAL))+
+ stat_bin(binwidth=1, alpha=0.5,
+ position="identity") + theme_bw()+
+ xlab("Admission Date")+
+ ylab("Count")+
+ scale_x_date(breaks=date_breaks("1 month"), labels=date_format("%b %y")) 
+```
+
+```{r}
+
+# library(esquisse)
+# library(ggplot2)
+# 
+# ggplot(dft1) +
+#  aes(x = RACEgroup, fill = RACEgroup) +
+#  geom_bar(aes(y = (..count..)/sum(..count..)), position = "dodge") +
+#  scale_fill_hue() +
+#  labs(x = "Race", y = "%", title = "Enrolled vs Not Enrolled in Clinical Trials by Race") +
+#  theme_classic() + scale_y_continuous(labels = scales::percent_format(accuracy=1.000)) +
+#  scale_y_continuous(limits = c(0, 0.4), breaks = seq(0, 0.4, by = 0.05), labels = scales::percent_format(accuracy=1.00)) +
+#  theme(legend.position = "none") +
+#  facet_wrap(vars(COVCLINTRIAL))
+
+# ggplot(dft1) +
+#  aes(x = COVCLINTRIAL, fill = RACEgroup, group = RACEgroup) +
+#   geom_bar(aes(y = (..count..)/sum(..count..)), position = "dodge") +
+#  scale_fill_hue() +
+#  labs(x = "Enrolled", y = "%", title = "Enrolled vs Not Enrolled in Clinical Trials by Race") +
+#  theme_classic() +
+#  scale_y_continuous(limits = c(0, 0.4), breaks = seq(0,0.4, by = 0.05), labels = scales::percent_format(accuracy=1.00)) +
+#  theme(legend.position = "none") +
+#  facet_wrap(vars(RACEgroup))
+
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(dft1) +
+ aes(x = RACEgroup, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Race", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials", fill = "Race") +
+ theme_classic() +
+ facet_wrap(vars(COVCLINTRIAL))
+
+ggplot(dft1) +
+ aes(x = COVCLINTRIAL, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
+ theme_minimal() +
+ theme(legend.position = "none") +
+ facet_wrap(vars(RACEgroup))
+
+ggplot(dft1) +
+ aes(x = COVCLINTRIAL, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
+ theme_classic() +
+ theme(legend.position = "none") +
+ facet_wrap(vars(RACEgroup))
+
+dft1 %>%
+ filter(!(RACEgroup %in% c("Other", "UTD"))) %>%
+ ggplot() +
+ aes(x = COVCLINTRIAL, fill = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = "Race") +
+ ggthemes::theme_fivethirtyeight() +
+ theme(legend.position = "none") +
+ facet_wrap(vars(RACEgroup))
+
+dft1 %>%
+ filter(!(RACEgroup %in% c("Other", "UTD"))) %>%
+ ggplot() +
+ aes(x = COVCLINTRIAL, fill = RACEgroup, group = RACEgroup) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Enrolled/Not-Enrolled", y = "Count", title = "Enrolled vs Not Enrolled in Clinical Trials by Race", fill = " ") +
+ ggthemes::theme_fivethirtyeight()
+```
+
+
+
+

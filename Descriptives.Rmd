@@ -18,7 +18,7 @@ library(haven)
 library(stringr)
 library(broom)
 library(SmartEDA)
-library(summarytools)
+#library(summarytools)
 library(stats)
 library(kableExtra)
 library(DataExplorer)
@@ -187,14 +187,14 @@ length(unique(ef2$SRC_FAC_ID))
 
 library(dplyr)
 
-dft1 <- ef2 %>% dplyr::select(CASE_ID,PATIENT_ID, SEX,AGEi,RACEi,
+##Added All MEDHISTOs 10.2.2020
+
+dft1 <- ef2 %>% dplyr::select(CASE_ID,PATIENT_ID, SEX,AGEi,RACEi, #Adds all the
                                HGBADM, WBCADM, PLATELET,
                                INITSCR, TROPADM,ANTIHYPRTNSV,
                                LIPLOWTHRP,ANTIPLT, ANTICOAG,
                                ANTIHYPRGLYM, HISETHNI,DDMER,
                                TROPADM, INITSCR, COVCLINTRIAL,
-                               MEDHISTO_01, MEDHISTO_02, MEDHISTO_08,
-                               MEDHISTO_09,MEDHISTO_11, MEDHISTO_12,
                                PATMANICUDT,PATMANICU, SRC_FAC_ID,
                                DISDATE,DSCHSTAT, ADMDT,DEATHDT,PSOURCE_01,
                                PSOURCE_02,PSOURCE_03,PSOURCE_04,
@@ -202,9 +202,9 @@ dft1 <- ef2 %>% dplyr::select(CASE_ID,PATIENT_ID, SEX,AGEi,RACEi,
                                PSOURCE_09, CARDARR, SHKMGMT_01,
                                SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
                                HOSPVENT, SCRUADM,TROPUADM, DDMERU, HGBUADM,
-                              WBCUADM) %>% ## CONTINUE ADD SEVERETIY VARS
+                               WBCUADM,WEIGHTADMi, HEIGHTi,
+                               matches("MEDHISTO_")) %>%
                   dplyr::filter(!is.na(COVCLINTRIAL))
-
                                 
 #Adding Labels for Factor Vars
 
@@ -232,27 +232,24 @@ dft1$RACEi <- factor(dft1$RACEi, levels = c("1", "2", "3", "4", "5", "6", "7"),
 dft1$HISETHNI <- factor(dft1$HISETHNI, levels = c("1", "2"),
                         labels = c("Yes", "No/UTD"))
 
-#Atrial Fibrilation
-dft1$MEDHISTO_01 <- factor(dft1$MEDHISTO_01, levels = c("0", "1"), 
-                  labels = c("No", "Yes"))
+#Label Med Histos
+medhx<-select(dft1, matches('MEDHISTO')) 
+names(medhx)
 
-#Atrial Flutter
-dft1$MEDHISTO_02 <- factor(dft1$MEDHISTO_02, levels = c("0", "1"), 
-                  labels = c("No", "Yes"))
+for (var in names(medhx)){
+  dft1[[var]] <- factor(dft1[[var]], levels = c("0","1"),
+                        labels = c("No", "Yes"))}
+#Check
+count=0
+for (var in names(medhx)){
+  str(filthosp[[var]])
+  count = count + 1
+  print(count)
+}  
 
-#Diabetes Mellitus  
-dft1$MEDHISTO_08 <- factor(dft1$MEDHISTO_08, levels = c("0", "1"), 
-                  labels = c("No", "Yes"))
-
-#Dyslipidemia
-dft1$MEDHISTO_09 <- factor(dft1$MEDHISTO_09, levels = c("0", "1"), 
-                  labels = c("No", "Yes"))
-#Heart Failure
-dft1$MEDHISTO_11 <- factor(dft1$MEDHISTO_11, levels = c("0", "1"), 
-                  labels = c("No", "Yes"))
-#Hypertension
-dft1$MEDHISTO_12 <- factor(dft1$MEDHISTO_12, levels = c("0", "1"), 
-                  labels = c("No", "Yes"))
+#Hospital Ventilation
+dft1$HOSPVENT <- factor(dft1$HOSPVENT, levels = c("1", "2"), 
+                  labels = c("Yes", "No"))
 
 ## Medications Prior To Admission
 
@@ -268,21 +265,16 @@ dft1$ANTIPLT <- factor(dft1$ANTIPLT, levels = c("1", "2"),
 dft1$ANTICOAG <- factor(dft1$ANTICOAG, levels = c("1", "2"), 
                   labels = c("Yes", "No/ND"))
 
-
 dft1$ANTIHYPRGLYM <- factor(dft1$ANTIHYPRGLYM, levels = c("1", "2"), 
                   labels = c("Yes", "No/ND"))
 
 dft1$PATMANICU <- as.factor(dft1$PATMANICU)
 
-## Payment Sources
-dft1$PSOURCE_01 <- as.factor(dft1$PSOURCE_01)
-dft1$PSOURCE_02 <- as.factor(dft1$PSOURCE_02)
-dft1$PSOURCE_03 <- as.factor(dft1$PSOURCE_03)
-dft1$PSOURCE_04 <- as.factor(dft1$PSOURCE_04)
-dft1$PSOURCE_05 <- as.factor(dft1$PSOURCE_05)
-dft1$PSOURCE_06 <- as.factor(dft1$PSOURCE_06)
-dft1$PSOURCE_07 <- as.factor(dft1$PSOURCE_07)
-dft1$PSOURCE_09 <- as.factor(dft1$PSOURCE_09)
+## Factorize Payment Sources
+psources<-names(select(dft1, matches('PSOURCE_0'))) 
+
+for (var in psources) { 
+  dft1[[var]]<- as.factor(dft1[[var]])}
 
 ```
 
@@ -342,18 +334,29 @@ dft1$RACEgroup <- fct_collapse(dft1$RACEi,
 )
 
 
+#Compute BMI Variable
 
-# Create Length of Hospitalization Variable
-# DISDATE is already length of admission
-#Derived date variables tend to have the "Studyday" tag
-#in the description and end in DT (ex. ANCHORDT).
-#These variables are deidentified date variables from the raw regsitry data,
-#where the anchor date, or baseline (day 0) is hospital admission date. 
-#All derived dates are in the context of the Admission date (0) + day.
+#WEIGHTADMi in Kg
+#HEIGHTi in cm 
+#peso (kg) / [estatura (m)]2 
 
-table(dft2$Covid_Sev)
+dft1 <- dft1 %>% mutate(BMI = (WEIGHTADMi/((HEIGHTi/100)^2)))
+
+dft1 <- dft1 %>% mutate(BMIgroup = case_when(BMI < 18.5 ~ 'Underweight',
+                                             BMI >= 18.5 & BMI < 25.0 ~ 'Normal',
+                                             BMI >= 25.0 & BMI < 30.0 ~ 'Overweight',
+                                             BMI >=30.0 ~ 'Obese'))
+
+dft1$BMIgroup <- as.factor(dft1$BMIgroup)
 
 
+#948 missing BMI values due to either Weight or Height not documented
+summary(dft1$BMI)
+summary(dft1$WEIGHTADMi)
+table(is.na(dft1$HEIGHTi))
+table(is.na(dft1$WEIGHTADMi))                    
+table(is.na(dft1$BMI))
+filter(dft1, BMI >80)
 
 ```
 
@@ -375,9 +378,6 @@ hist(dft1$DDMERU)
 hist(dft1$DDMER_T)
  
 filter(dft1, DDMER_T <= 10000)
-
-
-
 ```
 
 ```{r}
@@ -400,7 +400,6 @@ dft1 %>% select(SCRUADM, INITSCR, CREATININE_T) %>% filter (CREATININE_T > 20)
 
 
 ```
-
 
 ```{r}
 
@@ -430,9 +429,6 @@ dft1 %>% select(TROPADM, TROPUADM, TROPOADM_t) %>% filter (TROPOADM_t > 0.90)
 
 #Hemoglobin
 ```
-
-
-
 
 ```{r Histograms}
 

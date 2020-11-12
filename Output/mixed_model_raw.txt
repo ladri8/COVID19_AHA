@@ -1,0 +1,48 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: COVCLINTRIAL ~ SEX + RACEgroup + age_group + death + PATMANICU +      (1 | SRC_FAC_ID)
+   Data: filthosp
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+  3651.6   3743.2  -1812.8   3625.6     8468 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.1823 -0.2333 -0.1294 -0.0655 17.2174 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ SRC_FAC_ID (Intercept) 3.995    1.999   
+Number of obs: 8481, groups:  SRC_FAC_ID, 69
+
+Fixed effects:
+                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        -4.2041474  0.2973435 -14.139  < 2e-16 ***
+SEXFemale          -0.1662218  0.0900789  -1.845 0.064995 .  
+RACEgroupHispanic   0.3273695  0.1206873   2.713 0.006677 ** 
+RACEgroupBlack      0.0007521  0.1285824   0.006 0.995333    
+RACEgroupOther      1.6660053  0.4694296   3.549 0.000387 ***
+RACEgroupAsian_PI   0.1113263  0.2023281   0.550 0.582164    
+RACEgroupUTD       -0.0564135  0.2278140  -0.248 0.804421    
+age_group<50        0.1945565  0.1184574   1.642 0.100503    
+age_group50-64      0.4922431  0.1089262   4.519 6.21e-06 ***
+death1             -0.4324058  0.1343204  -3.219 0.001285 ** 
+PATMANICUYes        1.3350042  0.1015542  13.146  < 2e-16 ***
+PATMANICU(Missing)  0.2547269  0.4675142   0.545 0.585854    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SEXFml RACEgH RACEgB RACEgO RACEA_ RACEUT ag_<50 a_50-6 death1 PATMANICUY
+SEXFemale   -0.140                                                                          
+RACEgrpHspn -0.141 -0.019                                                                   
+RACEgrpBlck -0.137 -0.031  0.414                                                            
+RACEgrpOthr -0.035 -0.025  0.118  0.095                                                     
+RACEgrpA_PI -0.078 -0.009  0.290  0.210  0.073                                              
+RACEgropUTD -0.070  0.014  0.274  0.214  0.056  0.160                                       
+age_grop<50 -0.154  0.043 -0.195 -0.109 -0.022 -0.054 -0.095                                
+ag_grp50-64 -0.182  0.062 -0.095 -0.096 -0.027 -0.048 -0.075  0.501                         
+death1      -0.060  0.046 -0.007 -0.014 -0.029 -0.016 -0.004  0.220  0.169                  
+PATMANICUYs -0.178  0.084  0.022  0.017 -0.001 -0.010  0.000  0.013 -0.013 -0.337           
+PATMANICU(M -0.014  0.015 -0.023  0.032 -0.027 -0.006  0.016 -0.035 -0.040 -0.063  0.088    

@@ -1,0 +1,486 @@
+---
+title: "Descriptives Covid_8.26"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  word_document: default
+---
+#Load Packages
+
+```{r}
+library(haven)
+library(dplyr)
+library(reshape2)
+library(ggplot2)
+library(esquisse)
+library(haven)
+library(stringr)
+library(broom)
+library(SmartEDA)
+library(summarytools)
+library(stats)
+library(kableExtra)
+library(DataExplorer)
+library(scales)
+library(RColorBrewer)
+library(ecm)
+```
+
+## Loading the Data
+```{r Read Data, message=FALSE, warning=FALSE, include=FALSE}
+
+#Read in data and save it in df object (original data for comparison)
+dataFile = '/mnt/workspace/GWTG/COVID19/data/covid19_cvd_aug20.sas7bdat'
+formatsFile = '/mnt/workspace/GWTG/COVID19/data/R_Python_windows_formats.sas7bcat'
+
+## Assigning the dataframe to the dfor object
+dfor <- haven::read_sas(dataFile, formatsFile)
+
+```
+
+```{r}
+#Print Dimensions
+dim(dfor)
+
+#Print Unique Record ID
+cat("\n Original: Record, Patient, Hospital Counts \n")
+
+length(unique(dfor$RCRDNUM)) 
+length(unique(dfor$PATIENT_ID))
+length(unique(dfor$SRC_FAC_ID))
+
+```
+```{r}
+#Exclude NA's on COVCLINTRIAL
+# 48 rows with NAs for COVCLIN Trail 
+
+cat("\n Missing COVCLINTRIAL \n")
+sum(is.na(dfor$COVCLINTRIAL))
+
+# 48 rows with NAs for COVCLIN Trail 
+df <- dfor %>% dplyr::filter(!is.na(COVCLINTRIAL))
+
+#Print Unique
+cat("\n Complete COVCLINTRIAL Record, Patient, Hospital Counts \n")
+length(unique(df$RCRDNUM)) 
+length(unique(df$PATIENT_ID))
+length(unique(df$SRC_FAC_ID))
+```
+```{r}
+# 
+# 8920-8545 #number of records with duplicate patient IDs
+# 8920-48-431 #dimensions using Adriana's counts
+# 8920-48-327 #dimensions using Laura's counts
+
+```
+
+```{r}
+## Identify Duplicates
+##Searches once from the top down and once from the bottom up.
+##Adds "dups" variable to the df where duplicate is TRUE 
+
+df$dups <- duplicated(pull(df, PATIENT_ID)) |
+duplicated(pull(df,PATIENT_ID),fromLast=TRUE)
+
+
+#Extracts Duplicates where TRUE
+dup_df <- df[df$dups == "TRUE", ]
+
+#431 duplicates identified
+dim(dup_df)
+
+#Number of Distinct Patient_IDs and RCRDNUM in the dataframe with all duplicates
+n_distinct(dup_df$PATIENT_ID)
+n_distinct(dup_df$RCRDNUM)
+
+```
+```{r}
+
+# nrow(dup_df)
+# length(unique(dup_df$PATIENT_ID))
+
+#Number of rows with at least one repeating PATIENT_ID and 
+#number of unique repeating PATIENT_IDs row(dup_df)
+
+length(unique(dup_df$PATIENT_ID))
+dim(df[duplicated(df$PATIENT_ID, fromLast = TRUE),]) 
+dim(df[duplicated(df$PATIENT_ID),]) 
+
+# dup_summary <-  dup_df %>% 
+#                 group_by(PATIENT_ID) %>% 
+#                 summarise(n_records = length(PATIENT_ID))
+# 
+# n_patients_per_dup_n  <- dup_summary %>% 
+#                              group_by(n_records) %>%
+#                               summarise(n_patients = n(n_records))
+ # n_patients_per_dup_n
+
+```
+```{r}
+
+#Arrange by these Vars
+dup_df <-dup_df %>% arrange(PATIENT_ID, COVCLINTRIAL, SRC_FAC_ID, CASE_ID)
+
+# Add an Accumulator Var for the times a PATIENT_ID repeats 
+dup_df<-dup_df %>% group_by(PATIENT_ID) %>% mutate(DROPS = cumcount(PATIENT_ID))
+
+#Arrange by vars Descend by Number of Drops 
+#Keep rows of 1 (Yes) for Covclintrial and randomly select 
+dup_df<-dup_df %>% group_by(PATIENT_ID) %>% select(PATIENT_ID, COVCLINTRIAL, SRC_FAC_ID, CASE_ID, DROPS, everything()) %>% 
+arrange(desc(DROPS))
+
+head(dup_df)
+
+```
+```{r}
+
+#Selecting those with more than 1 repeat or "drop"
+dupdff<-dup_df %>% filter(DROPS > 1)
+
+dim(dupdff)
+head(dupdff)
+
+#using RCRDNUM
+drops <- dupdff["RCRDNUM"]
+head(drops)
+
+#Using Patient ID drops
+#drops<-dupdff["PATIENT_ID"]
+# 
+# head(drops)
+# nrow(drops)
+
+#Make drops into a vector 
+vecdrops <- as.vector(drops)
+
+```
+
+```{r}
+#Create Not In Operator
+`%notin%` <- Negate(`%in%`)
+
+#Using RCRDNUM
+dim(df)
+ef2 <- df[df$RCRDNUM %notin% vecdrops$RCRDNUM, , drop = FALSE]
+dim(ef2)
+
+# #Filtering DF, leaving only PATIENT_IDs that are not in vecdrops(list of duplicates)
+# dim(df)
+# ef <- df[df$PATIENT_ID %notin% vecdrops$PATIENT_ID, , drop = FALSE]
+# dim(ef)
+
+#Dropping the 195 repeats of patient with 196 repeats
+#d2 <-ef[!(ef$PATIENT_ID=="9.00064E+15004806"),]
+
+##Check
+length(unique(ef2$RCRDNUM))
+length(unique(ef2$PATIENT_ID))
+length(unique(ef2$SRC_FAC_ID))
+
+```
+
+##Select Working Variables and Add Labels
+
+```{r Select Working Variables and Add Labels, include=FALSE}
+#Select Working Variables and Exclude NAs in COVCLINTRIAL
+
+library(dplyr)
+
+dft1 <- ef2 %>% dplyr::select(CASE_ID,PATIENT_ID, SEX,AGEi,RACEi,
+                               HGBADM, WBCADM, PLATELET,
+                               INITSCR, TROPADM,ANTIHYPRTNSV,
+                               LIPLOWTHRP,ANTIPLT, ANTICOAG,
+                               ANTIHYPRGLYM, HISETHNI,DDMER,
+                               TROPADM, INITSCR, COVCLINTRIAL,
+                               MEDHISTO_01, MEDHISTO_02, MEDHISTO_08,
+                               MEDHISTO_09,MEDHISTO_11, MEDHISTO_12,
+                               PATMANICUDT,PATMANICU, SRC_FAC_ID,
+                               DISDATE,DSCHSTAT, ADMDT,DEATHDT,PSOURCE_01,
+                               PSOURCE_02,PSOURCE_03,PSOURCE_04,
+                               PSOURCE_05, PSOURCE_06, PSOURCE_07,
+                               PSOURCE_09, CARDARR, SHKMGMT_01,
+                               SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
+                               HOSPVENT, SCRUADM,TROPUADM, DDMERU, HGBUADM,
+                              WBCUADM, MEDHISTO_18, WEIGHTADMi, HEIGHTi) %>% ## CONTINUE ADD SEVERETIY VARS
+                  dplyr::filter(!is.na(COVCLINTRIAL))
+
+                                
+#Adding Labels for Factor Vars
+
+#Sex 
+
+dft1$SEX <- factor(dft1$SEX, levels = c("1", "2"), 
+                  labels = c("Male", "Female"))
+
+#Covclintrial
+
+dft1$COVCLINTRIAL <- factor(dft1$COVCLINTRIAL, levels = c("1", "2"),
+                            labels =c( "Yes", "No"))
+
+#RACEi is AHA's defition
+
+dft1$RACEi <- factor(dft1$RACEi, levels = c("1", "2", "3", "4", "5", "6", "7"),
+                  labels = c("Hispanic",
+                             "Non-Hispanic Black",
+                             "Native American",
+                             "Asian",
+                             "Pacific Islander",
+                             "Non-Hispanic White",
+                             "UTD"))
+#Hispanic Ethnicity
+dft1$HISETHNI <- factor(dft1$HISETHNI, levels = c("1", "2"),
+                        labels = c("Yes", "No/UTD"))
+
+#Atrial Fibrilation
+dft1$MEDHISTO_01 <- factor(dft1$MEDHISTO_01, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Atrial Flutter
+dft1$MEDHISTO_02 <- factor(dft1$MEDHISTO_02, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Diabetes Mellitus  
+dft1$MEDHISTO_08 <- factor(dft1$MEDHISTO_08, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Dyslipidemia
+dft1$MEDHISTO_09 <- factor(dft1$MEDHISTO_09, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+#Heart Failure
+dft1$MEDHISTO_11 <- factor(dft1$MEDHISTO_11, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+#Hypertension
+dft1$MEDHISTO_12 <- factor(dft1$MEDHISTO_12, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+#Chronic Kidney Disease #added 10.28.2020
+
+dft1$MEDHISTO_18 <- factor(dft1$MEDHISTO_18, levels = c("0", "1"), 
+                  labels = c("No", "Yes"))
+
+
+## Medications Prior To Admission
+
+dft1$ANTIHYPRTNSV <- factor(dft1$ANTIHYPRTNSV, levels = c("1", "2"), 
+                  labels = c("Yes", "No"))
+
+dft1$LIPLOWTHRP <- factor(dft1$LIPLOWTHRP, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$ANTIPLT <- factor(dft1$ANTIPLT, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$ANTICOAG <- factor(dft1$ANTICOAG, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+
+dft1$ANTIHYPRGLYM <- factor(dft1$ANTIHYPRGLYM, levels = c("1", "2"), 
+                  labels = c("Yes", "No/ND"))
+
+dft1$PATMANICU <- as.factor(dft1$PATMANICU)
+
+## Payment Sources
+dft1$PSOURCE_01 <- as.factor(dft1$PSOURCE_01)
+dft1$PSOURCE_02 <- as.factor(dft1$PSOURCE_02)
+dft1$PSOURCE_03 <- as.factor(dft1$PSOURCE_03)
+dft1$PSOURCE_04 <- as.factor(dft1$PSOURCE_04)
+dft1$PSOURCE_05 <- as.factor(dft1$PSOURCE_05)
+dft1$PSOURCE_06 <- as.factor(dft1$PSOURCE_06)
+dft1$PSOURCE_07 <- as.factor(dft1$PSOURCE_07)
+dft1$PSOURCE_09 <- as.factor(dft1$PSOURCE_09)
+
+```
+
+```{r Recode and Combine Variables}
+
+#Create age_group variable
+
+dft1 <- dft1 %>% mutate(age_group = case_when(AGEi > 64 ~ '>64',
+                                             AGEi >= 50 & AGEi <= 64 ~ '50-64',
+                                             AGEi < 50 ~ '<50'))
+#Create psource_group
+
+dft1 <- dft1 %>% mutate(psource_group = case_when((is.na(PSOURCE_04) == TRUE) | (PSOURCE_09 == 1) ~ "Unknown",
+  (PSOURCE_04 == 1) ~ "Self pay",
+  (PSOURCE_03 == 1) | (PSOURCE_07 == 1) ~ "Other",
+  (PSOURCE_05 == 1) ~ "Medicare",
+  (PSOURCE_01 == 1) | (PSOURCE_02 == 1)|(PSOURCE_06 ==1) ~ "Medicaid"))
+
+ 
+# Create Death Var with AHA Logic
+
+dft1 <- dft1 %>% mutate(death = ifelse(!is.na(DISDATE) == TRUE & DSCHSTAT == 6 , 1, 0))
+dft1$death <- as.factor(dft1$death)
+
+
+# Discharge Data (DISDATE) is not missing and Discharge Status is 6 or "Expired" 
+
+dft2<- dft1 %>% mutate(Covid_Sev = case_when(DSCHSTAT == 6 ~ "Level 1",
+                                                  CARDARR == 1 ~ "Level 2",
+                                                  SHKMGMT_01 == 1 ~ "Level 3",
+                                                  SHKMGMT_02 == 1 ~ "Level 3",
+                                                  SHKMGMT_04 == 1 ~ "Level 3",
+                                                  SHKMGMT_05 == 1 ~ "Level 3",
+                                                  SHKMGMT_03 == 1 ~ "Level 4",
+                                                  HOSPVENT == 1 ~ "Level 5",
+                                                  DSCHSTAT != 6 &
+                                                  CARDARR != 1 &
+                                                  SHKMGMT_01 != 1 &
+                                                  SHKMGMT_02 != 1 &
+                                                  SHKMGMT_04 != 1 &
+                                                  SHKMGMT_05 != 1 &
+                                                  SHKMGMT_03 != 1 &
+                                                  HOSPVENT != 1 ~ "Level 6")) ## do else, or nested else 
+
+dft2$Covid_Sev <- as.factor(dft2$Covid_Sev)
+
+## Create New Race Ethnicity Variable: RACEgroup 
+
+library(forcats)
+dft1$RACEgroup <- fct_collapse(dft1$RACEi,
+  UTD = "UTD",
+  Other = "Native American",
+  NHWhite = "Non-Hispanic White",
+  Asian_PI = c("Asian", "Pacific Islander"),
+  Black = "Non-Hispanic Black",
+  Hispanic = "Hispanic"
+)
+
+
+#Compute BMI Variable
+
+#WEIGHTADMi in Kg
+#HEIGHTi in cm 
+#peso (kg) / [estatura (m)]2 
+
+dft1 <- dft1 %>% mutate(BMI = (WEIGHTADMi/((HEIGHTi/100)^2)))
+
+#948 missing BMI values due to either Weight or Height not documented
+summary(dft1$BMI)
+summary(dft1$WEIGHTADMi)
+table(is.na(dft1$HEIGHTi))
+table(is.na(dft1$WEIGHTADMi))                    
+table(is.na(dft1$BMI))
+
+filter(dft1, BMI >80)
+
+```
+
+```{r}
+
+## Converting Units for DDMER, Creatinine,and Troponin
+
+hist(dfor$DDMERU, plot = TRUE)
+hist(dfor$TROPUADM, plot = TRUE)
+hist(dfor$SCRUADM, plot =TRUE)
+
+#Convert DDMER factors 2 (u/mL) and 3 (ug/mL) to 1 (ng/mL)
+
+dft1<- dft1 %>% mutate(DDMER_T = case_when(DDMERU == 1 ~ (DDMER*1),
+          DDMERU == 2 ~ (DDMER*1000),
+          DDMERU == 3 ~ (DDMER*1000)))
+
+hist(dft1$DDMERU)
+hist(dft1$DDMER_T)
+ 
+filter(dft1, DDMER_T <= 10000)
+
+
+
+```
+
+```{r}
+# Convert Creatinine units factor 2 (umol/L) to factor 1 (mg/dL)
+dft1<- dft1 %>% mutate(CREATININE_T = case_when(SCRUADM == 1 ~ (INITSCR*1),
+          SCRUADM == 2 ~ (INITSCR/88.42)))
+
+table(dft1$SCRUADM)
+hist(dft1$INITSCR)
+hist(dft1$CREATININE_T)
+summary(dft1$CREATININE_T)
+
+hist(dft1$INITSCR, breaks = 200)
+hist(dft1$CREATININE_T, breaks = 200)
+
+
+# 17 patients
+
+dft1 %>% select(SCRUADM, INITSCR, CREATININE_T) %>% filter (CREATININE_T > 20)
+
+
+```
+
+```{r}
+
+#13 p patients with over 100 Troponin --- Keep them
+#Convert Troponin factors 2 (ug/L) and 3(ng/L) to 1 (ng/mL)
+
+dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
+          TROPUADM == 2 ~ (TROPADM*1),
+          TROPUADM == 3 ~ (TROPADM*0.001)))
+
+hist(dft1$TROPADM)
+hist(dft1$TROPOADM_t)
+
+summary(dft1$TROPOADM_t)
+
+hist(dft1$TROPADM, breaks = 200)
+hist(dft1$TROPOADM_t, breaks = 200)
+
+#10 patients with over 100 Troponin --- Keep them
+
+dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
+          TROPUADM == 2 ~ (TROPADM*1),
+          TROPUADM == 3 ~ (TROPADM*0.001)))
+
+
+dft1 %>% select(TROPADM, TROPUADM, TROPOADM_t) %>% filter (TROPOADM_t > 0.90)
+
+#Hemoglobin
+```
+
+```{r Histograms}
+
+# Plotting Histograms of Continuous Vars Using Data Explorer
+# 
+# dft1 %>% select(AGEi, DDMER, HGBADM, INITSCR, PLATELET, TROPADM, WBCADM) %>% plot_histogram(geom_histogram_args = list(binwidth = .3, col ="black", size = 3))
+
+#Hemoglobin 
+
+hist(dft1$HGBADM,breaks = 300, plot = TRUE)
+dft1 %>% filter ( HGBADM > 50)
+
+#CHECK UNITS
+
+table(dfor$HGBUADM)
+
+
+#WBC
+hist(dft1$WBCADM,breaks= 200, plot = TRUE) 
+#Use unique to see unique values in the variable
+#May be a conversion factor issue One patient at 7387.0 
+# Fema…    38 Hisp…   13.3   7387      219 
+
+#
+hist(dft1$PLATELET)
+# Outliers: 3 patients with over 3000  
+dft1 %>% filter ( PLATELET > 800)
+
+#Creatinine 
+hist(dft1$INITSCR, breaks= 200)
+#11 patiens with initscr >20
+#dft1 %>% filter ( INITSCR > 20)
+
+#Troponin
+hist(dft1$TROPADM, breaks = 200)
+#10 patients with over 100 Troponin --- Keep them 
+
+#DDMER Prot
+hist(dft1$DDMER, breaks = 80, plot = TRUE)
+
+
+
+```
+
+
