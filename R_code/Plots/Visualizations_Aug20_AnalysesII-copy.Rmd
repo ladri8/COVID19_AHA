@@ -165,8 +165,10 @@ p3 <- ggplot(data = byrace2, aes(y= percent, x= reorder(raceplot, -percent), fil
              size= 2.7,
              position=position_stack(vjust=0.5)) +
   labs(fill='Enrolled') + 
-  scale_x_discrete(labels=c("Asian" = "Asian", "NA_PI" = "Native American and Pacific Islander",
-                            "Black" = "Non-Hispanic Black", "NHWhite" = "Non-Hispanic White",
+  scale_x_discrete(labels=c("Asian" = "Asian", 
+                            "NA_PI" = "Native American and\n Pacific Islander",
+                            "Black" = "Non-Hispanic Black",
+                            "NHWhite" = "Non-Hispanic White",
                             "Hispanic" = "Hispanic")) +
   theme(axis.text.x = element_text(size=14)) +
   theme_classic() +
