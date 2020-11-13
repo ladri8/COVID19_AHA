@@ -518,12 +518,22 @@ hist(dft1$BMI)
 dft1 <-dft1 %>% mutate(Cerebrovasc_group = case_when((MEDHISTO_05 == "Yes") | (MEDHISTO_06 == "Yes") | (MEDHISTO_04 == "Yes") ~ "Yes",
                                               (MEDHISTO_04 == "No")| (MEDHISTO_05 == "No") | (MEDHISTO_06 == "No") ~ "No"))
 
+dft1 %>% mutate(Cerebrovasc = case_when((MEDHISTO_05 == "Yes") ~ "Yes",
+                                              (MEDHISTO_06 == "Yes") ~ "Yes",
+                                              (MEDHISTO_04 == "Yes") ~ "Yes",
+                                              (MEDHISTO_04 == "No") ~ "No",
+                                              (MEDHISTO_05 == "No") ~ "No",
+                                              (MEDHISTO_06 == "No") ~ "No")) %>% group_by(COVCLINTRIAL) %>%
+  count(Cerebrovasc) 
+
 ##199 had 3 medical histories 
 ##  MEDHISTO_04 is a catch all for both? 
 
 filter(dft1, MEDHISTO_04 == "Yes" & MEDHISTO_05 == "Yes" | MEDHISTO_06 == "Yes")
 filter(dft1, MEDHISTO_04 == "Yes" | MEDHISTO_05 == "Yes" | MEDHISTO_06 == "Yes")
 filter(dft1, MEDHISTO_04 == "Yes")
+filter(dft1, MEDHISTO_05 == "Yes")
+filter(dft1, MEDHISTO_06 == "Yes")
 
 table(dft1$Cerebrovasc_group)
 
@@ -535,7 +545,13 @@ dft1 <-dft1 %>% mutate(fibandflutter = case_when( (MEDHISTO_01 == "Yes") | (MEDH
 
 table(dft1$MEDHISTO_01)                                                                                                 
 table(dft1$MEDHISTO_02)
-table(dft1$fibandflutter)    
+table(dft1$fibandflutter)  
+
+dft1 %>% mutate(fibflutter = case_when((MEDHISTO_01 == "Yes") ~ "Yes",
+                                              (MEDHISTO_02 == "Yes") ~ "Yes",
+                                              (MEDHISTO_01 == "No") ~ "No",
+                                              (MEDHISTO_02 == "No") ~ "No")) %>% group_by(COVCLINTRIAL) %>%
+  count(fibflutter) 
 
 # 44 patients had both 
 filter(dft1, MEDHISTO_01 == "Yes" & MEDHISTO_02 == "Yes")
@@ -550,7 +566,14 @@ table(dft1$MEDHISTO_19)
 table(dft1$MEDHISTO_27)
 table(dft1$dvt_pe)
 
+#92 people had both 
 filter(dft1, MEDHISTO_19 == "Yes" & MEDHISTO_27 == "Yes")
+
+dft1 %>% mutate(dvtpe = case_when((MEDHISTO_19 == "Yes") ~ "Yes",
+                                              (MEDHISTO_27 == "Yes") ~ "Yes",
+                                              (MEDHISTO_19 == "No") ~ "No",
+                                              (MEDHISTO_27 == "No") ~ "No")) %>% group_by(COVCLINTRIAL) %>%
+  count(dvtpe) 
 
 # Combine smoking/vaping
 
@@ -563,7 +586,15 @@ table(dft1$smo_vape)
 
 filter(dft1, MEDHISTO_20 == "Yes" | MEDHISTO_21 == "Yes")
 
+dft1 %>% mutate(smova = case_when((MEDHISTO_20 == "Yes") ~ "Yes",
+                                              (MEDHISTO_21 == "Yes") ~ "Yes",
+                                              (MEDHISTO_20 == "No") ~ "No",
+                                              (MEDHISTO_21 == "No") ~ "No")) %>% group_by(COVCLINTRIAL) %>%
+  count(smova) 
 
+## 4 people did both 
+
+####
 new_vars<-select(dft1, Cerebrovasc_group,smo_vape, dvt_pe,fibandflutter) 
 names(new_vars)
 
@@ -610,6 +641,7 @@ dft1 <-dft1 %>% mutate(month_cont = case_when(admmonth == "12" ~ 0,
 table(as.factor(dft1$month_cont))
 head(dft1$month_cont)
 head(dft1$ADMDT)
+head(dft1$admmonth)
 
 ```
 
@@ -648,12 +680,11 @@ names(dft1)
 str(dft1$cleanerzips)
 
 dft1 %>% select(FACILITY_DISPLAY_ID, PATIENT_DISPLAY_ID, cleanerzips) %>% filter(cleanerzips == "NA")
-
 dft1 %>% select(FACILITY_DISPLAY_ID, PATIENT_DISPLAY_ID, cleanerzips) %>% filter(cleanerzips == "NA" | cleanerzips == "NULL")
 
-
-
 dft1$region <-as.factor(dft1$region)
+
+table(dft1$death)
 ```
 
 

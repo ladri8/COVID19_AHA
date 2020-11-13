@@ -74,6 +74,20 @@ byrace<-dft1 %>%
   mutate(freq = n / sum(n)) %>%
   mutate(percent = (freq*100), rounded = round(percent,1))
 
+byrace2<- dft1 %>%
+  filter(!(RACEi == "UTD")) %>%
+  mutate(raceplot = fct_collapse(RACEi,
+  Asian = "Asian",
+  NHWhite = "Non-Hispanic White",
+  NA_PI = c("Native American", "Pacific Islander"),
+  Black = "Non-Hispanic Black",
+  Hispanic = "Hispanic"))%>%
+  group_by(raceplot, COVCLINTRIAL) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  mutate(percent = (freq*100), rounded = round(percent,1))
+
+byrace2
 
 sink("output.txt")
 byrace
@@ -136,6 +150,34 @@ p2
 file1 <- tempfile("file1", fileext = ".png")
 save_plot(file1, p2)
 View(file1)
+
+```
+
+```{r}
+
+
+p3 <- ggplot(data = byrace2, aes(y= percent, x= reorder(raceplot, -percent), fill=COVCLINTRIAL)) + 
+  geom_bar(stat="identity", width = 0.8) + 
+  ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
+  xlab('Race/Ethnicity') + ylab('Percentage') +
+   geom_text(aes(x = raceplot, label = paste0(rounded, '%')), 
+             colour = 'white',
+             size= 2.7,
+             position=position_stack(vjust=0.5)) +
+  labs(fill='Enrolled') + 
+  scale_x_discrete(labels=c("Asian" = "Asian", "NA_PI" = "Native American and Pacific Islander",
+                            "Black" = "Non-Hispanic Black", "NHWhite" = "Non-Hispanic White",
+                            "Hispanic" = "Hispanic")) +
+  theme(axis.text.x = element_text(size=14)) +
+  theme_classic() +
+  coord_flip()
+
+p3
+library(sjPlot)
+
+file2 <- tempfile("file2", fileext = ".png")
+save_plot(file2, p3)
+View(file2)
 
 ```
 

@@ -70,7 +70,7 @@ labels(dft1)<- c( AGEi = 'Age',
                     MEDHISTO_33 = "Organ Transplant",
                     MEDHISTO_34 = "Congenital heart disease",
                     MEDHISTO_35 = "Pulmonary Arterial Hypertension",
-                    Cerebovasc_group = "Cerebrovascular Disease, Stroke, or TIA",
+                    Cerebrovasc_group = "Cerebrovascular Disease, Stroke, or TIA",
                     fibandflutter = "Atrial Fibrilation or Atrial Flutter",
                     dvt_pe = "DVT or Pulmonary Embolism",
                     smo_vape = "Smoking or Vaping",
@@ -144,40 +144,40 @@ View(docx_file)
 ```
 
 ```{r}
-
-tablafilt <- select(filthosp, -c(CASE_ID, PATIENT_ID, SRC_FAC_ID, TROPADM,
-                               - TROPUADM, HGBADM, WBCADM, PLATELET, INITSCR,
-                               TROPADM,DDMERU, DDMER, SCRUADM,WBCUADM, PSOURCE_01,
-                               PSOURCE_02,PSOURCE_03,PSOURCE_04,PSOURCE_05,
-                               PSOURCE_07, PSOURCE_09,
-                               DISDATE,DSCHSTAT, ADMDT,DEATHDT,PSOURCE_01,
-                               PSOURCE_02,PSOURCE_03,PSOURCE_04,
-                               PSOURCE_05, PSOURCE_06, PSOURCE_07,
-                               PSOURCE_09, CARDARR, SHKMGMT_01,
-                               SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
-                               HOSPVENT, SCRUADM,TROPUADM, DDMERU, HGBUADM,
-                              WBCUADM, RACEgroup, PATMANICUDT))
-
-#Rearrange order of variables to appear in Table
-
-tablafilt<-tablafilt %>% dplyr::select(COVCLINTRIAL, AGEi, age_group, SEX,RACEi, HISETHNI, psource_group, 
-                               MEDHISTO_01, MEDHISTO_02, MEDHISTO_08, MEDHISTO_09,
-                               MEDHISTO_11, MEDHISTO_12, ANTIHYPRTNSV, LIPLOWTHRP,
-                               ANTIPLT, ANTICOAG, ANTIHYPRGLYM,PATMANICU, death )
-
-
-tabla2 <- tablafilt %>% tbl_summary(by = COVCLINTRIAL,
-                               digits = list(everything() ~ 1),
-                               type = list(starts_with(("MEDHISTO")) ~ "categorical"),
-                               missing = "always",
-                               missing_text = "(Missing)") %>%
-                              add_p(list(all_continuous() ~ "wilcox.test", all_categorical() ~ "chisq.test")) %>% 
-                              add_overall() %>% 
-                              add_stat_label() %>%
-                              modify_header(update = list(label ~ "**Variable**"))%>%
-                              modify_spanning_header(c("stat_1", "stat_2") ~ "**Enrolled in Clinical Trials**")
-
-
-tabla2
+# 
+# tablafilt <- select(filthosp, -c(CASE_ID, PATIENT_ID, SRC_FAC_ID, TROPADM,
+#                                - TROPUADM, HGBADM, WBCADM, PLATELET, INITSCR,
+#                                TROPADM,DDMERU, DDMER, SCRUADM,WBCUADM, PSOURCE_01,
+#                                PSOURCE_02,PSOURCE_03,PSOURCE_04,PSOURCE_05,
+#                                PSOURCE_07, PSOURCE_09,
+#                                DISDATE,DSCHSTAT, ADMDT,DEATHDT,PSOURCE_01,
+#                                PSOURCE_02,PSOURCE_03,PSOURCE_04,
+#                                PSOURCE_05, PSOURCE_06, PSOURCE_07,
+#                                PSOURCE_09, CARDARR, SHKMGMT_01,
+#                                SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
+#                                HOSPVENT, SCRUADM,TROPUADM, DDMERU, HGBUADM,
+#                               WBCUADM, RACEgroup, PATMANICUDT))
+# 
+# #Rearrange order of variables to appear in Table
+# 
+# tablafilt<-tablafilt %>% dplyr::select(COVCLINTRIAL, AGEi, age_group, SEX,RACEi, HISETHNI, psource_group, 
+#                                MEDHISTO_01, MEDHISTO_02, MEDHISTO_08, MEDHISTO_09,
+#                                MEDHISTO_11, MEDHISTO_12, ANTIHYPRTNSV, LIPLOWTHRP,
+#                                ANTIPLT, ANTICOAG, ANTIHYPRGLYM,PATMANICU, death )
+# 
+# 
+# tabla2 <- tablafilt %>% tbl_summary(by = COVCLINTRIAL,
+#                                digits = list(everything() ~ 1),
+#                                type = list(starts_with(("MEDHISTO")) ~ "categorical"),
+#                                missing = "always",
+#                                missing_text = "(Missing)") %>%
+#                               add_p(list(all_continuous() ~ "wilcox.test", all_categorical() ~ "chisq.test")) %>% 
+#                               add_overall() %>% 
+#                               add_stat_label() %>%
+#                               modify_header(update = list(label ~ "**Variable**"))%>%
+#                               modify_spanning_header(c("stat_1", "stat_2") ~ "**Enrolled in Clinical Trials**")
+# 
+# 
+# tabla2
 ```
 

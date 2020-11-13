@@ -99,30 +99,27 @@ library(officer)
 library(forcats)
 
 ## Check # of NA's: 
-table(filthosp$PATMANICU)
-
-
 # filthosp$PATMANICU <- fct_explicit_na(filthosp$PATMANICU)
-filthosp$PATMANICU <- factor(filthosp$PATMANICU, exclude = NULL)
-
-table(filthosp$PATMANICU)
+# filthosp$PATMANICU <- factor(filthosp$PATMANICU, exclude = NULL)
 
 contrasts(filthosp$PATMANICU)
-
-#filthosp = filthosp %>%
-#           mutate(PATMANICU = relevel(PATMANICU, "No/ND"))# 2-not managed in ICU
-
+table(filthosp$PATMANICU)
+filthosp$PATMANICU<- factor(filthosp$PATMANICU, levels = c("Yes", "No"),
+                          labels=c( "Yes", "No"))
+contrasts(filthosp$PATMANICU)
+filthosp = filthosp %>%
+           mutate(PATMANICU = relevel(PATMANICU, "No"))# 2-not managed in ICU
 contrasts(filthosp$PATMANICU) 
 
-table(filthosp$PATMANICU)
 
+
+```
+
+```{r}
 #Reference Levels for Acuity and Death and Race
-
 filthosp = filthosp %>% 
            mutate(death = relevel(death, "0"))# 0-No death
-
 filthosp = filthosp %>% mutate(RACEgroup = relevel(RACEgroup,"NHWhite"))
-
 filthosp = filthosp %>% mutate(COVCLINTRIAL = relevel(COVCLINTRIAL, "No"))
 
 #Ensuring Hospital ID and age_group is a factor
@@ -152,9 +149,14 @@ filthosp$DOCUSYMP_12 <- factor(filthosp$DOCUSYMP_12, levels = c("Yes", "No"),
 
 filthosp = filthosp %>% mutate(DOCUSYMP_12 = relevel(DOCUSYMP_12, "No"))
 
+
+filthosp$death <- factor(filthosp$death, levels = c("1", "0"),
+                          labels=c( "Yes", "No"))
+
+filthosp = filthosp %>% mutate(death = relevel(death, "No"))
+
+
 contrasts(filthosp$ANTIHYPRGLYM)
-
-
 
 ```
 
@@ -164,14 +166,14 @@ contrasts(filthosp$ANTIHYPRGLYM)
 filthosp$FACILITY_DISPLAY_ID<-as.factor(filthosp$FACILITY_DISPLAY_ID)
 
 fit2 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
-              psource_group + region + BMIgroup + HOSPVENT + PATMANICU +
-              fibandflutter + MEDHISTO_03 + MEDHISTO_07 + MEDHISTO_08 + MEDHISTO_09 +
-              MEDHISTO_12 + MEDHISTO_13 + MEDHISTO_14 + 
-              MEDHISTO_15 + MEDHISTO_16 + MEDHISTO_17 + MEDHISTO_18 + 
-              MEDHISTO_28 + MEDHISTO_29 + 
-              MEDHISTO_30 + MEDHISTO_31 + MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + 
-              MEDHISTO_35 + Cerebrovasc_group+ fibandflutter+ dvt_pe+ smo_vape + DOCUSYMP_12 +
-              month_cont + (1|FACILITY_DISPLAY_ID),
+              psource_group + region + BMIgroup + HOSPVENT + 
+              PATMANICU + fibandflutter + MEDHISTO_03 + MEDHISTO_07 +
+              MEDHISTO_08 + MEDHISTO_09 + MEDHISTO_12 + MEDHISTO_13 + 
+              MEDHISTO_14 + MEDHISTO_15 + MEDHISTO_16 + MEDHISTO_17 + 
+              MEDHISTO_18 + MEDHISTO_28 + MEDHISTO_29 + MEDHISTO_30 + 
+              MEDHISTO_31 + MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + 
+              MEDHISTO_35 + Cerebrovasc_group+ fibandflutter+ dvt_pe +
+              smo_vape + DOCUSYMP_12 + month_cont + (1|FACILITY_DISPLAY_ID),
              data = filthosp,
              family = binomial,
              nAGQ = 1, 
@@ -233,17 +235,7 @@ select(filthosp,FACILITY_DISPLAY_ID) %>% tally()
 
 #Model
 ```{r}
-
-fit2 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup +
-              age_group + death + PATMANICU +
-              psource_group + BMIgroup+  MEDHISTO_01 +  MEDHISTO_02 + MEDHISTO_03+ MEDHISTO_04+
-              MEDHISTO_05+ MEDHISTO_06+ MEDHISTO_07+ MEDHISTO_08+ MEDHISTO_09+  
-              MEDHISTO_10 + MEDHISTO_11 + MEDHISTO_12 + MEDHISTO_13 + MEDHISTO_14 + 
-              MEDHISTO_15 + MEDHISTO_16 + MEDHISTO_17 + MEDHISTO_18 + MEDHISTO_19 + 
-              MEDHISTO_20 + MEDHISTO_21 + MEDHISTO_22 + MEDHISTO_23 + MEDHISTO_24 + 
-              MEDHISTO_25 + MEDHISTO_26 + MEDHISTO_27 + MEDHISTO_28 + MEDHISTO_29 + 
-              MEDHISTO_30 + MEDHISTO_31 + MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + 
-              MEDHISTO_35 + (1|FACILITY_DISPLAY_ID ),
+fit3 <- glmer(COVCLINTRIAL ~  RACEgroup + (1|FACILITY_DISPLAY_ID),
              data = filthosp,
              family = binomial,
              nAGQ = 1, 
@@ -251,24 +243,24 @@ fit2 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup +
 
 summary(dft1$BMI)
 #Raw Model Summary 
-summary(fit2)
+summary(fit3)
 
 #Save raw output in txt
 sink("mixed_model_raw.txt")
-print(summary(fit2))
+print(summary(fit3))
 sink()
 
 #Summary into table 
 library(gtsummary)
 
-f2model_tab <- fit2 %>%
+f3model_tab <- fit3 %>%
   tbl_regression(exponentiate = TRUE ) %>%
   bold_labels() %>%
   bold_p(t= 0.05)
 
 # Print Table to Notebook
 
-f2model_tab
+f3model_tab
 
 #Export table into Word
 
