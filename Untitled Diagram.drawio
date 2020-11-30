@@ -1,30 +1,30 @@
-<mxfile host="app.diagrams.net" modified="2020-11-30T06:47:08.239Z" agent="5.0 (Windows)" etag="jWoYO4Wau0k5sNFyonYN" version="13.7.7" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-30T07:18:22.633Z" agent="5.0 (Windows)" etag="ex2Eee42BQ_va_aIlGMu" version="13.7.7" type="github">
   <diagram id="6a731a19-8d31-9384-78a2-239565b7b9f0" name="Page-1">
-    <mxGraphModel dx="3115" dy="1150" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="2492" dy="920" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="oBGM9gTl_-Td0VagPwam-129" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=4;" edge="1" parent="1" source="2" target="oBGM9gTl_-Td0VagPwam-123">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="2" value="&lt;div style=&quot;font-size: 19px&quot;&gt;start&lt;/div&gt;run_open_dialog()" style="shape=mxgraph.flowchart.terminator;strokeWidth=2;gradientDirection=north;fontStyle=0;html=1;fontSize=19;rounded=1;" parent="1" vertex="1">
-          <mxGeometry x="130" y="249" width="204.5" height="101" as="geometry" />
-        </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-183" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Helvetica;fontSize=19;exitX=0.905;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=4;" edge="1" parent="1" source="5">
+        <mxCell id="oBGM9gTl_-Td0VagPwam-129" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=4;" edge="1" parent="1" source="2">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="990" y="298.5000000000002" as="targetPoint" />
+            <mxPoint x="410" y="299.5000000000001" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="5" value="&lt;div style=&quot;font-size: 19px;&quot;&gt;INPUT&lt;br style=&quot;font-size: 19px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 19px;&quot;&gt;Dialog Box gets &lt;br style=&quot;font-size: 19px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 19px;&quot;&gt;user-selected CSV file &lt;/div&gt;" style="shape=mxgraph.flowchart.data;strokeWidth=2;gradientDirection=north;fontStyle=0;html=1;fontSize=19;rounded=1;" parent="1" vertex="1">
-          <mxGeometry x="635" y="249" width="289.5" height="99" as="geometry" />
+        <mxCell id="2" value="call run_open_dialog()" style="shape=mxgraph.flowchart.terminator;strokeWidth=2;gradientDirection=north;fontStyle=0;html=1;fontSize=19;rounded=1;" parent="1" vertex="1">
+          <mxGeometry x="130" y="249" width="204.5" height="101" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-270" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="5" target="oBGM9gTl_-Td0VagPwam-269">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="&lt;div style=&quot;font-size: 19px&quot;&gt;INPUT&lt;br style=&quot;font-size: 19px&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 19px&quot;&gt;Dialog Box &lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 19px&quot;&gt;gets user-selected &lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 19px&quot;&gt;CSV file &lt;/div&gt;" style="shape=mxgraph.flowchart.data;strokeWidth=2;gradientDirection=north;fontStyle=0;html=1;fontSize=19;rounded=1;" parent="1" vertex="1">
+          <mxGeometry x="130" y="466.37" width="214.5" height="99" as="geometry" />
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-63" value="destroy file dialog window" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;fontSize=19;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="149.75" y="510" width="165" height="69" as="geometry" />
+          <mxGeometry x="597.5" y="635" width="165" height="69" as="geometry" />
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-188" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-66" target="oBGM9gTl_-Td0VagPwam-67">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-66" value="&lt;div style=&quot;font-size: 19px;&quot;&gt;call &lt;br style=&quot;font-size: 19px;&quot;&gt;&lt;/div&gt;run_get_features(df) " style="shape=mxgraph.flowchart.terminator;strokeWidth=2;gradientDirection=north;fontStyle=0;html=1;fontSize=19;rounded=1;" vertex="1" parent="1">
+        <mxCell id="oBGM9gTl_-Td0VagPwam-66" value="run_get_features(df) " style="shape=mxgraph.flowchart.terminator;strokeWidth=2;gradientDirection=north;fontStyle=0;html=1;fontSize=19;rounded=1;" vertex="1" parent="1">
           <mxGeometry x="155.25" y="870" width="195" height="90" as="geometry" />
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-143" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-67" target="oBGM9gTl_-Td0VagPwam-73">
@@ -129,37 +129,11 @@
             <mxPoint x="277.75" y="1526.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-137" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=4;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-121" target="oBGM9gTl_-Td0VagPwam-63">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="290" y="410" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-121" value="Set df as the read from &quot;path variable " style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="410" y="485" width="155.5" height="119" as="geometry" />
-        </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-133" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=4;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-122" target="oBGM9gTl_-Td0VagPwam-124">
+        <mxCell id="oBGM9gTl_-Td0VagPwam-272" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-121" target="oBGM9gTl_-Td0VagPwam-63">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-122" value="Store CSV file path in path variable&amp;nbsp; " style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="1000" y="240" width="110" height="104.5" as="geometry" />
-        </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-182" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.095;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;fontFamily=Helvetica;fontSize=19;strokeWidth=4;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-123" target="5">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-123" value="&lt;br style=&quot;font-size: 19px;&quot;&gt;Dialog Box gets user-selected CSV file &lt;br style=&quot;font-size: 19px;&quot;&gt;&lt;br style=&quot;font-size: 19px;&quot;&gt;" style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="410" y="245" width="150" height="109" as="geometry" />
-        </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-134" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=4;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-124" target="oBGM9gTl_-Td0VagPwam-127">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-124" value="&lt;br&gt;&lt;div style=&quot;font-size: 19px&quot;&gt;Store CSV file path in path variable&lt;/div&gt;&lt;div style=&quot;font-size: 19px&quot;&gt; &lt;/div&gt;" style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="967.25" y="494" width="175.5" height="101" as="geometry" />
-        </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-135" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-127" target="oBGM9gTl_-Td0VagPwam-121">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-127" value="Set df as global variable " style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="666.25" y="495" width="155.5" height="99" as="geometry" />
+        <mxCell id="oBGM9gTl_-Td0VagPwam-121" value="read_csv the file path and store in df" style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="374.5" y="610" width="155.5" height="119" as="geometry" />
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-160" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=24;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-142" target="oBGM9gTl_-Td0VagPwam-145">
           <mxGeometry relative="1" as="geometry" />
@@ -250,42 +224,42 @@
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-203" value="" style="endArrow=none;html=1;strokeWidth=2;fontSize=17;dashed=1;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="370" y="390" as="sourcePoint" />
-            <mxPoint x="370" y="210" as="targetPoint" />
+            <mxPoint x="790" y="400" as="sourcePoint" />
+            <mxPoint x="790" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-204" value="" style="endArrow=none;html=1;dashed=1;strokeWidth=2;fontSize=17;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1160" y="220" as="sourcePoint" />
-            <mxPoint x="370" y="220" as="targetPoint" />
+            <mxPoint x="790" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-205" value="" style="endArrow=none;html=1;dashed=1;strokeWidth=2;fontSize=17;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1160" y="640" as="sourcePoint" />
-            <mxPoint x="130" y="640" as="targetPoint" />
+            <mxPoint x="1160" y="770" as="sourcePoint" />
+            <mxPoint x="100" y="770" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-206" value="" style="endArrow=none;html=1;dashed=1;strokeWidth=2;fontSize=17;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="130" y="400" as="sourcePoint" />
-            <mxPoint x="130" y="640" as="targetPoint" />
+            <mxPoint x="98.82" y="406" as="sourcePoint" />
+            <mxPoint x="99" y="770" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-207" value="" style="endArrow=none;html=1;dashed=1;strokeWidth=2;fontSize=17;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="370" y="400" as="sourcePoint" />
-            <mxPoint x="130" y="400" as="targetPoint" />
+            <mxPoint x="790" y="400" as="sourcePoint" />
+            <mxPoint x="94.5" y="400" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-208" value="" style="endArrow=none;html=1;dashed=1;strokeWidth=2;fontSize=17;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1160" y="220" as="sourcePoint" />
-            <mxPoint x="1160" y="640" as="targetPoint" />
+            <mxPoint x="1160" y="770" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-210" value="Class open_dialog(tk.Tk)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=0;fontSize=20;fontStyle=1;strokeWidth=7;" vertex="1" parent="1">
-          <mxGeometry x="394.5" y="170" width="115" height="30" as="geometry" />
+          <mxGeometry x="840" y="170" width="115" height="30" as="geometry" />
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-219" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-214" target="oBGM9gTl_-Td0VagPwam-216">
           <mxGeometry relative="1" as="geometry" />
@@ -324,6 +298,63 @@
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-240" value="&lt;div&gt;define&lt;br&gt;&lt;/div&gt;&lt;div&gt;FeatureRangeTool(self)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;sketch=0;fontSize=20;" vertex="1" parent="1">
           <mxGeometry x="89.56" y="1800" width="220.38" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-244" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-241" target="oBGM9gTl_-Td0VagPwam-242">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-241" value="instantiate open_dialog() in object app" style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="414.5" y="250" width="155.5" height="99" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-242" value="call to app.mainloop()" style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="612.5" y="250" width="135" height="99" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-252" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-249" target="oBGM9gTl_-Td0VagPwam-251">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-249" value="define class constructor " style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="805" y="250" width="135" height="99" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-257" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-251" target="oBGM9gTl_-Td0VagPwam-255">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-251" value="run __init__ of the parent class " style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="979" y="258.37" width="160" height="82.26" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-263" value="" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-255" target="oBGM9gTl_-Td0VagPwam-259">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-255" value="import filedialog from tkinter module" style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="977" y="379" width="164" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-264" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.939;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-259" target="oBGM9gTl_-Td0VagPwam-260">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-259" value="create self.files variable " style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="975" y="477.25" width="164" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-265" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-260" target="oBGM9gTl_-Td0VagPwam-261">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-260" value="create self.title variable " style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="776" y="477.25" width="164" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-266" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-261" target="oBGM9gTl_-Td0VagPwam-262">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-261" value="hide dialog window " style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="583.5" y="477.25" width="164" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-267" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.942;entryY=0.46;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-262" target="5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-262" value="filedialog widget asks user for path, store in path variable" style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="473.63" width="184" height="77.25" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-271" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-269" target="oBGM9gTl_-Td0VagPwam-121">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-269" value="Set df as global variable " style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="620" width="155.5" height="99" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
