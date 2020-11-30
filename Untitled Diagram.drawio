@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-11-30T07:20:24.832Z" agent="5.0 (Windows)" etag="WjPOu9chRM--qQCvhr9h" version="13.7.7" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-30T07:25:20.397Z" agent="5.0 (Windows)" etag="cwwpjgkiz0SVcE0CuV9g" version="13.7.7" type="github">
   <diagram id="6a731a19-8d31-9384-78a2-239565b7b9f0" name="Page-1">
     <mxGraphModel dx="2492" dy="920" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -304,6 +304,9 @@
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-241" value="instantiate open_dialog() in object app" style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
           <mxGeometry x="414.5" y="250" width="155.5" height="99" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-274" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=4;fontSize=20;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-242" target="oBGM9gTl_-Td0VagPwam-249">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-242" value="call to app.mainloop()" style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
           <mxGeometry x="612.5" y="250" width="135" height="99" as="geometry" />
