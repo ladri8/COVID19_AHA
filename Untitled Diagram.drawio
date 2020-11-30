@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-30T06:23:38.830Z" agent="5.0 (Windows)" etag="tQmV1ZKEHDlOtEAgVLFX" version="13.7.7" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-30T06:47:08.239Z" agent="5.0 (Windows)" etag="jWoYO4Wau0k5sNFyonYN" version="13.7.7" type="github">
   <diagram id="6a731a19-8d31-9384-78a2-239565b7b9f0" name="Page-1">
-    <mxGraphModel dx="2077" dy="767" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="3115" dy="1150" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -106,15 +106,14 @@
         <mxCell id="oBGM9gTl_-Td0VagPwam-98" value="define PatientIDSearchTool(self):&amp;nbsp; " style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontFamily=Helvetica;fontSize=19;rounded=1;" vertex="1" parent="1">
           <mxGeometry x="440" y="1800" width="269.5" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-169" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=24;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-99" target="oBGM9gTl_-Td0VagPwam-168">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="oBGM9gTl_-Td0VagPwam-169" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=24;" edge="1" parent="1" target="oBGM9gTl_-Td0VagPwam-168">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="199.83333333333348" y="1900" as="sourcePoint" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-99" value="&lt;div&gt;define&lt;br&gt;&lt;/div&gt;&lt;div&gt;FeatureRangeTool(self)&lt;/div&gt;" style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontFamily=Helvetica;fontSize=19;rounded=1;labelBorderColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="90" y="1800" width="219.5" height="100" as="geometry" />
-        </mxCell>
-        <mxCell id="oBGM9gTl_-Td0VagPwam-102" value="" style="endArrow=none;dashed=1;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;" edge="1" parent="1" source="oBGM9gTl_-Td0VagPwam-99" target="oBGM9gTl_-Td0VagPwam-231">
+        <mxCell id="oBGM9gTl_-Td0VagPwam-102" value="" style="endArrow=none;dashed=1;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;" edge="1" parent="1" target="oBGM9gTl_-Td0VagPwam-231">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="550" y="1670" as="sourcePoint" />
+            <mxPoint x="199.75" y="1800" as="sourcePoint" />
             <mxPoint x="277.75" y="1526.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -322,6 +321,9 @@
         </mxCell>
         <mxCell id="oBGM9gTl_-Td0VagPwam-231" value="create and pack buttons for 3: Patient ID and Provider ID tools,and Feature Count " style="whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fontSize=19;rounded=1;" vertex="1" parent="1">
           <mxGeometry x="452" y="1370" width="160.5" height="156.5" as="geometry" />
+        </mxCell>
+        <mxCell id="oBGM9gTl_-Td0VagPwam-240" value="&lt;div&gt;define&lt;br&gt;&lt;/div&gt;&lt;div&gt;FeatureRangeTool(self)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;sketch=0;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="89.56" y="1800" width="220.38" height="100" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
