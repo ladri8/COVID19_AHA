@@ -102,9 +102,18 @@ tabla <- select(dft1, -c(CASE_ID, PATIENT_DISPLAY_ID, FACILITY_DISPLAY_ID, TROPA
                          MEDHISTO_06,MEDHISTO_22, MEDHISTO_23,
                          MEDHISTO_24,MEDHISTO_25,MEDHISTO_26,MEDHISTO_27, MEDHISTO_21, MEDHISTO_20, MEDHISTO_19, MEDHISTO_10))
 
+
+tabla$RACEgr <- fct_collapse(dft1$RACEi,
+  UTD = "UTD",
+  Native_American = "Native American",
+  NHWhite = "Non-Hispanic White",
+  Asian_PI = c("Asian", "Pacific Islander"),
+  Black = "Non-Hispanic Black",
+  Hispanic = "Hispanic")
+
 #Rearrange order of variables to appear in Table
 
-tabla<-tabla %>% dplyr::select(COVCLINTRIAL, AGEi, age_group, SEX,RACEi, psource_group,region, BMIgroup,
+tabla<-tabla %>% dplyr::select(COVCLINTRIAL, AGEi, age_group, SEX,RACEgr, psource_group,region, BMIgroup,
                                matches("MEDHISTO_"),Cerebrovasc_group,fibandflutter,dvt_pe,smo_vape, DOCUSYMP_12,
                                ANTIHYPRTNSV, LIPLOWTHRP, ANTIPLT, ANTICOAG, ANTIHYPRGLYM, month_cont,PATMANICU, HOSPVENT,death)
 
@@ -112,6 +121,11 @@ tabla<-tabla %>% dplyr::select(COVCLINTRIAL, AGEi, age_group, SEX,RACEi, psource
 
 
 ```{r}
+
+#Set decimals to 2
+
+options(gtsummary.tbl_summary.percent_fun = function(x) sprintf(x * 100, fmt='%#.2f'))
+
 tabla1 <- tabla %>% tbl_summary(by = COVCLINTRIAL,
                                digits = list(everything() ~ 1),
                                percent = "column",

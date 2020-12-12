@@ -74,21 +74,28 @@ byrace<-dft1 %>%
   mutate(freq = n / sum(n)) %>%
   mutate(percent = (freq*100), rounded = round(percent,1))
 
+# byrace2<- dft1 %>%
+#   filter(!(RACEi == "UTD")) %>%
+#   mutate(raceplot = fct_collapse(RACEi,
+#   Asian = "Asian",
+#   NHWhite = "Non-Hispanic White",
+#   NA_PI = c("Native American", "Pacific Islander"),
+#   Black = "Non-Hispanic Black",
+#   Hispanic = "Hispanic"))%>%
+#   group_by(raceplot, COVCLINTRIAL) %>%
+#   summarise(n = n()) %>%
+#   mutate(freq = n / sum(n)) %>%
+#   mutate(percent = (freq*100), rounded = round(percent,1))
+
 byrace2<- dft1 %>%
-  filter(!(RACEi == "UTD")) %>%
-  mutate(raceplot = fct_collapse(RACEi,
-  Asian = "Asian",
-  NHWhite = "Non-Hispanic White",
-  NA_PI = c("Native American", "Pacific Islander"),
-  Black = "Non-Hispanic Black",
-  Hispanic = "Hispanic"))%>%
-  group_by(raceplot, COVCLINTRIAL) %>%
+  filter(!(RACEi == "UTD"))%>%
+  group_by(RACEi, COVCLINTRIAL) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n)) %>%
   mutate(percent = (freq*100), rounded = round(percent,1))
 
 byrace2
-# 
+ 
 # sink("output.txt")
 # byrace
 # sink()
@@ -134,18 +141,26 @@ byrace2
 # PLot Percentage of Enrollment by Race/Ethnicity
 library(sjPlot)
 
-p2 <- byrace2 %>% filter((!(COVCLINTRIAL == "No"))) %>% ggplot(aes(y= percent, x= reorder(RACEi, -percent), fill=COVCLINTRIAL))+ 
+p2 <- byrace2 %>% filter((!(COVCLINTRIAL == "No"))) %>% ggplot(aes(y= percent, x= reorder(RACEgroup, -percent), fill=COVCLINTRIAL))+ 
   geom_bar(stat="identity", width = 0.8) + 
   ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
   xlab('Race/Ethnicity') + ylab('Percentage') +
-   geom_text(aes(x = RACEi, label = paste0(rounded, '%')), 
+   geom_text(aes(x = RACEgroup, label = paste0(rounded, '%')), 
              colour = 'white',
              size= 2.7,
              position=position_stack(vjust=0.5)) +
-  labs(fill='Enrolled') +
+  labs(fill='Enrolled')+
+  scale_x_discrete(labels=c("Asian_PI" = "Asian and \n Pacific Islander",
+                            "Other" = "Native American",
+                            "Hispanic" = "Hispanic",
+                            "NHWhite" = "Non-Hispanic \n White",
+                            "Black" = "Non-Hispanic \n Black")) +
+    scale_y_continuous(limits=c(0,25))+
   theme_classic()
 
 p2
+ggsave("fig1.png")
+
 
 file <- tempfile("file1", fileext = ".png")
 set_null_device("png")
@@ -154,9 +169,11 @@ View(file)
 
 ```
 
+
+
 ```{r}
 
-p3 <- byrace2 %>% filter((!(COVCLINTRIAL == "No"))) %>% ggplot(aes(y= percent, x= reorder(raceplot, -percent), fill=COVCLINTRIAL)) +
+p3 <- byrace2 %>% filter((!(COVCLINTRIAL == "No"))) %>% ggplot(aes(y= percent, x= reorder(RACEgr, -percent), fill=COVCLINTRIAL)) +
   geom_bar(stat="identity", width = 0.8) +
   ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
   xlab('Race/Ethnicity') + ylab('Percentage') +
@@ -165,14 +182,10 @@ p3 <- byrace2 %>% filter((!(COVCLINTRIAL == "No"))) %>% ggplot(aes(y= percent, x
              size= 2.7,
              position=position_stack(vjust=0.5)) +
   labs(fill='Enrolled') +
-  scale_x_discrete(labels=c("Asian" = "Asian",
-                            "NA_PI" = "Native American and\n Pacific Islander",
-                            "Black" = "Non-Hispanic Black",
-                            "NHWhite" = "Non-Hispanic White",
-                            "Hispanic" = "Hispanic")) +
   scale_y_continuous(limits=c(0,25))+
   theme(axis.text.x = element_text(size=14)) + 
   theme_classic()
+  
 p3
 
 library(sjPlot)

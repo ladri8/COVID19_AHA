@@ -75,6 +75,9 @@ cat("\n Missing COVCLINTRIAL \n")
 
 df2 <-df2nd %>% filter(!is.na(COVCLINTRIAL))
 
+df2 %>%
+  count(FACILITY_DISPLAY_ID) %>% tally()
+
 #Number of Unique Patients
 df2 %>%
   count(FACILITY_DISPLAY_ID, PATIENT_DISPLAY_ID) %>% tally() 
@@ -109,7 +112,10 @@ df2 <-df2 %>%
          ADMDT[which.max(ADMDT)]) %>%
     filter(ADMDT == mxDate & !duplicated(ADMDT)) %>%
   ungroup
- 
+
+df2 %>%
+  count(FACILITY_DISPLAY_ID) %>% tally() 
+
 ```
 
 
@@ -324,6 +330,7 @@ n_pt_per_dup_n
 #Check Duplicates One Last Time
 
 
+
 ```
 
 ##Select Working Variables and Add Labels
@@ -347,7 +354,7 @@ dft1 <- df2 %>% dplyr::select(CASE_ID,PATIENT_DISPLAY_ID,FACILITY_DISPLAY_ID,
               SHKMGMT_02, SHKMGMT_04, SHKMGMT_05,
               SHKMGMT_03, HOSPVENT, SCRUADM,
               TROPUADM, DDMERU, HGBUADM, WBCUADM,
-              WEIGHTADMi, HEIGHTi,DOCUSYMP_12,ZIP, matches("MEDHISTO_")) %>%
+              WEIGHTADMi, HEIGHTi,DOCUSYMP_12,ZIP,DIAGDT, matches("MEDHISTO_")) %>%
       dplyr::filter(!is.na(COVCLINTRIAL))
 
 #LABEL VARS
@@ -428,6 +435,7 @@ for (var in psources) {
 # dft1$Cerebrovasc_group <-as.factor(dft1$)
 
 table(dft1$PATMANICU, useNA = "ifany")
+
 ```
 
 ```{r Recode and Combine Variables}
