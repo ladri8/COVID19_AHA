@@ -111,8 +111,13 @@ filthosp = filthosp %>%
            mutate(PATMANICU = relevel(PATMANICU, "No"))# 2-not managed in ICU
 contrasts(filthosp$PATMANICU) 
 
-contrasts(filthosp$admonth)
 
+#Wrangling Admission Month
+
+table(filthosp$admonth)
+filthosp = filthosp %>%
+           mutate(admonth = relevel(admonth, "March"))
+contrasts(filthosp$admonth)
 
 
 ```

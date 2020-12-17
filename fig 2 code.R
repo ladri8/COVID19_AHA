@@ -18,18 +18,16 @@ ggplot(bydate) +
   theme_minimal() +
   theme(legend.position = "none")
 
+#bymonth<-bydate %>% select(COVCLINTRIAL, admonth, n) %>% pivot_wider(names_from = admonth, values_from = n) %>% group_by(COVCLINTRIAL)
+
+# 2 x 8 Contingency Table
+
 library(tidyr)
-
 contingencia<-table(dft1$COVCLINTRIAL, dft1$admonth)
+contingencia
 
-bymonth<-bydate %>% select(COVCLINTRIAL, admonth, n) %>% pivot_wider(names_from = admonth, values_from = n) %>% group_by(COVCLINTRIAL)
-
-contingency<-print.data.frame(bymonth)
-kable(contingency)
-
-#Chisq Test
 chisq.test(contingencia)
 
 #Fisher Exact Test
-
-
+#Tried Increasing workspace to 2e8, 2e9, 2e10 runs out of memory at 2e11
+fisher.test(contingencia, workspace = 2e8)
