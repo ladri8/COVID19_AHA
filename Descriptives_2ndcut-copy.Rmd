@@ -16,7 +16,7 @@ library(esquisse)
 library(haven)
 library(broom)
 library(SmartEDA)
-library(summarytools)
+#library(summarytools)
 library(stats)
 library(kableExtra)
 library(DataExplorer)
@@ -627,6 +627,15 @@ library(lubridate)
 #Extracted Admission Date Month into "admmonth" var
 dft1$admmonth <- month(dft1$ADMDT)
 
+dft1$diagyr <- year(dft1$DIAGDT)
+
+filtdiagdt <-dft1 %>% filter(diagyr == "2019" | diagyr== "2020")
+
+range(filtdiagdt$DIAGDT)
+
+yrclean<-filtdiagdt %>% filter(diagyr == "2020")
+
+
 #Summarize Counts by Month
 dft1 %>% group_by(admmonth) %>% tally()  
 
@@ -644,13 +653,24 @@ dft1 <-dft1 %>% mutate(month_cont = case_when(admmonth == "12" ~ 0,
                                               admmonth == "7" ~ 5,
                                               admmonth == "8" ~ 6,
                                               admmonth == "9" ~ 7))
-        
 
+dft1 <-dft1 %>% mutate(admonth = case_when(admmonth == "12" ~ "Before March", 
+                                              admmonth == "1" ~ "Before March",
+                                              admmonth == "2" ~ "Before March",
+                                              admmonth == "3" ~ "March",
+                                              admmonth == "4" ~ "April",
+                                              admmonth == "5" ~ "May",
+                                              admmonth == "6" ~ "June",
+                                              admmonth == "7" ~ "July",
+                                              admmonth == "8" ~ "August",
+                                              admmonth == "9" ~ "September"))
+dft1$admonth <- as.factor(dft1$admonth)
+        
 table(as.factor(dft1$month_cont))
 head(dft1$month_cont)
 head(dft1$ADMDT)
 head(dft1$admmonth)
-
+head(dft1$admonth)
 ```
 
 ```{r}
@@ -722,6 +742,7 @@ filter(dft1, DDMER_T <= 10000)
 ```
 
 ```{r}
+
 # Convert Creatinine units factor 2 (umol/L) to factor 1 (mg/dL)
 dft1<- dft1 %>% mutate(CREATININE_T = case_when(SCRUADM == 1 ~ (INITSCR*1),
           SCRUADM == 2 ~ (INITSCR/88.42)))
