@@ -1,30 +1,35 @@
 bydate<- dft1 %>%
   group_by(COVCLINTRIAL, admonth) %>%
   filter(!(COVCLINTRIAL == "No")) %>%
+  filter (!(admonth == "Before March")) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n)) %>%
   mutate(percent = (freq*100), rounded = round(percent,1))
 
 bydate
 
-bydate$admonth <- factor(bydate$admonth, levels = c("Before March", "March", "April", "May", "June","July", "August", "September"))
+bydate$admonth <- factor(bydate$admonth, levels = c("March", "April", "May", "June","July", "August", "September"))
 
 ggplot(bydate) +
   aes(x = admonth, fill = admonth, weight = freq) +
   geom_bar(position = "dodge") +
   ggtitle("Figure 2. Proportion of Enrollment in Clinical Trials by Admission Month") +
   xlab('Admission Month') + ylab('Proportion') +
-  scale_fill_hue() +
-  theme_minimal() +
+  scale_fill_hue() + scale_y_continuous(limits = c(0, 0.5), breaks=seq(0,0.5,0.1)) +
+  theme_classic() + 
   theme(legend.position = "none")
 
 # 2 x 8 Contingency Table
 
-library(tidyr)
-contingencia<-table(dft1$COVCLINTRIAL, dft1$admonth)
-contingencia
+nobeforemarch <- dft1 %>% select(COVCLINTRIAL,admonth) %>% filter(!(admonth == "Before March")) %>% droplevels()
 
-chisq.test(contingencia)
+library(tidyr)
+
+monthtable<-table(nobeforemarch$COVCLINTRIAL, nobeforemarch$admonth)
+
+monthtable<-tibble(monthtable)
+
+chisq.test(monthtable)
 
 #Fisher Exact Test 
 ## Get rid of Before march for this test... 
@@ -40,7 +45,7 @@ chisq.test(agegroup)
 
 #Sex Analyses
 sextable <- table(dft1$COVCLINTRIAL, dft1$SEX)
-sextable
+addmargins(sextable)
 
 #Chisq Tes Sex
 chisq.test(sextable)

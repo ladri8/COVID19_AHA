@@ -162,16 +162,19 @@ filthosp$death <- factor(filthosp$death, levels = c("1", "0"),
 
 filthosp = filthosp %>% mutate(death = relevel(death, "No"))
 
+#Filter Before March from Admission Month factor variabl
 
-#contrasts(filthosp$ANTIHYPRGLYM)
+nobeforemarch<- filthosp %>% filter(!(admonth == "BeforeMarch")) %>% droplevels()
+
+table(nobeforemarch$admonth)
+
 
 ```
 
-#Regression Model + Payment Source + Chronic Kidney Disease (Medhisto18) + BMIGroup + Relevel
+#Regression Model (with continuous month)
 ```{r}
 
 filthosp$FACILITY_DISPLAY_ID<-as.factor(filthosp$FACILITY_DISPLAY_ID)
-
 
 #With Month Continuous
 fit2 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
@@ -182,7 +185,7 @@ fit2 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
               MEDHISTO_18 + MEDHISTO_28 + MEDHISTO_29 + MEDHISTO_30 + 
               MEDHISTO_31 + MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + 
               MEDHISTO_35 + Cerebrovasc_group+ fibandflutter+ dvt_pe +
-              smo_vape + DOCUSYMP_12 + admonth + (1|FACILITY_DISPLAY_ID),
+              smo_vape + DOCUSYMP_12 + month_cont + (1|FACILITY_DISPLAY_ID),
              data = filthosp,
              family = binomial,
              nAGQ = 1, 
@@ -241,7 +244,7 @@ fit3 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
               MEDHISTO_31 + MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + 
               MEDHISTO_35 + Cerebrovasc_group+ fibandflutter+ dvt_pe +
               smo_vape + DOCUSYMP_12 + admonth + (1|FACILITY_DISPLAY_ID),
-             data = filthosp,
+             data= filthosp,
              family = binomial,
              nAGQ = 1, 
              control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5)))
@@ -282,15 +285,10 @@ save_as_docx("Model2" = f2model_flextab,
 
 View(docx_file)
 
-length(unique(filthosp$FACILITY_DISPLAY_ID))
+#length(unique(filthosp$FACILITY_DISPLAY_ID))
 
-head(filthosp$region)
-select(filthosp,FACILITY_DISPLAY_ID) %>% tally()
-
-
-
-
-
+#head(filthosp$region)
+#select(filthosp,FACILITY_DISPLAY_ID) %>% tally()
 
 ```
 

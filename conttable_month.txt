@@ -1,0 +1,10 @@
+     
+      April August July June March  May September
+  Yes   527     86  157  184   204  238        17
+  No   5304    527  801  899  4165 1708       201
+
+	Pearson's Chi-squared test
+
+data:  monthtable
+X-squared = 278.05, df = 6, p-value < 2.2e-16
+
