@@ -1,6 +1,6 @@
 bydate<- dft1 %>%
   group_by(COVCLINTRIAL, admonth) %>%
-  #filter(!(COVCLINTRIAL == "No")) %>%
+  filter(!(COVCLINTRIAL == "No")) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n)) %>%
   mutate(percent = (freq*100), rounded = round(percent,1))
@@ -18,8 +18,6 @@ ggplot(bydate) +
   theme_minimal() +
   theme(legend.position = "none")
 
-#bymonth<-bydate %>% select(COVCLINTRIAL, admonth, n) %>% pivot_wider(names_from = admonth, values_from = n) %>% group_by(COVCLINTRIAL)
-
 # 2 x 8 Contingency Table
 
 library(tidyr)
@@ -28,6 +26,22 @@ contingencia
 
 chisq.test(contingencia)
 
-#Fisher Exact Test
+#Fisher Exact Test 
+## Get rid of Before march for this test... 
 #Tried Increasing workspace to 2e8, 2e9, 2e10 runs out of memory at 2e11
 fisher.test(contingencia, workspace = 2e8)
+
+#Age group Analyses 
+agegroup <- table(dft1$COVCLINTRIAL, dft1$age_group)
+agegroup
+
+#Test 
+chisq.test(agegroup)
+
+#Sex Analyses
+sextable <- table(dft1$COVCLINTRIAL, dft1$SEX)
+sextable
+
+#Chisq Tes Sex
+chisq.test(sextable)
+
