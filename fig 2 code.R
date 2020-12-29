@@ -21,20 +21,20 @@ ggplot(bydate) +
 
 # 2 x 8 Contingency Table
 
-nobeforemarch <- dft1 %>% select(COVCLINTRIAL,admonth) %>% filter(!(admonth == "Before March")) %>% droplevels()
+nobeforemarch <- dft1 %>% select(COVCLINTRIAL,admonth) %>% filter(!(admonth == "BM")) %>% droplevels()
 
 library(tidyr)
 
 monthtable<-table(nobeforemarch$COVCLINTRIAL, nobeforemarch$admonth)
 
-monthtable<-tibble(monthtable)
+monthtable
 
 chisq.test(monthtable)
+
 
 #Fisher Exact Test 
 ## Get rid of Before march for this test... 
 #Tried Increasing workspace to 2e8, 2e9, 2e10 runs out of memory at 2e11
-fisher.test(contingencia, workspace = 2e8)
 
 #Age group Analyses 
 agegroup <- table(dft1$COVCLINTRIAL, dft1$age_group)
@@ -43,10 +43,35 @@ agegroup
 #Test 
 chisq.test(agegroup)
 
-#Sex Analyses
+sink("conttable_age.txt")
+
+print(chisq.test(agegroup))
+sink()
+
+
+#Sex Analysis
 sextable <- table(dft1$COVCLINTRIAL, dft1$SEX)
 addmargins(sextable)
 
 #Chisq Tes Sex
 chisq.test(sextable)
+
+#Save raw output in txt
+sink("conttables.txt")
+
+print("Admission Month")
+print(monthtable)
+print(chisq.test(monthtable))
+
+print("Age Group")
+
+print(agegroup)
+print(chisq.test(agegroup))
+
+print("Sex")
+
+print(sextable)
+print(chisq.test(sextable))
+
+sink()
 
