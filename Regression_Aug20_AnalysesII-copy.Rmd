@@ -116,7 +116,7 @@ contrasts(filthosp$PATMANICU)
 
 table(filthosp$admonth)
 filthosp = filthosp %>%
-           mutate(admonth = relevel(admonth, "March"))
+           mutate(admonth = relevel(admonth, "April"))
 
 contrasts(filthosp$admonth)
 
@@ -157,7 +157,7 @@ filthosp$DOCUSYMP_12 <- factor(filthosp$DOCUSYMP_12, levels = c("Yes", "No"),
 
 filthosp = filthosp %>% mutate(DOCUSYMP_12 = relevel(DOCUSYMP_12, "No"))
 
-filthosp = filthosp %>% mutate(admonth = relevel(admonth, "March"))
+filthosp = filthosp %>% mutate(admonth = relevel(admonth, "April"))
 
 filthosp$death <- factor(filthosp$death, levels = c("1", "0"),
                           labels=c( "Yes", "No"))
@@ -166,11 +166,10 @@ filthosp = filthosp %>% mutate(death = relevel(death, "No"))
 
 #Filter Before March from Admission Month factor variabl
 
-nobeforemarch<- filthosp %>% filter(!(admonth == "BM")) %>% droplevels()
-
-head(nob)
+#nobeforemarch<- filthosp %>% filter(!(admonth == "BM")) %>% droplevels()
 
 table(nobeforemarch$admonth)
+contrasts(nobeforemarch$admonth)
 
 ```
 
@@ -236,6 +235,7 @@ View(docx_file)
 ```
 
 ```{r}
+
 filthosp$FACILITY_DISPLAY_ID<-as.factor(filthosp$FACILITY_DISPLAY_ID)
 
 fit3 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
@@ -247,7 +247,7 @@ fit3 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
               MEDHISTO_31 + MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + 
               MEDHISTO_35 + Cerebrovasc_group+ fibandflutter+ dvt_pe +
               smo_vape + DOCUSYMP_12 + admonth + (1|FACILITY_DISPLAY_ID),
-             data = nobeforemarch,
+             data = filthosp,
              family = binomial,
              nAGQ = 1, 
              control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5)))
