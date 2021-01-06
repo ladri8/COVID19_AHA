@@ -252,6 +252,7 @@ fit3 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
              nAGQ = 1, 
              control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5)))
 
+fit3
 
 #Raw Model Summary 
 summary(fit3)

@@ -1,7 +1,7 @@
 bydate<- dft1 %>%
   group_by(COVCLINTRIAL, admonth) %>%
   filter(!(COVCLINTRIAL == "No")) %>%
-  filter (!(admonth == "Before March")) %>%
+  filter (!(admonth == "BM")) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n)) %>%
   mutate(percent = (freq*100), rounded = round(percent,1))
@@ -13,10 +13,10 @@ bydate$admonth <- factor(bydate$admonth, levels = c("March", "April", "May", "Ju
 ggplot(bydate) +
   aes(x = admonth, fill = admonth, weight = freq) +
   geom_bar(position = "dodge") +
-  ggtitle("Figure 2. Proportion of Enrollment in Clinical Trials by Admission Month") +
-  xlab('Admission Month') + ylab('Proportion') +
+  ggtitle("Figure 2. Clinical Trial Enrollment Over Time") +
+  xlab('Admission Month (2020)') + ylab('Proportion (%) of All Enrolled Patients') +
   scale_fill_hue() + scale_y_continuous(limits = c(0, 0.5), breaks=seq(0,0.5,0.1)) +
-  theme_classic() + 
+  theme_classic(base_size = 16) + 
   theme(legend.position = "none")
 
 # 2 x 8 Contingency Table
@@ -73,5 +73,4 @@ print("Sex")
 print(sextable)
 print(chisq.test(sextable))
 
-sink()
 
