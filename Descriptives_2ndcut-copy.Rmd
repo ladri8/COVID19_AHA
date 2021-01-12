@@ -731,43 +731,42 @@ table(dft1$death)
 
 ## Converting Units for DDMER, Creatinine,and Troponin
 
-hist(df2nd$DDMERU, plot = TRUE)
-hist(df2nd$TROPUADM, plot = TRUE)
-hist(df2nd$SCRUADM, plot =TRUE)
-
-#Convert DDMER factors 2 (u/mL) and 3 (ug/mL) to 1 (ng/mL)
-
-dft1<- dft1 %>% mutate(DDMER_T = case_when(DDMERU == 1 ~ (DDMER*1),
-          DDMERU == 2 ~ (DDMER*1000),
-          DDMERU == 3 ~ (DDMER*1000)))
-
-hist(dft1$DDMERU)
-hist(dft1$DDMER_T)
- 
-filter(dft1, DDMER_T <= 10000)
-
-
+# hist(df2nd$DDMERU, plot = TRUE)
+# hist(df2nd$TROPUADM, plot = TRUE)
+# hist(df2nd$SCRUADM, plot =TRUE)
+# 
+# #Convert DDMER factors 2 (u/mL) and 3 (ug/mL) to 1 (ng/mL)
+# 
+# dft1<- dft1 %>% mutate(DDMER_T = case_when(DDMERU == 1 ~ (DDMER*1),
+#           DDMERU == 2 ~ (DDMER*1000),
+#           DDMERU == 3 ~ (DDMER*1000)))
+# 
+# hist(dft1$DDMERU)
+# hist(dft1$DDMER_T)
+#  
+# filter(dft1, DDMER_T <= 10000)
+# 
 
 ```
 
 ```{r}
 
-# Convert Creatinine units factor 2 (umol/L) to factor 1 (mg/dL)
-dft1<- dft1 %>% mutate(CREATININE_T = case_when(SCRUADM == 1 ~ (INITSCR*1),
-          SCRUADM == 2 ~ (INITSCR/88.42)))
-
-table(dft1$SCRUADM)
-hist(dft1$INITSCR)
-hist(dft1$CREATININE_T)
-summary(dft1$CREATININE_T)
-
-hist(dft1$INITSCR, breaks = 200)
-hist(dft1$CREATININE_T, breaks = 200)
-
-
-# 17 patients
-
-dft1 %>% select(SCRUADM, INITSCR, CREATININE_T) %>% filter (CREATININE_T > 20)
+# # Convert Creatinine units factor 2 (umol/L) to factor 1 (mg/dL)
+# dft1<- dft1 %>% mutate(CREATININE_T = case_when(SCRUADM == 1 ~ (INITSCR*1),
+#           SCRUADM == 2 ~ (INITSCR/88.42)))
+# 
+# table(dft1$SCRUADM)
+# hist(dft1$INITSCR)
+# hist(dft1$CREATININE_T)
+# summary(dft1$CREATININE_T)
+# 
+# hist(dft1$INITSCR, breaks = 200)
+# hist(dft1$CREATININE_T, breaks = 200)
+# 
+# 
+# # 17 patients
+# 
+# dft1 %>% select(SCRUADM, INITSCR, CREATININE_T) %>% filter (CREATININE_T > 20)
 
 
 ```
@@ -777,26 +776,26 @@ dft1 %>% select(SCRUADM, INITSCR, CREATININE_T) %>% filter (CREATININE_T > 20)
 #13 p patients with over 100 Troponin --- Keep them
 #Convert Troponin factors 2 (ug/L) and 3(ng/L) to 1 (ng/mL)
 
-dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
-          TROPUADM == 2 ~ (TROPADM*1),
-          TROPUADM == 3 ~ (TROPADM*0.001)))
-
-hist(dft1$TROPADM)
-hist(dft1$TROPOADM_t)
-
-summary(dft1$TROPOADM_t)
-
-hist(dft1$TROPADM, breaks = 200)
-hist(dft1$TROPOADM_t, breaks = 200)
-
-#10 patients with over 100 Troponin --- Keep them
-
-dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
-          TROPUADM == 2 ~ (TROPADM*1),
-          TROPUADM == 3 ~ (TROPADM*0.001)))
-
-
-dft1 %>% select(TROPADM, TROPUADM, TROPOADM_t) %>% filter (TROPOADM_t > 0.90)
+# dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
+#           TROPUADM == 2 ~ (TROPADM*1),
+#           TROPUADM == 3 ~ (TROPADM*0.001)))
+# 
+# hist(dft1$TROPADM)
+# hist(dft1$TROPOADM_t)
+# 
+# summary(dft1$TROPOADM_t)
+# 
+# hist(dft1$TROPADM, breaks = 200)
+# hist(dft1$TROPOADM_t, breaks = 200)
+# 
+# #10 patients with over 100 Troponin --- Keep them
+# 
+# dft1<- dft1 %>% mutate(TROPOADM_t = case_when(TROPUADM == 1 ~ (TROPADM*1),
+#           TROPUADM == 2 ~ (TROPADM*1),
+#           TROPUADM == 3 ~ (TROPADM*0.001)))
+# 
+# 
+# dft1 %>% select(TROPADM, TROPUADM, TROPOADM_t) %>% filter (TROPOADM_t > 0.90)
 
 #Hemoglobin
 ```
@@ -804,44 +803,102 @@ dft1 %>% select(TROPADM, TROPUADM, TROPOADM_t) %>% filter (TROPOADM_t > 0.90)
 ```{r Histograms}
 
 # Plotting Histograms of Continuous Vars Using Data Explorer
+# # 
+# # dft1 %>% select(AGEi, DDMER, HGBADM, INITSCR, PLATELET, TROPADM, WBCADM) %>% plot_histogram(geom_histogram_args = list(binwidth = .3, col ="black", size = 3))
 # 
-# dft1 %>% select(AGEi, DDMER, HGBADM, INITSCR, PLATELET, TROPADM, WBCADM) %>% plot_histogram(geom_histogram_args = list(binwidth = .3, col ="black", size = 3))
-
-#Hemoglobin 
-
-hist(dft1$HGBADM,breaks = 300, plot = TRUE)
-dft1 %>% filter ( HGBADM > 50)
-
-#CHECK UNITS
-
-table(df2nd$HGBUADM)
-
-
-#WBC
-hist(dft1$WBCADM,breaks= 200, plot = TRUE) 
-#Use unique to see unique values in the variable
-#May be a conversion factor issue One patient at 7387.0 
-# Fema…    38 Hisp…   13.3   7387      219 
-
-#
-hist(dft1$PLATELET)
-# Outliers: 3 patients with over 3000  
-dft1 %>% filter ( PLATELET > 800)
-
-#Creatinine 
-hist(dft1$INITSCR, breaks= 200)
-#11 patiens with initscr >20
-#dft1 %>% filter ( INITSCR > 20)
-
-#Troponin
-hist(dft1$TROPADM, breaks = 200)
-#10 patients with over 100 Troponin --- Keep them 
-
-#DDMER Prot
-hist(dft1$DDMER, breaks = 80, plot = TRUE)
+# #Hemoglobin 
+# 
+# hist(dft1$HGBADM,breaks = 300, plot = TRUE)
+# dft1 %>% filter ( HGBADM > 50)
+# 
+# #CHECK UNITS
+# 
+# table(df2nd$HGBUADM)
+# 
+# 
+# #WBC
+# hist(dft1$WBCADM,breaks= 200, plot = TRUE) 
+# #Use unique to see unique values in the variable
+# #May be a conversion factor issue One patient at 7387.0 
+# # Fema…    38 Hisp…   13.3   7387      219 
+# 
+# #
+# hist(dft1$PLATELET)
+# # Outliers: 3 patients with over 3000  
+# dft1 %>% filter ( PLATELET > 800)
+# 
+# #Creatinine 
+# hist(dft1$INITSCR, breaks= 200)
+# #11 patiens with initscr >20
+# #dft1 %>% filter ( INITSCR > 20)
+# 
+# #Troponin
+# hist(dft1$TROPADM, breaks = 200)
+# #10 patients with over 100 Troponin --- Keep them 
+# 
+# #DDMER Prot
+# hist(dft1$DDMER, breaks = 80, plot = TRUE)
 
 
 
 ```
 
+
+
+```{r}
+#Imputation by Group 
+
+require(dplyr)
+# Obese <- subset(dft1, BMIgroup == "Obese")
+# Normal <- subset(dft1, BMIgroup == "Normal")
+# Under <-subset(dft1, BMIgroup == "Underweight")
+# Over <- subset(dft1, BMIgroup == "Overweight" )
+
+mean(Obese$BMIadmit, rm.na = TRUE)
+mean(Normal$BMIadmit, rm.na = TRUE)
+mean(Over$BMIadmit, rm.na = TRUE)
+mean(Under$BMIadmit, rm.na = TRUE)
+
+group_means <- c(16.48,37.5,22.5, 27.47)
+
+#Obese$BMIadmit[which(is.na(Obese$BMIadmit))] <- mean(Obese$BMIadmit, na.rm = TRUE)
+set.seed(123)
+
+#dft1$BMI[which(is.na(dft1$BMI))] <- sample(group_means)
+#head(dft1$BMI,100)
+
+dft1 <- dft1 %>% mutate(imp_BMI=ifelse(is.na(BMIadmit), sample(group_means), BMIadmit))
+
+dim(dft1)
+
+```
+
+```{r}
+
+#Impute randomly with group means object 
+#dft1$BMI[which(is.na(dft1$BMI))] <- sample(group_means)
+
+#Check BMI, BMIadmit, and BMIgroup 
+#dft1 %>% select(BMI, BMIadmit, BMIgroup)
+
+
+```
+```{r}
+
+dft1 <- dft1 %>% mutate(imputed_BMIgroup = case_when(imp_BMI < 18.5 ~ 'Underweight',
+                                             imp_BMI >= 18.5 & imp_BMI < 25.0 ~ 'Normal',
+                                             imp_BMI >= 25.0 & imp_BMI < 30.0 ~ 'Overweight',
+                                             imp_BMI >=30.0 ~ 'Obese'))
+
+dft1 %>% select(BMI, BMIadmit, BMIgroup, imputed_BMIgroup)
+
+
+```
+
+```{r}
+table(dft1$BMIgroup, useNA = 'ifany')
+
+table(dft1$imputed_BMIgroup, useNA = 'ifany')
+
+```
 

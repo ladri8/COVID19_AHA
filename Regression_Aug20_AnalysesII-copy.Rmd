@@ -120,7 +120,6 @@ filthosp = filthosp %>%
 
 contrasts(filthosp$admonth)
 
-filthosp$admonth
 
 ```
 
@@ -139,6 +138,12 @@ filthosp = filthosp %>% mutate(age_group = relevel(age_group, ">64"))
 
 table(filthosp$COVCLINTRIAL)
 contrasts(filthosp$COVCLINTRIAL)
+
+# contrasts(filthosp$imputed_BMIgroup)
+
+filthosp$imputed_BMIgroup <- as.factor(filthosp$imputed_BMIgroup)
+
+contrasts(filthosp$imputed_BMIgroup)
 
 filthosp$HOSPVENT <- factor(filthosp$HOSPVENT, levels = c("Yes", "No"),
                           labels=c( "Yes", "No"))
@@ -173,14 +178,16 @@ contrasts(nobeforemarch$admonth)
 
 ```
 
-#Regression Model (with continuous month)
+#Regression Model (with continuous month and Imputed BMI group)
 ```{r}
 
 filthosp$FACILITY_DISPLAY_ID<-as.factor(filthosp$FACILITY_DISPLAY_ID)
 
+
+
 #With Month Continuous
 fit2 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
-              psource_group + region + BMIgroup + HOSPVENT + 
+              psource_group + region + imputed_BMIgroup + HOSPVENT + 
               PATMANICU + fibandflutter + MEDHISTO_03 + MEDHISTO_07 +
               MEDHISTO_08 + MEDHISTO_09 + MEDHISTO_12 + MEDHISTO_13 + 
               MEDHISTO_14 + MEDHISTO_15 + MEDHISTO_16 + MEDHISTO_17 + 
@@ -192,6 +199,8 @@ fit2 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
              family = binomial,
              nAGQ = 1, 
              control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5)))
+
+fit2
 
 #Raw Model Summary 
 summary(fit2)
@@ -296,6 +305,70 @@ View(docx_file)
 
 ```
 
+
+```{r}
+fit3 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
+              psource_group + region + BMIgroup + HOSPVENT + 
+              PATMANICU + fibandflutter + MEDHISTO_03 + MEDHISTO_07 +
+              MEDHISTO_08 + MEDHISTO_09 + MEDHISTO_12 + MEDHISTO_13 + 
+              MEDHISTO_14 + MEDHISTO_15 + MEDHISTO_16 + MEDHISTO_17 + 
+              MEDHISTO_18 + MEDHISTO_28 + MEDHISTO_29 + MEDHISTO_30 + 
+              MEDHISTO_31 + MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + 
+              MEDHISTO_35 + Cerebrovasc_group+ fibandflutter+ dvt_pe +
+              smo_vape + DOCUSYMP_12 + month_cont + (1|FACILITY_DISPLAY_ID),
+             data = filthosp,
+             family = binomial,
+             nAGQ = 1, 
+             control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5)))
+
+
+
+
+```
+
+```{r}
+
+## Without BMI
+
+fit4 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
+              psource_group + region + HOSPVENT + 
+              PATMANICU + fibandflutter + MEDHISTO_03 + MEDHISTO_07 +
+              MEDHISTO_08 + MEDHISTO_09 + MEDHISTO_12 + MEDHISTO_13 + 
+              MEDHISTO_14 + MEDHISTO_15 + MEDHISTO_16 + MEDHISTO_17 + 
+              MEDHISTO_18 + MEDHISTO_28 + MEDHISTO_29 + MEDHISTO_30 + 
+              MEDHISTO_31 + MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + 
+              MEDHISTO_35 + Cerebrovasc_group+ fibandflutter+ dvt_pe +
+              smo_vape + DOCUSYMP_12 + month_cont + (1|FACILITY_DISPLAY_ID),
+             data = filthosp,
+             family = binomial,
+             nAGQ = 1, 
+             control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5)))
+
+fit4
+
+## 14397 without BMI
+
+
+
+```
+
+```{r}
+fit5 <- glmer(COVCLINTRIAL ~ SEX + RACEgroup + age_group + death +
+              psource_group + HOSPVENT + 
+              PATMANICU + fibandflutter + MEDHISTO_03 + MEDHISTO_07 +
+              MEDHISTO_08 + MEDHISTO_09 + MEDHISTO_12 + MEDHISTO_13 + 
+              MEDHISTO_14 + MEDHISTO_15 + MEDHISTO_16 + MEDHISTO_17 + 
+              MEDHISTO_18 + MEDHISTO_28 + MEDHISTO_29 + MEDHISTO_30 + 
+              MEDHISTO_31 + MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + 
+              MEDHISTO_35 + Cerebrovasc_group+ fibandflutter+ dvt_pe +
+              smo_vape + DOCUSYMP_12 + month_cont + (1|FACILITY_DISPLAY_ID),
+             data = filthosp,
+             family = binomial,
+             nAGQ = 1, 
+             control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e5)))
+
+fit5
+```
 
 
 

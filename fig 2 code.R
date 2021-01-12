@@ -70,7 +70,6 @@ print(chisq.test(agegroup))
 
 print("Sex")
 
-print(sextable)
 print(chisq.test(sextable))
 
 

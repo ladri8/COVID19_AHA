@@ -1,170 +1,75 @@
 Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
  Family: binomial  ( logit )
 Formula: COVCLINTRIAL ~ SEX + RACEgroup + age_group + death + psource_group +  
-    region + BMIgroup + HOSPVENT + PATMANICU + fibandflutter +  
+    region + imputed_BMIgroup + HOSPVENT + PATMANICU + fibandflutter +  
     MEDHISTO_03 + MEDHISTO_07 + MEDHISTO_08 + MEDHISTO_09 + MEDHISTO_12 +  
     MEDHISTO_13 + MEDHISTO_14 + MEDHISTO_15 + MEDHISTO_16 + MEDHISTO_17 +  
     MEDHISTO_18 + MEDHISTO_28 + MEDHISTO_29 + MEDHISTO_30 + MEDHISTO_31 +  
     MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + MEDHISTO_35 + Cerebrovasc_group +  
-    fibandflutter + dvt_pe + smo_vape + DOCUSYMP_12 + admonth +      (1 | FACILITY_DISPLAY_ID)
+    fibandflutter + dvt_pe + smo_vape + DOCUSYMP_12 + month_cont +      (1 | FACILITY_DISPLAY_ID)
    Data: filthosp
 Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e+05))
 
      AIC      BIC   logLik deviance df.resid 
-  6036.9   6439.8  -2964.4   5928.9    12812 
+  6520.8   6884.3  -3212.4   6424.8    14349 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--3.4500 -0.2780 -0.1339 -0.0570 17.2893 
+-2.6135 -0.2717 -0.1313 -0.0564 21.6667 
 
 Random effects:
  Groups              Name        Variance Std.Dev.
- FACILITY_DISPLAY_ID (Intercept) 2.996    1.731   
-Number of obs: 12866, groups:  FACILITY_DISPLAY_ID, 85
+ FACILITY_DISPLAY_ID (Intercept) 3.002    1.733   
+Number of obs: 14397, groups:  FACILITY_DISPLAY_ID, 85
 
 Fixed effects:
-                       Estimate Std. Error z value Pr(>|z|)    
-(Intercept)            -4.69330    0.34301 -13.683  < 2e-16 ***
-SEXFemale              -0.25610    0.07249  -3.533 0.000411 ***
-RACEgroupHispanic       0.06081    0.10251   0.593 0.553074    
-RACEgroupBlack         -0.25616    0.09946  -2.576 0.010008 *  
-RACEgroupOther          0.58795    0.39901   1.474 0.140605    
-RACEgroupAsian_PI       0.02651    0.17356   0.153 0.878587    
-RACEgroupUTD           -0.05366    0.18347  -0.292 0.769938    
-age_group<50           -0.13953    0.11362  -1.228 0.219426    
-age_group50-64          0.10484    0.09678   1.083 0.278661    
-deathYes               -0.29455    0.11247  -2.619 0.008820 ** 
-psource_groupMedicare   0.06523    0.11519   0.566 0.571233    
-psource_groupOther      0.26612    0.09120   2.918 0.003522 ** 
-psource_groupSelf pay   0.25656    0.14220   1.804 0.071190 .  
-psource_groupUnknown    0.20263    0.19073   1.062 0.288065    
-regionMidwest          -0.04506    0.44488  -0.101 0.919328    
-regionSouth             0.61338    0.37034   1.656 0.097674 .  
-regionWest              1.98859    0.48801   4.075 4.60e-05 ***
-BMIgroupObese           0.53453    0.10154   5.264 1.41e-07 ***
-BMIgroupOverweight      0.22839    0.10594   2.156 0.031093 *  
-BMIgroupUnderweight    -0.39058    0.31109  -1.256 0.209293    
-HOSPVENTYes             0.47882    0.11416   4.194 2.74e-05 ***
-PATMANICUYes            1.16772    0.10136  11.521  < 2e-16 ***
-fibandflutterYes       -0.31795    0.13648  -2.330 0.019821 *  
-MEDHISTO_03Yes          0.09818    0.10851   0.905 0.365573    
-MEDHISTO_07Yes         -0.18645    0.22376  -0.833 0.404702    
-MEDHISTO_08Yes         -0.01717    0.08117  -0.212 0.832462    
-MEDHISTO_09Yes          0.08850    0.08415   1.052 0.292915    
-MEDHISTO_12Yes         -0.07216    0.09326  -0.774 0.439079    
-MEDHISTO_13Yes         -0.15469    0.23744  -0.651 0.514747    
-MEDHISTO_14Yes         -0.34722    0.24637  -1.409 0.158727    
-MEDHISTO_15Yes          0.17717    0.17303   1.024 0.305846    
-MEDHISTO_16Yes          0.15305    0.18397   0.832 0.405460    
-MEDHISTO_17Yes          0.09789    0.12265   0.798 0.424834    
-MEDHISTO_18Yes         -0.12391    0.11975  -1.035 0.300788    
-MEDHISTO_28Yes          0.03740    0.23366   0.160 0.872830    
-MEDHISTO_29Yes         -0.03438    0.21695  -0.158 0.874091    
-MEDHISTO_30Yes          0.88795    0.43660   2.034 0.041973 *  
-MEDHISTO_31Yes          0.05342    0.21852   0.244 0.806858    
-MEDHISTO_32Yes         -0.18484    0.26671  -0.693 0.488278    
-MEDHISTO_33Yes          0.51614    0.22773   2.266 0.023422 *  
-MEDHISTO_34Yes          1.47846    0.57365   2.577 0.009958 ** 
-MEDHISTO_35Yes          0.44663    0.42499   1.051 0.293292    
-Cerebrovasc_groupYes   -0.40032    0.14376  -2.785 0.005359 ** 
-dvt_peYes              -0.69579    0.18997  -3.663 0.000250 ***
-smo_vapeYes            -0.04047    0.14546  -0.278 0.780847    
-DOCUSYMP_12Yes         -0.42825    0.12931  -3.312 0.000927 ***
-admonthAugust           0.55158    0.17062   3.233 0.001226 ** 
-admonthBM             -14.49721  703.08531  -0.021 0.983549    
-admonthJuly             0.57411    0.14393   3.989 6.64e-05 ***
-admonthJune             0.93561    0.13358   7.004 2.48e-12 ***
-admonthMarch           -0.73027    0.11525  -6.336 2.35e-10 ***
-admonthMay              0.71907    0.11745   6.122 9.23e-10 ***
-admonthSeptember       -0.58524    0.30085  -1.945 0.051744 .  
+                             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                 -5.083328   0.333956 -15.222  < 2e-16 ***
+SEXFemale                   -0.257159   0.068995  -3.727 0.000194 ***
+RACEgroupHispanic            0.176679   0.097391   1.814 0.069658 .  
+RACEgroupBlack              -0.210833   0.095389  -2.210 0.027088 *  
+RACEgroupOther               0.674470   0.369535   1.825 0.067973 .  
+RACEgroupAsian_PI            0.021428   0.167004   0.128 0.897904    
+RACEgroupUTD                -0.114003   0.173949  -0.655 0.512224    
+age_group<50                -0.151460   0.107812  -1.405 0.160065    
+age_group50-64               0.126530   0.091690   1.380 0.167592    
+deathYes                    -0.317842   0.106942  -2.972 0.002958 ** 
+psource_groupMedicare        0.001817   0.109354   0.017 0.986741    
+psource_groupOther           0.176256   0.086521   2.037 0.041636 *  
+psource_groupSelf pay        0.202617   0.135308   1.497 0.134276    
+psource_groupUnknown         0.109828   0.184594   0.595 0.551863    
+regionMidwest                0.128521   0.431273   0.298 0.765701    
+regionSouth                  0.721939   0.352798   2.046 0.040725 *  
+regionWest                   1.910348   0.464581   4.112 3.92e-05 ***
+imputed_BMIgroupObese        0.453518   0.094956   4.776 1.79e-06 ***
+imputed_BMIgroupOverweight   0.153975   0.099975   1.540 0.123526    
+imputed_BMIgroupUnderweight -0.288835   0.224909  -1.284 0.199062    
+HOSPVENTYes                  0.451401   0.108634   4.155 3.25e-05 ***
+PATMANICUYes                 1.110952   0.096507  11.512  < 2e-16 ***
+fibandflutterYes            -0.257867   0.129323  -1.994 0.046155 *  
+MEDHISTO_03Yes               0.037040   0.104575   0.354 0.723190    
+MEDHISTO_07Yes              -0.336954   0.217337  -1.550 0.121050    
+MEDHISTO_08Yes              -0.010100   0.077249  -0.131 0.895976    
+MEDHISTO_09Yes               0.079167   0.080253   0.986 0.323904    
+MEDHISTO_12Yes              -0.025547   0.088922  -0.287 0.773883    
+MEDHISTO_13Yes              -0.134277   0.225104  -0.597 0.550834    
+MEDHISTO_14Yes              -0.378923   0.238284  -1.590 0.111787    
+MEDHISTO_15Yes               0.132763   0.166628   0.797 0.425587    
+MEDHISTO_16Yes               0.178415   0.174713   1.021 0.307165    
+MEDHISTO_17Yes               0.085927   0.117084   0.734 0.463013    
+MEDHISTO_18Yes              -0.123093   0.114683  -1.073 0.283123    
+MEDHISTO_28Yes              -0.006079   0.226360  -0.027 0.978575    
+MEDHISTO_29Yes               0.010173   0.208694   0.049 0.961122    
+MEDHISTO_30Yes               0.689730   0.428627   1.609 0.107581    
+MEDHISTO_31Yes               0.137676   0.210880   0.653 0.513845    
+MEDHISTO_32Yes              -0.147242   0.259168  -0.568 0.569945    
+MEDHISTO_33Yes               0.500913   0.215926   2.320 0.020349 *  
+MEDHISTO_34Yes               1.318333   0.514144   2.564 0.010343 *  
+MEDHISTO_35Yes               0.319364   0.409073   0.781 0.434978    
+Cerebrovasc_groupYes        -0.355592   0.135957  -2.615 0.008910 ** 
+dvt_peYes                   -0.647998   0.181205  -3.576 0.000349 ***
+smo_vapeYes                 -0.009297   0.138361  -0.067 0.946426    
+DOCUSYMP_12Yes              -0.382398   0.123489  -3.097 0.001957 ** 
+month_cont                   0.190752   0.027730   6.879 6.03e-12 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-convergence code: 0
-unable to evaluate scaled gradient
-Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
-
-Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
- Family: binomial  ( logit )
-Formula: COVCLINTRIAL ~ SEX + RACEgroup + age_group + death + psource_group +  
-    region + BMIgroup + HOSPVENT + PATMANICU + fibandflutter +  
-    MEDHISTO_03 + MEDHISTO_07 + MEDHISTO_08 + MEDHISTO_09 + MEDHISTO_12 +  
-    MEDHISTO_13 + MEDHISTO_14 + MEDHISTO_15 + MEDHISTO_16 + MEDHISTO_17 +  
-    MEDHISTO_18 + MEDHISTO_28 + MEDHISTO_29 + MEDHISTO_30 + MEDHISTO_31 +  
-    MEDHISTO_32 + MEDHISTO_33 + MEDHISTO_34 + MEDHISTO_35 + Cerebrovasc_group +  
-    fibandflutter + dvt_pe + smo_vape + DOCUSYMP_12 + admonth +      (1 | FACILITY_DISPLAY_ID)
-   Data: filthosp
-Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e+05))
-
-     AIC      BIC   logLik deviance df.resid 
-  6036.9   6439.8  -2964.4   5928.9    12812 
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.4500 -0.2780 -0.1339 -0.0570 17.2893 
-
-Random effects:
- Groups              Name        Variance Std.Dev.
- FACILITY_DISPLAY_ID (Intercept) 2.996    1.731   
-Number of obs: 12866, groups:  FACILITY_DISPLAY_ID, 85
-
-Fixed effects:
-                       Estimate Std. Error z value Pr(>|z|)    
-(Intercept)            -4.69330    0.34301 -13.683  < 2e-16 ***
-SEXFemale              -0.25610    0.07249  -3.533 0.000411 ***
-RACEgroupHispanic       0.06081    0.10251   0.593 0.553074    
-RACEgroupBlack         -0.25616    0.09946  -2.576 0.010008 *  
-RACEgroupOther          0.58795    0.39901   1.474 0.140605    
-RACEgroupAsian_PI       0.02651    0.17356   0.153 0.878587    
-RACEgroupUTD           -0.05366    0.18347  -0.292 0.769938    
-age_group<50           -0.13953    0.11362  -1.228 0.219426    
-age_group50-64          0.10484    0.09678   1.083 0.278661    
-deathYes               -0.29455    0.11247  -2.619 0.008820 ** 
-psource_groupMedicare   0.06523    0.11519   0.566 0.571233    
-psource_groupOther      0.26612    0.09120   2.918 0.003522 ** 
-psource_groupSelf pay   0.25656    0.14220   1.804 0.071190 .  
-psource_groupUnknown    0.20263    0.19073   1.062 0.288065    
-regionMidwest          -0.04506    0.44488  -0.101 0.919328    
-regionSouth             0.61338    0.37034   1.656 0.097674 .  
-regionWest              1.98859    0.48801   4.075 4.60e-05 ***
-BMIgroupObese           0.53453    0.10154   5.264 1.41e-07 ***
-BMIgroupOverweight      0.22839    0.10594   2.156 0.031093 *  
-BMIgroupUnderweight    -0.39058    0.31109  -1.256 0.209293    
-HOSPVENTYes             0.47882    0.11416   4.194 2.74e-05 ***
-PATMANICUYes            1.16772    0.10136  11.521  < 2e-16 ***
-fibandflutterYes       -0.31795    0.13648  -2.330 0.019821 *  
-MEDHISTO_03Yes          0.09818    0.10851   0.905 0.365573    
-MEDHISTO_07Yes         -0.18645    0.22376  -0.833 0.404702    
-MEDHISTO_08Yes         -0.01717    0.08117  -0.212 0.832462    
-MEDHISTO_09Yes          0.08850    0.08415   1.052 0.292915    
-MEDHISTO_12Yes         -0.07216    0.09326  -0.774 0.439079    
-MEDHISTO_13Yes         -0.15469    0.23744  -0.651 0.514747    
-MEDHISTO_14Yes         -0.34722    0.24637  -1.409 0.158727    
-MEDHISTO_15Yes          0.17717    0.17303   1.024 0.305846    
-MEDHISTO_16Yes          0.15305    0.18397   0.832 0.405460    
-MEDHISTO_17Yes          0.09789    0.12265   0.798 0.424834    
-MEDHISTO_18Yes         -0.12391    0.11975  -1.035 0.300788    
-MEDHISTO_28Yes          0.03740    0.23366   0.160 0.872830    
-MEDHISTO_29Yes         -0.03438    0.21695  -0.158 0.874091    
-MEDHISTO_30Yes          0.88795    0.43660   2.034 0.041973 *  
-MEDHISTO_31Yes          0.05342    0.21852   0.244 0.806858    
-MEDHISTO_32Yes         -0.18484    0.26671  -0.693 0.488278    
-MEDHISTO_33Yes          0.51614    0.22773   2.266 0.023422 *  
-MEDHISTO_34Yes          1.47846    0.57365   2.577 0.009958 ** 
-MEDHISTO_35Yes          0.44663    0.42499   1.051 0.293292    
-Cerebrovasc_groupYes   -0.40032    0.14376  -2.785 0.005359 ** 
-dvt_peYes              -0.69579    0.18997  -3.663 0.000250 ***
-smo_vapeYes            -0.04047    0.14546  -0.278 0.780847    
-DOCUSYMP_12Yes         -0.42825    0.12931  -3.312 0.000927 ***
-admonthAugust           0.55158    0.17062   3.233 0.001226 ** 
-admonthBM             -14.49721  703.08531  -0.021 0.983549    
-admonthJuly             0.57411    0.14393   3.989 6.64e-05 ***
-admonthJune             0.93561    0.13358   7.004 2.48e-12 ***
-admonthMarch           -0.73027    0.11525  -6.336 2.35e-10 ***
-admonthMay              0.71907    0.11745   6.122 9.23e-10 ***
-admonthSeptember       -0.58524    0.30085  -1.945 0.051744 .  
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-convergence code: 0
-unable to evaluate scaled gradient
-Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
-
