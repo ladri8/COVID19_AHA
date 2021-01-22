@@ -120,20 +120,21 @@ byrace2
 # #Plot 2
 #  png("myplot.png")
 #  
-# p1 <- ggplot(data = dat, aes(y= percent, x= reorder(RACEi, -rounded), fill=COVCLINTRIAL)) + 
-#   geom_bar(stat="identity", width = 0.8) + 
-#   ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
-#   xlab('Race/Ethnicity') + ylab('Percentage') +
-#   # geom_text(aes(x = RACEi, label = paste0(rounded, '%')), 
-#   #           colour = 'white',
-#   #           size= 3,
-#   #           position=position_stack(vjust=0.5)) + 
-#   labs(fill='Enrolled') +
-#   theme_classic() + 
-#   coord_flip()
-# 
-# p1
-# 
+p1 <- ggplot(data = byrace2, aes(y= percent, x= reorder(RACEgroup, -rounded), fill=COVCLINTRIAL)) + 
+   geom_bar(stat="identity", width = 0.8) + 
+   ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
+   xlab('Race/Ethnicity') + ylab('Proportion (%) of All Enrolled Patients') +
+   geom_text(aes(x = RACEgroup ,label = paste0(rounded, '%')), 
+              colour = 'white',
+              size= 3,
+              position=position_stack(vjust=0.5)) + 
+   labs(fill='Enrolled') +
+   theme_classic() + 
+   coord_flip()
+ 
+p1
+
+  
 # file1 <- tempfile("file1", fileext = ".png")
 # save_plot(file1, p1)
 # View(file1)
@@ -146,43 +147,48 @@ byrace2<-byrace2 %>% group_by(RACEgroup) %>% mutate(Totals= (sum(n)))
 
 p2 <- byrace2 %>% filter((!(COVCLINTRIAL == "No"))) %>% ggplot(aes(y= percent, x= reorder(RACEgroup, -percent), fill=COVCLINTRIAL))+ 
   geom_bar(stat="identity", width = 0.8) + 
-  ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
-  xlab('Race/Ethnicity') + ylab('Percentage') +
-   geom_text(aes(x = RACEgroup, label = paste0(rounded, '%', "\n n=", Totals)), 
+  ggtitle("Figure 1.Enrollment in Clinical Trials by Race/Ethnicity") +
+  xlab('Race/Ethnicity') + ylab('Proportion (%) of All Enrolled Patients') +
+   geom_text(aes(x = RACEgroup, label = paste0(rounded, '%')), 
              colour = 'white',
              size= 2.7,
              position=position_stack(vjust=0.5)) +
   labs(fill='Enrolled')+
-  scale_x_discrete(labels=c("Asian_PI" = "Asian and \n Pacific Islander",
-                            "Other" = "Native American",
-                            "Hispanic" = "Hispanic",
-                            "NHWhite" = "Non-Hispanic \n White",
-                            "Black" = "Non-Hispanic \n Black")) +
+  scale_x_discrete(labels=c("Asian_PI" = "Asian and \n Pacific Islander \n n=716",
+                            "Other" = "Native American \n n=67",
+                            "Hispanic" = "Hispanic \n n=4,225",
+                            "NHWhite" = "Non-Hispanic \n White \n n=5,159 ",
+                            "Black" = "Non-Hispanic \n Black \n n=3,909")) +
     scale_y_continuous(limits=c(0,25))+
   theme_classic()
-
 p2
 
 ggsave("fig1_12_15.png")
 
+
+
+head(byrace2)
+
+
 #### Second Option
 
-p3 <- byrace2 %>% filter((!(COVCLINTRIAL == "No"))) %>% ggplot(aes(y= percent, x= reorder(RACEgroup, -percent), fill=COVCLINTRIAL))+ 
+p3 <- byrace2 %>% filter((!(COVCLINTRIAL == "No"))) %>% 
+  ggplot(aes(y= percent, x= reorder(RACEgroup, -percent), fill=COVCLINTRIAL))+ 
   geom_bar(stat="identity", width = 0.8) + 
-  ggtitle("Figure 1. Percentage of Enrollment in Clinical Trials") +
+  ggtitle("Figure 1.Percentage of Enrollment in Clinical Trials") +
   xlab('Race/Ethnicity') + ylab('Percentage') +
-   geom_text(aes(x = RACEgroup, label = paste0("\n n=", Totals)), 
+  geom_text(aes(x = RACEgroup, label = paste0(rounded), 
              colour = 'white',
              size= 2.7,
-             position=position_stack(vjust=0.5)) +
+             position=position_stack(vjust=0.5))) +
   labs(fill='Enrolled')+
   scale_x_discrete(labels=c("Asian_PI" = "Asian and \n Pacific Islander",
                             "Other" = "Native American",
                             "Hispanic" = "Hispanic",
                             "NHWhite" = "Non-Hispanic \n White",
                             "Black" = "Non-Hispanic \n Black")) +
-    scale_y_continuous(limits=c(0,25))+
-  theme_classic()
+   scale_y_continuous(limits=c(0,25))+
+   theme_classic(base_size = 16) 
 
 p3
 

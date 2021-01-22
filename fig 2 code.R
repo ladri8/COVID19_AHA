@@ -11,11 +11,11 @@ bydate
 bydate$admonth <- factor(bydate$admonth, levels = c("March", "April", "May", "June","July", "August", "September"))
 
 ggplot(bydate) +
-  aes(x = admonth, fill = admonth, weight = freq) +
-  geom_bar(position = "dodge") +
+  aes(x = admonth, weight = percent) +
+  geom_bar(position = "dodge", fill = "#00BFC4") +
   ggtitle("Figure 2. Clinical Trial Enrollment Over Time") +
   xlab('Admission Month (2020)') + ylab('Proportion (%) of All Enrolled Patients') +
-  scale_fill_hue() + scale_y_continuous(limits = c(0, 0.5), breaks=seq(0,0.5,0.1)) +
+  scale_y_continuous(limits = c(0, 50), breaks=seq(0,50,10)) +
   theme_classic(base_size = 16) + 
   theme(legend.position = "none")
 
@@ -68,8 +68,30 @@ print("Age Group")
 print(agegroup)
 print(chisq.test(agegroup))
 
-print("Sex")
 
 print(chisq.test(sextable))
 
+
+
+#### Fig 1 
+
+
+p3 <- byrace2 %>% filter((!(COVCLINTRIAL == "No"))) %>% ggplot(aes(y= percent, x= reorder(RACEgroup, -percent), fill=COVCLINTRIAL))+ 
+  geom_bar(stat="identity", width = 0.8) + 
+  ggtitle("Figure 1.Percentage of Enrollment in Clinical Trials") +
+  xlab('Race/Ethnicity') + ylab('Percentage') +
+  geom_text(aes(x = RACEgroup, label = paste0(rounded), 
+                colour = 'white',
+                size= 2.7,
+                position=position_stack(vjust=0.5)) +
+              labs(fill='Enrolled')+
+              scale_x_discrete(labels=c("Asian_PI" = "Asian and \n Pacific Islander",
+                                        "Other" = "Native American",
+                                        "Hispanic" = "Hispanic",
+                                        "NHWhite" = "Non-Hispanic \n White",
+                                        "Black" = "Non-Hispanic \n Black")) +
+              scale_y_continuous(limits=c(0,25))+
+              theme_classic()
+            
+p3
 

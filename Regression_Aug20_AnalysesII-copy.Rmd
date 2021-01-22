@@ -554,7 +554,7 @@ dft1 %>%
  theme_minimal() +
  theme(legend.position = "none")
 
-
+R.version.string
 ```
 
 

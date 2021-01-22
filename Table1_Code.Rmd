@@ -43,13 +43,14 @@ tmpdir <- tempdir()
 #Add Labels
  
 
-labels(nobeforemarch)<- c( AGEi = 'Age',
+labels(filthosp)<- c( AGEi = 'Age',
                     SEX = "Sex",
                     age_group ="Age Group", 
                     RACEi = "Race/Ethnicity",
                     psource_group = "Payment Source",
                     region = "Region",
                     BMIgroup = "BMI",
+                    imputed_BMIgroup = "BMI group",
                     MEDHISTO_03 = "Cancer",
                     MEDHISTO_07 = "Currently on Dialysis",
                     MEDHISTO_08 = "Diabetes Mellitus",
@@ -114,7 +115,7 @@ tabla$RACEgr <- fct_collapse(dft1$RACEi,
 
 #Rearrange order of variables to appear in Table
 
-tabla<-tabla %>% dplyr::select(COVCLINTRIAL, AGEi, age_group, SEX,RACEgr, psource_group,region, BMIgroup,
+tabla<-tabla %>% dplyr::select(COVCLINTRIAL, AGEi, age_group, SEX,RACEgr, psource_group,region, imputed_BMIgroup, BMIgroup,
                                matches("MEDHISTO_"),Cerebrovasc_group,fibandflutter,dvt_pe,smo_vape, DOCUSYMP_12,
                                ANTIHYPRTNSV, LIPLOWTHRP, ANTIPLT, ANTICOAG, ANTIHYPRGLYM, month_cont,PATMANICU, HOSPVENT,death)
 
@@ -195,5 +196,22 @@ View(docx_file)
 # 
 # 
 # tabla2
+
+create_report(dft1)
+```
+
+```{r}
+profile_missing(dft1)
+```
+```{r}
+plot_missing(
+  dft1,
+  group = list(Good = 0.05, OK = 0.4, Bad = 0.8, Remove = 1),
+  missing_only = TRUE,
+  geom_label_args = list(),
+  title = NULL,
+  ggtheme = theme_gray(),
+  theme_config = list(legend.position = c("bottom"))
+)
 ```
 
