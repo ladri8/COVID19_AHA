@@ -1,0 +1,217 @@
+---
+title: "Untitled"
+author: "Adriana RM"
+date: "10/2/2020"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Load Packages
+
+```{r}
+library(haven)
+library(dplyr)
+library(reshape2)
+library(ggplot2)
+library(esquisse)
+library(haven)
+library(stringr)
+library(broom)
+library(SmartEDA)
+#library(summarytools)
+library(stats)
+library(kableExtra)
+library(DataExplorer)
+library(scales)
+library(RColorBrewer)
+library(ecm)
+```
+
+```{r}
+
+#Using Arsenal
+library(arsenal)
+library(magrittr)
+tmpdir <- tempdir()
+                        
+   
+#Add Labels
+ 
+
+labels(filthosp)<- c( AGEi = 'Age',
+                    SEX = "Sex",
+                    age_group ="Age Group", 
+                    RACEi = "Race/Ethnicity",
+                    psource_group = "Payment Source",
+                    region = "Region",
+                    BMIgroup = "BMI",
+                    imputed_BMIgroup = "BMI group",
+                    MEDHISTO_03 = "Cancer",
+                    MEDHISTO_07 = "Currently on Dialysis",
+                    MEDHISTO_08 = "Diabetes Mellitus",
+                    MEDHISTO_09 = "Dyslipidemia",
+                    MEDHISTO_11 = "Heart Failure",
+                    MEDHISTO_12 = "Hypertension",
+                    MEDHISTO_13 = "Peripheral Artery Disease",
+                    MEDHISTO_14 = "Prior CABG",
+                    MEDHISTO_15 = "Prior MI",
+                    MEDHISTO_16 = "Prior PCI",
+                    MEDHISTO_17 = "No Medical History",
+                    MEDHISTO_18 = "Chronic Kidney Disease",
+                    MEDHISTO_28 = "Pulmonary Disease",
+                    MEDHISTO_29 = "COPD",
+                    MEDHISTO_30 = "Interstitial Lung Disease (ILD)",
+                    MEDHISTO_31 = "Asthma",
+                    MEDHISTO_32 = "Other Pulmonary Disease",
+                    MEDHISTO_33 = "Organ Transplant",
+                    MEDHISTO_34 = "Congenital heart disease",
+                    MEDHISTO_35 = "Pulmonary Arterial Hypertension",
+                    Cerebrovasc_group = "Cerebrovascular Disease, Stroke, or TIA",
+                    fibandflutter = "Atrial Fibrilation or Atrial Flutter",
+                    dvt_pe = "DVT or Pulmonary Embolism",
+                    smo_vape = "Smoking or Vaping",
+                    DOCUSYMP_12 = "Confusion or Altered Mental State",
+                    ANTIHYPRTNSV = "Antihypertensive",
+                    LIPLOWTHRP = "Lipid-lowering Therapy",
+                    ANTIPLT = "Antiplatelet",
+                    ANTICOAG = "Anticoagulant",
+                    ANTIHYPRGLYM = "Anti-Hyperglycemic", 
+                    month_cont = "Admission Date",
+                    admonth = "Admission Month",
+                    PATMANICU = "Managed in ICU",
+                    HOSPVENT = "Intubation or Mechanical Ventilation",
+                    death = "In-Hospital Death")
+
+
+#Deselect Specific Variables
+
+tabla <- select(dft1, -c(CASE_ID, PATIENT_DISPLAY_ID, FACILITY_DISPLAY_ID, TROPADM, - TROPUADM,
+                         HGBADM, WBCADM, PLATELET, INITSCR, TROPADM,DDMERU,
+                         DDMER, SCRUADM,WBCUADM, PSOURCE_01, PSOURCE_02,PSOURCE_03,
+                         PSOURCE_04,PSOURCE_05,PSOURCE_07, PSOURCE_09,
+                         DISDATE,DSCHSTAT, ADMDT,DEATHDT,PSOURCE_01,
+                         PSOURCE_02,PSOURCE_03,PSOURCE_04,
+                         PSOURCE_05, PSOURCE_06, PSOURCE_07,
+                         PSOURCE_09, CARDARR, SHKMGMT_01,
+                         SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
+                         SCRUADM,TROPUADM, DDMERU, HGBUADM,
+                         WBCUADM, RACEgroup,MEDHISTO_01, MEDHISTO_02, MEDHISTO_04, MEDHISTO_05,
+                         MEDHISTO_06,MEDHISTO_22, MEDHISTO_23,
+                         MEDHISTO_24,MEDHISTO_25,MEDHISTO_26,MEDHISTO_27, MEDHISTO_21, MEDHISTO_20, MEDHISTO_19, MEDHISTO_10))
+
+
+tabla$RACEgr <- fct_collapse(dft1$RACEi,
+  UTD = "UTD",
+  Native_American = "Native American",
+  NHWhite = "Non-Hispanic White",
+  Asian_PI = c("Asian", "Pacific Islander"),
+  Black = "Non-Hispanic Black",
+  Hispanic = "Hispanic")
+
+#Rearrange order of variables to appear in Table
+
+tabla<-tabla %>% dplyr::select(COVCLINTRIAL, AGEi, age_group, SEX,RACEgr, psource_group,region, imputed_BMIgroup, BMIgroup,
+                               matches("MEDHISTO_"),Cerebrovasc_group,fibandflutter,dvt_pe,smo_vape, DOCUSYMP_12,
+                               ANTIHYPRTNSV, LIPLOWTHRP, ANTIPLT, ANTICOAG, ANTIHYPRGLYM, month_cont,PATMANICU, HOSPVENT,death)
+
+```
+
+
+```{r}
+
+#Set decimals to 2
+
+options(gtsummary.tbl_summary.percent_fun = function(x) sprintf(x * 100, fmt='%#.2f'))
+
+tabla1 <- tabla %>% tbl_summary(by = COVCLINTRIAL,
+                               digits = list(everything() ~ 1),
+                               percent = "column",
+                               type = list(starts_with(("MEDHISTO")) ~ "categorical", AGEi ~ "continuous",
+                                           where(is.numeric) ~ "continuous"),
+                               missing = "always",
+                              statistic = where(is.numeric) ~ "{mean} ({sd})",
+                              missing_text = "(Missing)") %>%
+                              add_p(list(all_continuous() ~ "t.test", all_categorical() ~ "chisq.test")) %>% 
+                              add_overall() %>% 
+                              add_stat_label() %>%
+                              modify_header(update = list(label ~ "**Variable**"))%>%
+                              modify_spanning_header(c("stat_1", "stat_2") ~ "**Enrolled in Clinical Trials**")
+
+tabla1
+
+#Export table into Word
+tabla1_flextab <- as_flex_table(tabla1,
+                                  include = everything(),
+                                  return_calls = FALSE,
+                                  strip_md_bold = TRUE)
+
+#Save as a Doc file
+docx_file <- tempfile(fileext = ".docx")
+
+save_as_docx("Table1" = tabla1_flextab,
+              path = docx_file)
+
+View(docx_file)
+
+```
+
+```{r}
+# 
+# tablafilt <- select(filthosp, -c(CASE_ID, PATIENT_ID, SRC_FAC_ID, TROPADM,
+#                                - TROPUADM, HGBADM, WBCADM, PLATELET, INITSCR,
+#                                TROPADM,DDMERU, DDMER, SCRUADM,WBCUADM, PSOURCE_01,
+#                                PSOURCE_02,PSOURCE_03,PSOURCE_04,PSOURCE_05,
+#                                PSOURCE_07, PSOURCE_09,
+#                                DISDATE,DSCHSTAT, ADMDT,DEATHDT,PSOURCE_01,
+#                                PSOURCE_02,PSOURCE_03,PSOURCE_04,
+#                                PSOURCE_05, PSOURCE_06, PSOURCE_07,
+#                                PSOURCE_09, CARDARR, SHKMGMT_01,
+#                                SHKMGMT_02, SHKMGMT_04, SHKMGMT_05, SHKMGMT_03, 
+#                                HOSPVENT, SCRUADM,TROPUADM, DDMERU, HGBUADM,
+#                               WBCUADM, RACEgroup, PATMANICUDT))
+# 
+# #Rearrange order of variables to appear in Table
+# 
+# tablafilt<-tablafilt %>% dplyr::select(COVCLINTRIAL, AGEi, age_group, SEX,RACEi, HISETHNI, psource_group, 
+#                                MEDHISTO_01, MEDHISTO_02, MEDHISTO_08, MEDHISTO_09,
+#                                MEDHISTO_11, MEDHISTO_12, ANTIHYPRTNSV, LIPLOWTHRP,
+#                                ANTIPLT, ANTICOAG, ANTIHYPRGLYM,PATMANICU, death )
+# 
+# 
+# tabla2 <- tablafilt %>% tbl_summary(by = COVCLINTRIAL,
+#                                digits = list(everything() ~ 1),
+#                                type = list(starts_with(("MEDHISTO")) ~ "categorical"),
+#                                missing = "always",
+#                                missing_text = "(Missing)") %>%
+#                               add_p(list(all_continuous() ~ "wilcox.test", all_categorical() ~ "chisq.test")) %>% 
+#                               add_overall() %>% 
+#                               add_stat_label() %>%
+#                               modify_header(update = list(label ~ "**Variable**"))%>%
+#                               modify_spanning_header(c("stat_1", "stat_2") ~ "**Enrolled in Clinical Trials**")
+# 
+# 
+# tabla2
+
+create_report(dft1)
+```
+
+```{r}
+profile_missing(dft1)
+```
+```{r}
+plot_missing(
+  dft1,
+  group = list(Good = 0.05, OK = 0.4, Bad = 0.8, Remove = 1),
+  missing_only = TRUE,
+  geom_label_args = list(),
+  title = NULL,
+  ggtheme = theme_gray(),
+  theme_config = list(legend.position = c("bottom"))
+)
+```
+

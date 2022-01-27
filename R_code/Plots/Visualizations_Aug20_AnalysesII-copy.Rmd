@@ -160,7 +160,10 @@ p2 <- byrace2 %>% filter((!(COVCLINTRIAL == "No"))) %>% ggplot(aes(y= percent, x
                             "NHWhite" = "Non-Hispanic \n White \n n=5,159 ",
                             "Black" = "Non-Hispanic \n Black \n n=3,909")) +
     scale_y_continuous(limits=c(0,25))+
-  theme_classic()
+  theme_classic(base_size = 16) + 
+  theme(legend.position = "none")
+
+
 p2
 
 ggsave("fig1_12_15.png")
