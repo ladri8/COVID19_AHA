@@ -1,3 +1,6 @@
+
+## Summarize data by clinical trial and admission date
+
 bydate<- dft1 %>%
   group_by(COVCLINTRIAL, admonth) %>%
   filter(!(COVCLINTRIAL == "No")) %>%
