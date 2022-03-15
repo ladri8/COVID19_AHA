@@ -143,6 +143,6 @@ save_as_docx("Table1" = tabla1_flextab,
 
 View(docx_file)
 
-```
+
 
 
